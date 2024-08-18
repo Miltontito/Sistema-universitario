@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Sistema Gestor de Alumnos y Cursos.iml" filepath="$PROJECT_DIR$/Sistema Gestor de Alumnos y Cursos.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/Sistema-universitario.iml" filepath="$PROJECT_DIR$/.idea/Sistema-universitario.iml" />
+      <module fileurl="file://$PROJECT_DIR$/source/source.iml" filepath="$PROJECT_DIR$/source/source.iml" />
     </modules>
   </component>
 </project>
