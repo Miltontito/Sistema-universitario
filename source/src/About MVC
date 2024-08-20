@@ -1,0 +1,10 @@
+El patrón arquitectural MVC (model-view-controller) separa la aplicación
+en tres componentes principales facilitando la organización del código.
+
+Interacción entre los componentes:
+
+    1). El USUARIO interactua con la Vista (presiona un botón para inscribirse).
+    2). La VISTA notifica al Controlador sobre la acción.
+    3). El CONTROLADOR actualiza el Modelo con la nueva información.
+    4). El MODELO se actualiza y puede notficar a la Vista si es necesario.
+    5). La VISTA actualiza lo que el usuario ve, reflejando los cambios realizados.
