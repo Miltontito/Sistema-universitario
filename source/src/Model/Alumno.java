@@ -4,13 +4,14 @@ import java.util.List;
 
 public class Alumno {
     private static Integer identificador_alumno = 0;
-    private Integer alumnoID;
+    private final Integer alumnoID;
     private Long legajo;
     private Long dni;
     private String Nombre;
     private String apellido;
     private Carrera carrera;
-    private List<Materia> materias; //Cambian constantemente.
+    private List<Materia> materiasQuePuedeCursar; //Cambia cada cuatrimestre
+    private List<Materia> materias; //Materias que cursa actualmente.
     private List<Materia> materiasAprobadas; //Se guardan a lo largo del tiempo.
 
 
@@ -19,12 +20,11 @@ public class Alumno {
     public Alumno(){
         this.alumnoID = asignarID();
     }
-    
     // ---------------| Métodos |---------------
+
     protected Integer asignarID(){
         return identificador_alumno++;
     }
-
     public Boolean inscribirseACarrera(Carrera carrera){
         if (this.carrera != null){
             this.carrera = carrera;
@@ -32,14 +32,26 @@ public class Alumno {
         }
         return false;
     }
-
-    public Boolean inscribirseAMateria(){
-        return null;
+    public Alumno obtenerMateriasQuePuedeCursar(){
+        materiasQuePuedeCursar = carrera.materiasQuePuedeCursar(this);
+        return this;
     }
-
-
-
+    public Boolean inscribirseAMateria(Materia materia){
+        /* si la materia se encuentra en la lista de materias que puede cursar entonces... */
+        if(materiasQuePuedeCursar.contains(materia)){
+            materias.add(materia);
+            return true;
+        }
+        return false;
+    }
+    public List<Materia> obtenerMateriasQueCursa(){
+        return this.materias;
+    }
+    public List<Materia> obtenerMateriasAprobadas(){
+        return this.materiasAprobadas;
+    }
     // ---------------| Getters |---------------
+
     public Long getLegajo() {
         return legajo;
     }
@@ -55,9 +67,6 @@ public class Alumno {
     public Carrera getCarrera() {
         return carrera;
     }
-    public List<Materia> getMaterias() {
-        return materias;
-    }
     public List<Materia> getMateriasAprobadas() {
         return materiasAprobadas;
     }
@@ -67,6 +76,7 @@ public class Alumno {
 
     // ---------------| Setters |---------------
     /* Se elige retornar al alumno por buenas prácticas */
+
     public Alumno setLegajo(Long legajo) {
         this.legajo = legajo;
         return this;
@@ -83,16 +93,12 @@ public class Alumno {
         this.apellido = apellido;
         return this;
     }
+    /* Para asignar las materias del primer cuatrimestre */
     public Alumno setMaterias(List<Materia> materias) {
         this.materias = materias;
         return this;
     }
-    public Alumno setMateriasAprobadas(List<Materia> materiasAprobadas) {
-        this.materiasAprobadas = materiasAprobadas;
-        return this;
-    }
-    public Alumno setAlumnoID(Integer alumnoID) {
-        this.alumnoID = alumnoID;
-        return this;
+    public void setMateriasAprobadas(Materia materia) {
+        this.materiasAprobadas.add(materia);
     }
 }
