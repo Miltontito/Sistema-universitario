@@ -6,18 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="4fa29f9a-05f3-469d-9a19-938f515d8553" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/src/About MVC" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/src/Controller/About Controller" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/src/Model/About Model" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/src/Model/Alumno.java" beforeDir="false" afterPath="$PROJECT_DIR$/source/src/Model/Alumno.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/source/src/Model/Carrera.java" beforeDir="false" afterPath="$PROJECT_DIR$/source/src/Model/Carrera.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/src/Model/PlanDeEstudio.java" beforeDir="false" afterPath="$PROJECT_DIR$/source/src/Model/PlanDeEstudio.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/src/Model/PlanesDeEstudio/PlanA.java" beforeDir="false" afterPath="$PROJECT_DIR$/source/src/Model/PlanesDeEstudio/PlanA.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/src/Model/PlanesDeEstudio/PlanB.java" beforeDir="false" afterPath="$PROJECT_DIR$/source/src/Model/PlanesDeEstudio/PlanB.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/src/Model/PlanesDeEstudio/PlanC.java" beforeDir="false" afterPath="$PROJECT_DIR$/source/src/Model/PlanesDeEstudio/PlanC.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/src/Model/PlanesDeEstudio/PlanD.java" beforeDir="false" afterPath="$PROJECT_DIR$/source/src/Model/PlanesDeEstudio/PlanD.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/src/Model/PlanesDeEstudio/PlanE.java" beforeDir="false" afterPath="$PROJECT_DIR$/source/src/Model/PlanesDeEstudio/PlanE.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/src/VIew/About View" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/src/Model/Cuatrimestre.java" beforeDir="false" afterPath="$PROJECT_DIR$/source/src/Model/Cuatrimestre.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,6 +24,19 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/source/src/Model/Carrera.java" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="ProblemsViewState">
+    <hideBySeverity>
+      <option value="11" />
+      <option value="12" />
+      <option value="13" />
+      <option value="14" />
+      <option value="15" />
+      <option value="16" />
+    </hideBySeverity>
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 0
@@ -68,6 +71,17 @@
       <updated>1723918167048</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

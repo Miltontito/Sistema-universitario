@@ -1,8 +1,13 @@
 package Model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Carrera {
+
+    // -------------------------------------------
+    // ---------------| Atributos |---------------
+    // -------------------------------------------
     private static Integer identificador_carrera;
     private final Integer carreraID;
     private String nombre;
@@ -12,7 +17,9 @@ public class Carrera {
     private PlanDeEstudio planDeEstudio;
     private List<Alumno> alumnos;
 
+    // -----------------------------------------------
     // ---------------| Constructores |---------------
+    // -----------------------------------------------
     public Carrera(){
         this.carreraID = asignarID();
     }
@@ -21,12 +28,14 @@ public class Carrera {
         this.cantMateriasOptativasParaAprobar = cantMateriasOptativasParaAprobar;
     }
 
+    // -----------------------------------------
     // ---------------| Métodos |---------------
+    // -----------------------------------------
     protected Integer asignarID(){
         return identificador_carrera++;
     }
-    public boolean crearCuatrimestre(){
-        cuatrimestres.add(new Cuatrimestre());
+    public boolean crearCuatrimestre(List<Materia> materias){
+        cuatrimestres.add(new Cuatrimestre(materias));
         return true;
     }
     public Carrera asignarCuatrimestre(Cuatrimestre cuatrimestre){
@@ -38,13 +47,41 @@ public class Carrera {
         return this;
     }
     public List<Materia> materiasQuePuedeCursar(Alumno alumno){
-        return null;
+        return planDeEstudio.materiasQuePuedeCursar(alumno, this);
     }
     public Boolean sePuedeGraduar(Alumno alumno){
-        return null;
+
+        boolean cumpleLosRequisitos = true;
+        List<Materia> obligatorias = new ArrayList<>();
+        List<Materia> aprobadas = alumno.getMateriasAprobadas();
+
+        //Por cada cuatrimestre retira las materias obligatorias.
+        for(Cuatrimestre cuatrimestre : this.cuatrimestres){
+            obligatorias.addAll(cuatrimestre.listarMateriasObligatorias());
+        }
+        //No es eficiente.
+        cumpleLosRequisitos = aprobadas.containsAll(obligatorias);
+
+        /* Si eliminamos todas las obligatorias nos quedan las optativas */
+        aprobadas.removeAll(obligatorias);
+        if(cumpleLosRequisitos){
+            return aprobadas.size() >= this.getCantMateriasOptativasParaAprobar();
+        }
+
+        //Retorna false
+        return cumpleLosRequisitos;
+    }
+    public List<Materia> obtenerMateriasDeLaCarrera(){
+        List<Materia> materias = new ArrayList<>();
+        for(Cuatrimestre cuatrimestre : this.cuatrimestres){
+            materias.addAll(cuatrimestre.listarTodasLasMaterias());
+        }
+        return materias;
     }
 
+    // -----------------------------------------
     // ---------------| Getters |---------------
+    // -----------------------------------------
     public Integer getCarreraID() {
         return carreraID;
     }
@@ -63,7 +100,13 @@ public class Carrera {
     public List<Alumno> getAlumnos(){
         return this.alumnos;
     }
+    public PlanDeEstudio getPlanDeEstudio() {
+        return planDeEstudio;
+    }
+
+    // -----------------------------------------
     // ---------------| Setters |---------------
+    // -----------------------------------------
     public void setCantMateriasOptativasParaAprobar(Integer cantMateriasOptativasParaAprobar) {
         this.cantMateriasOptativasParaAprobar = cantMateriasOptativasParaAprobar;
     }
@@ -73,4 +116,5 @@ public class Carrera {
     public void setCodigoCarrera(Long codigoCarrera) {
         this.codigoCarrera = codigoCarrera;
     }
+
 }
