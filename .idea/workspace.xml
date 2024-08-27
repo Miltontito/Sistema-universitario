@@ -5,19 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4fa29f9a-05f3-469d-9a19-938f515d8553" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/MigLayout.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/miglayout-core-javadoc.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/miglayout-core-sources.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/miglayout-core.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/miglayout-swing-javadoc.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/miglayout-swing-sources.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/miglayout-swing.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/source/src/VIew/TestForm.form" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/source/src/VIew/TestForm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/src/About MVC" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/src/Controller/About Controller" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/src/Model/About Model" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/src/Model/Alumno.java" beforeDir="false" afterPath="$PROJECT_DIR$/source/src/Model/Alumno.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/src/Model/Carrera.java" beforeDir="false" afterPath="$PROJECT_DIR$/source/src/Model/Carrera.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/src/Model/PlanDeEstudio.java" beforeDir="false" afterPath="$PROJECT_DIR$/source/src/Model/PlanDeEstudio.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/src/Model/PlanesDeEstudio/PlanA.java" beforeDir="false" afterPath="$PROJECT_DIR$/source/src/Model/PlanesDeEstudio/PlanA.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/src/Model/PlanesDeEstudio/PlanB.java" beforeDir="false" afterPath="$PROJECT_DIR$/source/src/Model/PlanesDeEstudio/PlanB.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/src/Model/PlanesDeEstudio/PlanC.java" beforeDir="false" afterPath="$PROJECT_DIR$/source/src/Model/PlanesDeEstudio/PlanC.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/src/Model/PlanesDeEstudio/PlanD.java" beforeDir="false" afterPath="$PROJECT_DIR$/source/src/Model/PlanesDeEstudio/PlanD.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/src/Model/PlanesDeEstudio/PlanE.java" beforeDir="false" afterPath="$PROJECT_DIR$/source/src/Model/PlanesDeEstudio/PlanE.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/src/VIew/About View" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/source.iml" beforeDir="false" afterPath="$PROJECT_DIR$/source/source.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,10 +46,13 @@
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;UI_DESIGNER_EDITOR_MODE.PaletteManager.SHOW&quot;: &quot;true&quot;,
+    &quot;UI_DESIGNER_EDITOR_MODE.PaletteManager.WIDTH&quot;: &quot;83&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;/home/miltongomez/Escritorio/Sistema-universitario&quot;,
-    &quot;onboarding.tips.debug.path&quot;: &quot;/home/miltongomez/Escritorio/Sistema-universitario/source/src/Main.java&quot;
+    &quot;onboarding.tips.debug.path&quot;: &quot;/home/miltongomez/Escritorio/Sistema-universitario/source/src/Main.java&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
 }</component>
   <component name="RecentsManager">
