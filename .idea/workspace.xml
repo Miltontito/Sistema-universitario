@@ -5,9 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4fa29f9a-05f3-469d-9a19-938f515d8553" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/source/src/View/MainForm.form" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/source/src/View/MainForm.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/src/Model/Alumno.java" beforeDir="false" afterPath="$PROJECT_DIR$/source/src/Model/Alumno.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/source/src/Model/Carrera.java" beforeDir="false" afterPath="$PROJECT_DIR$/source/src/Model/Carrera.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/src/Model/ControladorUniversitario.java" beforeDir="false" afterPath="$PROJECT_DIR$/source/src/Model/ControladorUniversitario.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/source/src/Model/Cuatrimestre.java" beforeDir="false" afterPath="$PROJECT_DIR$/source/src/Model/Cuatrimestre.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/src/Model/Materia.java" beforeDir="false" afterPath="$PROJECT_DIR$/source/src/Model/Materia.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/src/Model/PlanesDeEstudio/PlanA.java" beforeDir="false" afterPath="$PROJECT_DIR$/source/src/Model/PlanesDeEstudio/PlanA.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/src/Model/PlanesDeEstudio/PlanB.java" beforeDir="false" afterPath="$PROJECT_DIR$/source/src/Model/PlanesDeEstudio/PlanB.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/src/Model/PlanesDeEstudio/PlanC.java" beforeDir="false" afterPath="$PROJECT_DIR$/source/src/Model/PlanesDeEstudio/PlanC.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/src/Model/PlanesDeEstudio/PlanD.java" beforeDir="false" afterPath="$PROJECT_DIR$/source/src/Model/PlanesDeEstudio/PlanD.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/src/Model/PlanesDeEstudio/PlanE.java" beforeDir="false" afterPath="$PROJECT_DIR$/source/src/Model/PlanesDeEstudio/PlanE.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,7 +62,7 @@
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/miltongomez/Escritorio/Sistema-universitario&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/milton/Downloads/InvenTree-master&quot;,
     &quot;onboarding.tips.debug.path&quot;: &quot;/home/miltongomez/Escritorio/Sistema-universitario/source/src/Main.java&quot;
   }
 }</component>
@@ -90,6 +100,11 @@
           <url>file://$PROJECT_DIR$/source/src/Main.java</url>
           <line>3</line>
           <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/source/src/Model/Alumno.java</url>
+          <line>71</line>
+          <option name="timeStamp" value="8" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

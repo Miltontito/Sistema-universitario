@@ -1,5 +1,6 @@
 package Model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Cuatrimestre {
@@ -12,11 +13,11 @@ public class Cuatrimestre {
     // -----------------------------------------------
     // ---------------| Constructores |---------------
     // -----------------------------------------------
-    public Cuatrimestre(){}
-    public Cuatrimestre(List<Materia> materiasObligatorias){
+    public Cuatrimestre() {}
+    public Cuatrimestre(List<Materia> materiasObligatorias) {
         this.materiasObligatorias = materiasObligatorias;
     }
-    public Cuatrimestre(List<Materia> materiasObligatorias, List<Materia> materiasOptativas){
+    public Cuatrimestre(List<Materia> materiasObligatorias, List<Materia> materiasOptativas) {
         this(materiasObligatorias);
         this.materiasOptativas = materiasOptativas;
     }
@@ -25,18 +26,28 @@ public class Cuatrimestre {
     // ---------------|    Metodos    |---------------
     // -----------------------------------------------
     public List<Materia> listarMateriasObligatorias(){
-        return null;
+        return materiasObligatorias;
+    }
+    public List<Materia> litarMateriasOptativas(){
+        return materiasOptativas;
     }
     public List<Materia> listarTodasLasMaterias(){
-        return null;
+        List<Materia> materias = new ArrayList<>();
+        materias.addAll(materiasObligatorias);
+        materias.addAll(materiasOptativas);
+        return materias;
     }
-
-    // -----------------------------------------------
-    // ---------------|    Getters    |---------------
-    // -----------------------------------------------
-
-    // -----------------------------------------------
-    // ---------------|    Setters    |---------------
-    // -----------------------------------------------
+    public Boolean addMateriaObligatoria(Materia materia){
+        if (materia != null){
+            materiasObligatorias.add(materia);
+        }
+        return false;
+    }
+    public Boolean addMateriaOptativa(Materia materia){
+        if (materia != null){
+            materiasOptativas.add(materia);
+        }
+        return false;
+    }
 
 }

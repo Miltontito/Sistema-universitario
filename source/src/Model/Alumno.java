@@ -1,26 +1,50 @@
 package Model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Alumno {
+    // -------------------------------------------
+    // ---------------| Atributos |---------------
+    // -------------------------------------------
+
     private static Integer identificador_alumno = 0;
     private final Integer alumnoID;
     private Long legajo;
     private Long dni;
-    private String Nombre;
+    private String nombre;
     private String apellido;
     private Carrera carrera;
     private List<Materia> materiasQuePuedeCursar; //Cambia cada cuatrimestre
-    private List<Materia> materias; //Materias que cursa actualmente.
-    private List<Materia> materiasAprobadas; //Se guardan a lo largo del tiempo.
+    private List<Materia> materias; //todas las materias, aprobadas y cursando
 
-
+    // -----------------------------------------------
     // ---------------| Constructores |---------------
-    /* sin parámetros */
-    public Alumno(){
+    // -----------------------------------------------
+    public Alumno() {
         this.alumnoID = asignarID();
     }
+    public Alumno(Long legajo, Long dni, String nombre, String apellido) {
+        this();
+        this.legajo = legajo;
+        this.dni = dni;
+        this.nombre = nombre;
+        this.apellido = apellido;
+    }
+    public Alumno(Long legajo, Long dni, String nombre, String apellido, Carrera carrera) {
+        this(legajo, dni, nombre, apellido);
+        this.carrera = carrera;
+    }
+    public Alumno(Long legajo, Long dni, String nombre, String apellido, Carrera carrera, List<Materia> materiasQuePuedeCursar, List<Materia> materias) {
+        this(legajo, dni, nombre, apellido, carrera);
+        this.materiasQuePuedeCursar = materiasQuePuedeCursar;
+        this.materias = materias;
+    }
+
+
+    // -----------------------------------------
     // ---------------| Métodos |---------------
+    // -----------------------------------------
 
     protected Integer asignarID(){
         return identificador_alumno++;
@@ -32,9 +56,9 @@ public class Alumno {
         }
         return false;
     }
-    public Alumno obtenerMateriasQuePuedeCursar(){
+    public List<Materia> obtenerMateriasQuePuedeCursar(){
         materiasQuePuedeCursar = carrera.materiasQuePuedeCursar(this);
-        return this;
+        return materiasQuePuedeCursar;
     }
     public Boolean inscribirseAMateria(Materia materia){
         /* si la materia se encuentra en la lista de materias que puede cursar entonces... */
@@ -45,12 +69,36 @@ public class Alumno {
         return false;
     }
     public List<Materia> obtenerMateriasQueCursa(){
-        return this.materias;
+        List<Materia> cursadas = new ArrayList<>();
+        for(Materia materia : this.materias){
+            if(!materia.isMateriaAprobada()){
+                cursadas.add(materia);
+            }
+        }
+        if(cursadas.isEmpty()){
+            return null;
+        }
+        return cursadas;
     }
     public List<Materia> obtenerMateriasAprobadas(){
-        return this.materiasAprobadas;
+        List<Materia> aprobadas = new ArrayList<>();
+        for(Materia materia : this.materias){
+            if(materia.isMateriaAprobada()){
+                aprobadas.add(materia);
+            }
+        }
+        if(aprobadas.isEmpty()){
+            return null;
+        }
+        return aprobadas;
     }
+    public void setMateriaAprobada(Materia materia) {
+        this.materias.add(materia);
+    }
+
+    // -----------------------------------------
     // ---------------| Getters |---------------
+    // -----------------------------------------
 
     public Long getLegajo() {
         return legajo;
@@ -59,7 +107,7 @@ public class Alumno {
         return dni;
     }
     public String getNombre() {
-        return Nombre;
+        return nombre;
     }
     public String getApellido() {
         return apellido;
@@ -67,38 +115,33 @@ public class Alumno {
     public Carrera getCarrera() {
         return carrera;
     }
-    public List<Materia> getMateriasAprobadas() {
-        return materiasAprobadas;
-    }
     public Integer getAlumnoID() {
         return alumnoID;
     }
+    public List<Materia> getMaterias(){
+        return materias;
+    }
 
+    // -----------------------------------------
     // ---------------| Setters |---------------
+    // -----------------------------------------
     /* Se elige retornar al alumno por buenas prácticas */
 
-    public Alumno setLegajo(Long legajo) {
-        this.legajo = legajo;
-        return this;
-    }
-    public Alumno setDni(Long dni) {
+    public void setLegajo(Long legajo) {
+        this.legajo = legajo;}
+    public void setDni(Long dni) {
         this.dni = dni;
-        return this;
     }
-    public Alumno setNombre(String nombre) {
-        Nombre = nombre;
-        return this;
+    public void setNombre(String nombre) {
+        nombre = nombre;
     }
-    public Alumno setApellido(String apellido) {
+    public void setApellido(String apellido) {
         this.apellido = apellido;
-        return this;
     }
-    /* Para asignar las materias del primer cuatrimestre */
-    public Alumno setMaterias(List<Materia> materias) {
+    public void setMaterias(List<Materia> materias) {
         this.materias = materias;
-        return this;
     }
-    public void setMateriasAprobadas(Materia materia) {
-        this.materiasAprobadas.add(materia);
+    public void setCarrera(Carrera carrera){
+        this.carrera = carrera;
     }
 }

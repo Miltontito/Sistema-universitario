@@ -20,12 +20,27 @@ public class Carrera {
     // -----------------------------------------------
     // ---------------| Constructores |---------------
     // -----------------------------------------------
-    public Carrera(){
+    public Carrera() {
         this.carreraID = asignarID();
     }
-    public Carrera(Integer cantMateriasOptativasParaAprobar){
+    public Carrera(Integer cantMateriasOptativasParaAprobar) {
         this();
         this.cantMateriasOptativasParaAprobar = cantMateriasOptativasParaAprobar;
+    }
+    public Carrera(String nombre, Long codigoCarrera) {
+        this();
+        this.nombre = nombre;
+        this.codigoCarrera = codigoCarrera;
+    }
+    public Carrera(String nombre, Long codigoCarrera, Integer cantMateriasOptativasParaAprobar, List<Cuatrimestre> cuatrimestres) {
+        this(nombre, codigoCarrera);
+        this.cantMateriasOptativasParaAprobar = cantMateriasOptativasParaAprobar;
+        this.cuatrimestres = cuatrimestres;
+    }
+    public Carrera(String nombre, Long codigoCarrera, Integer cantMateriasOptativasParaAprobar, List<Cuatrimestre> cuatrimestres, PlanDeEstudio planDeEstudio, List<Alumno> alumnos) {
+        this(nombre, codigoCarrera, cantMateriasOptativasParaAprobar, cuatrimestres);
+        this.planDeEstudio = planDeEstudio;
+        this.alumnos = alumnos;
     }
 
     // -----------------------------------------
@@ -53,7 +68,7 @@ public class Carrera {
 
         boolean cumpleLosRequisitos = true;
         List<Materia> obligatorias = new ArrayList<>();
-        List<Materia> aprobadas = alumno.getMateriasAprobadas();
+        List<Materia> aprobadas = alumno.getMaterias();
 
         //Por cada cuatrimestre retira las materias obligatorias.
         for(Cuatrimestre cuatrimestre : this.cuatrimestres){
@@ -116,5 +131,10 @@ public class Carrera {
     public void setCodigoCarrera(Long codigoCarrera) {
         this.codigoCarrera = codigoCarrera;
     }
-
+    public void setCuatrimestres(List<Cuatrimestre> cuatrimestres){
+        this.cuatrimestres = cuatrimestres;
+    }
+    public void setAlumnos(List<Alumno> alumnos){
+        this.alumnos = alumnos;
+    }
 }
