@@ -29,3 +29,5 @@ bin/
 .DS_Store
 /View/nbproject/private/
 /View/build/
+/GUI/JavaApplication1/nbproject/private/
+/GUI/JavaApplication1/build/

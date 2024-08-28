@@ -5,18 +5,50 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4fa29f9a-05f3-469d-9a19-938f515d8553" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/MigLayout.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/miglayout-core-javadoc.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/miglayout-core-sources.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/miglayout-core.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/miglayout-swing-javadoc.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/miglayout-swing-sources.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/miglayout-swing.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/source/src/VIew/TestForm.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/source/src/VIew/TestForm.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GUI/JavaApplication1/src/VIew/MainJFrame.form" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GUI/JavaApplication1/src/VIew/MainJFrame.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GUI/JavaApplication1/src/VIew/PrincipalPanel.form" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GUI/JavaApplication1/src/VIew/PrincipalPanel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GUI/JavaApplication1/src/static/UNTDFLogoTransparente.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GUI/JavaApplication1/src/static/add_icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GUI/JavaApplication1/src/static/carrera_icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GUI/JavaApplication1/src/static/close_icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GUI/JavaApplication1/src/static/help_icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GUI/JavaApplication1/src/static/materia_icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GUI/JavaApplication1/src/static/people_icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GUI/JavaApplication1/src/static/person_add_icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GUI/JavaApplication1/src/static/person_icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GUI/JavaApplication1/src/static/person_remove_icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GUI/JavaApplication1/src/static/rule_settings_icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GUI/JavaApplication1/src/static/test.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GUI/JavaApplication1/src/static/update_icon.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/source.iml" beforeDir="false" afterPath="$PROJECT_DIR$/source/source.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/build.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/manifest.mf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/nbproject/build-impl.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/nbproject/genfiles.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/nbproject/project.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/nbproject/project.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/src/Static/UNTDFLogoTransparente.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/src/Static/add_icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/src/Static/carrera_icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/src/Static/close_icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/src/Static/help_icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/src/Static/materia_icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/src/Static/people_icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/src/Static/person_add_icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/src/Static/person_icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/src/Static/person_remove_icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/src/Static/rule_settings_icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/src/Static/test.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/src/Static/update_icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/src/View/MainJFrame.form" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/src/View/MainJFrame.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/src/View/PrincipalPanel.form" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/src/View/PrincipalPanel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/src/lib/flatlaf-3.5.1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/src/lib/flatlaf-intellij-themes-3.5.1.jar" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
