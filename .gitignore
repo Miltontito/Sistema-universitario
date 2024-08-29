@@ -29,5 +29,14 @@ bin/
 .DS_Store
 /View/nbproject/private/
 /View/build/
-/GUI/JavaApplication1/nbproject/private/
-/GUI/JavaApplication1/build/
+/source/src/GUI/JavaApplication1/nbproject/private/
+/source/src/GUI/JavaApplication1/build/
+/source/src/VIew/GUI/JavaApplication1/build/
+/source/src/VIew/GUI/JavaApplication1/nbproject/private/
+/source/src/VIew/GUI/View/build/
+/source/src/VIew/GUI/View/nbproject/private/
+/source/src/View/JavaApplication1/build/
+/source/src/View/JavaApplication1/nbproject/private/
+/source/src/View/View/build/
+/source/src/View/View/nbproject/private/
+/target/
