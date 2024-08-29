@@ -55,4 +55,10 @@ public class PlanC implements PlanDeEstudio {
         }
         return true;
     }
+    
+    @Override
+    public String toString(){
+        return """
+               Plan C: Un alumno puede cursar una materia si aprob\u00f3 las cursadas de las correlativas y los finales de todas las materias de 5 cuatrimestres previos al que se quiere anotar""";
+    }
 }

@@ -56,4 +56,10 @@ public class PlanE implements PlanDeEstudio {
         }
         return true;
     }
+    
+    @Override
+    public String toString(){
+        return """
+               Plan E: Un alumno puede cursar una materia si aprob\u00f3 los finales de las correlativas y los finales de todas las materias de 3 cuatrimestres previos.""";
+    }
 }

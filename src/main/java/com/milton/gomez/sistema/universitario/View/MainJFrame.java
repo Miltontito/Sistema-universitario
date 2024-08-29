@@ -1,8 +1,8 @@
 package com.milton.gomez.sistema.universitario.View;
-import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatMaterialLighterIJTheme;
 import com.milton.gomez.sistema.universitario.View.Panels.*;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Frame;
 import java.awt.Image;
 import javax.swing.*;
 /**
@@ -39,6 +39,8 @@ public class MainJFrame extends JFrame {
         ContentPanel.repaint();
     }
     
+    
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -57,10 +59,14 @@ public class MainJFrame extends JFrame {
         ExitPanel = new javax.swing.JPanel();
         ExitText = new javax.swing.JLabel();
         Title_Label = new javax.swing.JLabel();
+        MinimizePanel = new javax.swing.JPanel();
+        Minimize_Label = new javax.swing.JLabel();
         ContentPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setLocationByPlatform(true);
+        setTitle("Sistema Universitario");
+        setBounds(new java.awt.Rectangle(0, 0, 0, 0));
+        setMinimumSize(new java.awt.Dimension(1030, 650));
         setUndecorated(true);
 
         BackgroundPanel.setBackground(new java.awt.Color(255, 255, 255));
@@ -230,6 +236,9 @@ public class MainJFrame extends JFrame {
             }
         });
         HeaderPanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                HeaderPanelMouseClicked(evt);
+            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 HeaderPanelMousePressed(evt);
             }
@@ -270,22 +279,49 @@ public class MainJFrame extends JFrame {
         Title_Label.setForeground(new java.awt.Color(255, 255, 255));
         Title_Label.setText("Sistema Universitario");
 
+        MinimizePanel.setBackground(new java.awt.Color(204, 0, 0));
+
+        Minimize_Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/minimize_icon.png"))); // NOI18N
+        Minimize_Label.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Minimize_LabelMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                Minimize_LabelMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                Minimize_LabelMouseExited(evt);
+            }
+        });
+
+        javax.swing.GroupLayout MinimizePanelLayout = new javax.swing.GroupLayout(MinimizePanel);
+        MinimizePanel.setLayout(MinimizePanelLayout);
+        MinimizePanelLayout.setHorizontalGroup(
+            MinimizePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(Minimize_Label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        MinimizePanelLayout.setVerticalGroup(
+            MinimizePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(Minimize_Label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout HeaderPanelLayout = new javax.swing.GroupLayout(HeaderPanel);
         HeaderPanel.setLayout(HeaderPanelLayout);
         HeaderPanelLayout.setHorizontalGroup(
             HeaderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, HeaderPanelLayout.createSequentialGroup()
-                .addContainerGap(477, Short.MAX_VALUE)
+            .addGroup(HeaderPanelLayout.createSequentialGroup()
+                .addGap(477, 477, 477)
                 .addComponent(Title_Label)
-                .addGap(208, 208, 208)
+                .addGap(142, 142, 142)
+                .addComponent(MinimizePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(2, 2, 2)
                 .addComponent(ExitPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         HeaderPanelLayout.setVerticalGroup(
             HeaderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(HeaderPanelLayout.createSequentialGroup()
-                .addComponent(ExitPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addComponent(Title_Label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(Title_Label, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(MinimizePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(ExitPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         BackgroundPanel.add(HeaderPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1030, 64));
@@ -300,7 +336,7 @@ public class MainJFrame extends JFrame {
         );
         ContentPanelLayout.setVerticalGroup(
             ContentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 580, Short.MAX_VALUE)
         );
 
         BackgroundPanel.add(ContentPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 70, 780, 580));
@@ -376,6 +412,22 @@ public class MainJFrame extends JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_UNTDF_iconLabelMouseEntered
 
+    private void Minimize_LabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Minimize_LabelMouseClicked
+        this.setState(Frame.ICONIFIED);
+    }//GEN-LAST:event_Minimize_LabelMouseClicked
+
+    private void Minimize_LabelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Minimize_LabelMouseEntered
+        MinimizePanel.setBackground(Color.red);
+    }//GEN-LAST:event_Minimize_LabelMouseEntered
+
+    private void Minimize_LabelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Minimize_LabelMouseExited
+        MinimizePanel.setBackground(new Color(204, 0, 0));
+    }//GEN-LAST:event_Minimize_LabelMouseExited
+
+    private void HeaderPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HeaderPanelMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_HeaderPanelMouseClicked
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Alumnos_Button;
     private javax.swing.JButton Ayuda_Button;
@@ -389,6 +441,8 @@ public class MainJFrame extends JFrame {
     private javax.swing.JPanel MenuPanel;
     private javax.swing.JPanel Menu_ButtonsPanel;
     private javax.swing.JPanel Menu_HeaderPanel;
+    private javax.swing.JPanel MinimizePanel;
+    private javax.swing.JLabel Minimize_Label;
     private javax.swing.JButton PlanesDeEstudio_Button;
     private javax.swing.JLabel Title_Label;
     private javax.swing.JLabel UNTDF_iconLabel;

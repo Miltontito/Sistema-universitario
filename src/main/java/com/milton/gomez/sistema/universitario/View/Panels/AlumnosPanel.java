@@ -2,6 +2,8 @@ package com.milton.gomez.sistema.universitario.View.Panels;
 
 import com.milton.gomez.sistema.universitario.Controller.ControllerAlumno;
 import com.milton.gomez.sistema.universitario.View.MainJFrame;
+import javax.swing.JLabel;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -16,6 +18,7 @@ public class AlumnosPanel extends javax.swing.JPanel {
     public AlumnosPanel() {
         initComponents();
         cargarAlumnos();
+        alinearTablaAlumnos();
     }
     
     private void cargarAlumnos(){
@@ -31,6 +34,12 @@ public class AlumnosPanel extends javax.swing.JPanel {
                             u.getNombre(), 
                             u.getApellido(), 
                             u.getCarrera().getNombre()}));
+    }
+    
+    private void alinearTablaAlumnos(){
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment( JLabel.RIGHT );
+        Alumnos_Table.setDefaultRenderer(Object.class, centerRenderer);
     }
 
     /**
@@ -116,6 +125,8 @@ public class AlumnosPanel extends javax.swing.JPanel {
                     .addComponent(Buscar_Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        Alumnos_ScrollPane.setFont(new java.awt.Font("Roboto", 0, 15)); // NOI18N
 
         Alumnos_Table.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         Alumnos_Table.setModel(new javax.swing.table.DefaultTableModel(

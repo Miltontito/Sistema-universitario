@@ -4,6 +4,10 @@
  */
 package com.milton.gomez.sistema.universitario.View.Panels;
 
+import com.milton.gomez.sistema.universitario.Controller.ControllerPlanesDeEstudio;
+import com.milton.gomez.sistema.universitario.Model.PlanDeEstudio;
+import javax.swing.DefaultListModel;
+
 /**
  *
  * @author milton
@@ -15,6 +19,18 @@ public class PlanesDeEstudioPanel extends javax.swing.JPanel {
      */
     public PlanesDeEstudioPanel() {
         initComponents();
+        listarPlanesDeEstudio();
+    }
+    
+    private void listarPlanesDeEstudio(){
+        // Obtener el modelo de la JList
+        DefaultListModel<PlanDeEstudio> listModel = (DefaultListModel<PlanDeEstudio>) PlanesDeEstudio_List.getModel();
+
+        // Limpiar el modelo actual para evitar duplicados
+        listModel.clear();
+
+        // Agregar cada carrera al modelo de la JList
+        ControllerPlanesDeEstudio.listarTodosLosPlaneDeEstudio().forEach((c) -> listModel.addElement(c));
     }
 
     /**
@@ -27,25 +43,74 @@ public class PlanesDeEstudioPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         Background_Panel = new javax.swing.JPanel();
+        Header_Panel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        Body_Panel = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        PlanesDeEstudio_List = new javax.swing.JList<>();
 
-        jLabel1.setText("PlaceHolder Planes de estudio");
+        jLabel1.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/rule_settings_icon.png"))); // NOI18N
+        jLabel1.setText("Planes de Estudio");
+
+        javax.swing.GroupLayout Header_PanelLayout = new javax.swing.GroupLayout(Header_Panel);
+        Header_Panel.setLayout(Header_PanelLayout);
+        Header_PanelLayout.setHorizontalGroup(
+            Header_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Header_PanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(Header_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Header_PanelLayout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(293, 293, 293))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Header_PanelLayout.createSequentialGroup()
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 443, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(194, 194, 194))))
+        );
+        Header_PanelLayout.setVerticalGroup(
+            Header_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Header_PanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        PlanesDeEstudio_List.setModel(new DefaultListModel<>());
+        jScrollPane1.setViewportView(PlanesDeEstudio_List);
+
+        javax.swing.GroupLayout Body_PanelLayout = new javax.swing.GroupLayout(Body_Panel);
+        Body_Panel.setLayout(Body_PanelLayout);
+        Body_PanelLayout.setHorizontalGroup(
+            Body_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Body_PanelLayout.createSequentialGroup()
+                .addGap(56, 56, 56)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 656, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(68, Short.MAX_VALUE))
+        );
+        Body_PanelLayout.setVerticalGroup(
+            Body_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Body_PanelLayout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(316, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout Background_PanelLayout = new javax.swing.GroupLayout(Background_Panel);
         Background_Panel.setLayout(Background_PanelLayout);
         Background_PanelLayout.setHorizontalGroup(
             Background_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(Background_PanelLayout.createSequentialGroup()
-                .addGap(207, 207, 207)
-                .addComponent(jLabel1)
-                .addContainerGap(185, Short.MAX_VALUE))
+            .addComponent(Header_Panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(Body_Panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         Background_PanelLayout.setVerticalGroup(
             Background_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Background_PanelLayout.createSequentialGroup()
-                .addGap(232, 232, 232)
-                .addComponent(jLabel1)
-                .addContainerGap(279, Short.MAX_VALUE))
+                .addComponent(Header_Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Body_Panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -63,6 +128,11 @@ public class PlanesDeEstudioPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Background_Panel;
+    private javax.swing.JPanel Body_Panel;
+    private javax.swing.JPanel Header_Panel;
+    private javax.swing.JList<PlanDeEstudio> PlanesDeEstudio_List;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator1;
     // End of variables declaration//GEN-END:variables
 }

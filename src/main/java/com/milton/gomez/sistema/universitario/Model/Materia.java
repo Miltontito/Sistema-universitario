@@ -8,7 +8,7 @@ public class Materia {
     // ---------------| Atributos |---------------
     // -------------------------------------------
 
-    private static Integer identificador_materia;
+    private static Integer identificador_materia = 0;
     private final Integer materiaID;
     private String codigoDeMateria;
     private String nombre;
@@ -44,7 +44,7 @@ public class Materia {
     // ----------------| Metodos |----------------
     // -------------------------------------------
 
-    protected Integer asignarID(){
+    private Integer asignarID(){
         return identificador_materia++;
     }
     public void esPromocionable(Boolean promocionable){
@@ -61,6 +61,11 @@ public class Materia {
         this.cursadaAprobada = true;
         return false;
 
+    }
+    
+    @Override
+    public String toString(){
+        return getCodigoDeMateria()+ ". " + getNombre();
     }
 
     // -------------------------------------------

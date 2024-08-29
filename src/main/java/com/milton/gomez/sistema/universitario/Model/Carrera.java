@@ -24,7 +24,7 @@ public class Carrera {
     // -----------------------------------------------
     public Carrera() {
         this.carreraID = asignarID();
-        this.planDeEstudio = new PlanA();
+        this.cuatrimestres = new ArrayList<>();
     }
     
     public Carrera(String nombre) {
@@ -55,11 +55,11 @@ public class Carrera {
     // -----------------------------------------
     // ---------------| Métodos |---------------
     // -----------------------------------------
-    protected Integer asignarID(){
+    private Integer asignarID(){
         return identificador_carrera++;
     }
     public boolean crearCuatrimestre(){
-        cuatrimestres.add(new Cuatrimestre());
+        this.cuatrimestres.add(new Cuatrimestre());
         return true;
     }
     public boolean crearCuatrimestre(List<Materia> materias){

@@ -56,4 +56,9 @@ public class PlanA implements PlanDeEstudio {
 
         return true; // Todas las correlativas tienen la cursada aprobada
     }
+    
+    @Override
+    public String toString(){
+        return "Plan A: Un alumno puede cursar una materia si aprobó las cursadas de las correlativas";
+    }
 }

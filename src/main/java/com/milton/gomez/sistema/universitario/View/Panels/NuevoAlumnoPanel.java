@@ -7,6 +7,9 @@ package com.milton.gomez.sistema.universitario.View.Panels;
 import com.milton.gomez.sistema.universitario.Controller.ControllerCarreras;
 import com.milton.gomez.sistema.universitario.Model.Carrera;
 import javax.swing.DefaultListModel;
+import javax.swing.JLabel;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -20,8 +23,7 @@ public class NuevoAlumnoPanel extends javax.swing.JPanel {
     public NuevoAlumnoPanel() {
         initComponents();
         listarCarreras();
-        
-        //listarMaterias();
+        alinearTablaMaterias();
     }
     
     private void listarCarreras(){
@@ -33,6 +35,28 @@ public class NuevoAlumnoPanel extends javax.swing.JPanel {
 
         // Agregar cada carrera al modelo de la JList
         ControllerCarreras.listarTodasLasCarreras().forEach((c) -> listModel.addElement(c));
+    }
+    
+    private void listarMaterias(){
+        // Obtenemos el modelo de la JList materias
+        DefaultTableModel tableModel = (DefaultTableModel) Materias_Table.getModel();
+        
+        tableModel.setRowCount(0);
+        
+        ControllerCarreras.listarTodosLosCuatrimestres(Carreras_List.getSelectedValue().getCarreraID())
+                .forEach((c) -> c.listarTodasLasMaterias().forEach((m) -> tableModel
+                        .addRow(new Object[]{
+                            c.getCuatrimestreID()+1,
+                            m})));
+        
+        
+    }
+    
+    private void alinearTablaMaterias(){
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment( JLabel.LEFT );
+        Materias_Table.setDefaultRenderer(Object.class, centerRenderer);
+        Materias_Table.setDefaultRenderer(Integer.class, centerRenderer);
     }
     
     //private void
@@ -63,7 +87,7 @@ public class NuevoAlumnoPanel extends javax.swing.JPanel {
         Carreras_List = new javax.swing.JList<>();
         jLabel7 = new javax.swing.JLabel();
         Materia_ScrollPane = new javax.swing.JScrollPane();
-        Materias_List = new javax.swing.JList<>();
+        Materias_Table = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Roboto Black", 0, 24)); // NOI18N
@@ -95,19 +119,49 @@ public class NuevoAlumnoPanel extends javax.swing.JPanel {
         jLabel6.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel6.setText("Seleccione la Carrera (Max. 1)");
 
+        Carreras_List.setFont(new java.awt.Font("Roboto", 0, 15)); // NOI18N
         Carreras_List.setModel(new DefaultListModel<>());
         Carreras_List.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        Carreras_List.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                Carreras_ListValueChanged(evt);
+            }
+        });
         Carrera_ScrollPane.setViewportView(Carreras_List);
 
         jLabel7.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel7.setText("Seleccione las Materias");
 
-        Materias_List.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
+        Materia_ScrollPane.setFont(new java.awt.Font("Roboto", 0, 15)); // NOI18N
+
+        Materias_Table.setFont(new java.awt.Font("Roboto", 0, 15)); // NOI18N
+        Materias_Table.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Cuatrimestre", "Materia"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.Object.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
         });
-        Materia_ScrollPane.setViewportView(Materias_List);
+        Materia_ScrollPane.setViewportView(Materias_Table);
+        if (Materias_Table.getColumnModel().getColumnCount() > 0) {
+            Materias_Table.getColumnModel().getColumn(0).setMaxWidth(100);
+        }
 
         jButton1.setBackground(new java.awt.Color(204, 0, 0));
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
@@ -187,7 +241,7 @@ public class NuevoAlumnoPanel extends javax.swing.JPanel {
                         .addComponent(jLabel6)
                         .addGap(8, 8, 8)
                         .addComponent(Carrera_ScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(Materia_ScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -208,6 +262,10 @@ public class NuevoAlumnoPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void Carreras_ListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_Carreras_ListValueChanged
+        listarMaterias();
+    }//GEN-LAST:event_Carreras_ListValueChanged
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField Apellido_TextField;
@@ -217,7 +275,7 @@ public class NuevoAlumnoPanel extends javax.swing.JPanel {
     private javax.swing.JTextField DNI_TextField;
     private javax.swing.JTextField Legajo_TextField;
     private javax.swing.JScrollPane Materia_ScrollPane;
-    private javax.swing.JList<String> Materias_List;
+    private javax.swing.JTable Materias_Table;
     private javax.swing.JTextField Nombre_TextField;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
