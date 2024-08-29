@@ -13,7 +13,20 @@ import com.milton.gomez.sistema.universitario.Model.ControladorUniversitario;
 public class IniciadorMaterias {
     public static void inicializarMaterias(){
         ControladorUniversitario controlador = ControladorUniversitario.getInstance();
-        controlador.crearMateria("FEO12", "Algebra", Boolean.TRUE, null);
+        
+        
+        //Crea el primer cuatrimestre de la carrera Sistemas.
+        controlador.obtenerCarreras().get(0).crearCuatrimestre();
+        
+        controlador.obtenerCarreras().get(0).getCuatrimestres().get(0).addMateriaObligatoria(
+                controlador.crearMateria("FEO1", "Algebra", Boolean.TRUE, null));
+        
+        controlador.obtenerCarreras().get(0).getCuatrimestres().get(0).addMateriaObligatoria(
+                controlador.crearMateria("FEO2", "Programacion 0", Boolean.TRUE, null));
+        
+        controlador.obtenerCarreras().get(0).getCuatrimestres().get(0).addMateriaObligatoria(
+                controlador.crearMateria("FEO3", "Elementos de Info.", Boolean.TRUE, null));
+        
     }
     
     

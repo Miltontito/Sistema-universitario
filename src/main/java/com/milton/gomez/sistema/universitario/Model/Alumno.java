@@ -48,7 +48,7 @@ public class Alumno {
     // -----------------------------------------
 
     protected Integer asignarID(){
-        return ++identificador_alumno;
+        return identificador_alumno++;
     }
     public Boolean inscribirseACarrera(Carrera carrera){
         if (this.carrera != null){

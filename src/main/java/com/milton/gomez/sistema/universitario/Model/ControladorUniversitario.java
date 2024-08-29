@@ -34,9 +34,9 @@ public class ControladorUniversitario {
     // -----------------------------------------
     // ---------------| Métodos |---------------
     // -----------------------------------------
-
+    
     // Crear métodos
-    public void crearCarrera(String nombre, Long codCarrera, Integer cantMateriasOptativas, PlanDeEstudio planDeEstudio, List<Cuatrimestre> cuatrimestres, List<Alumno> alumnos) {
+    public Carrera crearCarrera(String nombre, Long codCarrera, Integer cantMateriasOptativas, PlanDeEstudio planDeEstudio, List<Cuatrimestre> cuatrimestres, List<Alumno> alumnos) {
         Carrera nuevaCarrera = new Carrera();
         nuevaCarrera.setNombre(nombre);
         nuevaCarrera.setCodigoCarrera(codCarrera);
@@ -45,14 +45,16 @@ public class ControladorUniversitario {
         nuevaCarrera.setCuatrimestres(cuatrimestres != null ? cuatrimestres : new ArrayList<>());
         nuevaCarrera.setAlumnos(alumnos != null ? alumnos : new ArrayList<>());
         carreras.add(nuevaCarrera);
+        return nuevaCarrera;
     }
 
-    public void crearMateria(String codigoDeMateria, String nombre, Boolean promocionable, List<Materia> correlativas) {
+    public Materia crearMateria(String codigoDeMateria, String nombre, Boolean promocionable, List<Materia> correlativas) {
         Materia nuevaMateria = new Materia(codigoDeMateria, nombre, promocionable, correlativas != null ? correlativas : new ArrayList<>());
         materias.add(nuevaMateria);
+        return nuevaMateria;
     }
 
-    public void crearAlumno(String nombre, String apellido, Long legajo, Long dni, Carrera carrera) {
+    public Alumno crearAlumno(String nombre, String apellido, Long legajo, Long dni, Carrera carrera) {
         Alumno nuevoAlumno = new Alumno();
         nuevoAlumno.setNombre(nombre);
         nuevoAlumno.setApellido(apellido);
@@ -60,6 +62,7 @@ public class ControladorUniversitario {
         nuevoAlumno.setDni(dni);
         nuevoAlumno.setCarrera(carrera);
         alumnos.add(nuevoAlumno);
+        return nuevoAlumno;
     }
 
 

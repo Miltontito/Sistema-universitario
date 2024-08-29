@@ -1,7 +1,7 @@
 package com.milton.gomez.sistema.universitario.Model;
 
 
-import java.awt.PopupMenu;
+import com.milton.gomez.sistema.universitario.Model.PlanesDeEstudio.PlanA;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,13 +18,13 @@ public class Carrera {
     private List<Cuatrimestre> cuatrimestres;
     private PlanDeEstudio planDeEstudio;
     private List<Alumno> alumnos;
-    public PopupMenu getNombre;
 
     // -----------------------------------------------
     // ---------------| Constructores |---------------
     // -----------------------------------------------
     public Carrera() {
         this.carreraID = asignarID();
+        this.planDeEstudio = new PlanA();
     }
     
     public Carrera(String nombre) {
@@ -56,7 +56,11 @@ public class Carrera {
     // ---------------| Métodos |---------------
     // -----------------------------------------
     protected Integer asignarID(){
-        return ++identificador_carrera;
+        return identificador_carrera++;
+    }
+    public boolean crearCuatrimestre(){
+        cuatrimestres.add(new Cuatrimestre());
+        return true;
     }
     public boolean crearCuatrimestre(List<Materia> materias){
         cuatrimestres.add(new Cuatrimestre(materias));
@@ -102,7 +106,6 @@ public class Carrera {
         }
         return materias;
     }
-    
     @Override
     public String toString(){
         return this.getNombre();

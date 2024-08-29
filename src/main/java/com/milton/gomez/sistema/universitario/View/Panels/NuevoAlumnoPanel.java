@@ -20,6 +20,8 @@ public class NuevoAlumnoPanel extends javax.swing.JPanel {
     public NuevoAlumnoPanel() {
         initComponents();
         listarCarreras();
+        
+        //listarMaterias();
     }
     
     private void listarCarreras(){
@@ -32,6 +34,8 @@ public class NuevoAlumnoPanel extends javax.swing.JPanel {
         // Agregar cada carrera al modelo de la JList
         ControllerCarreras.listarTodasLasCarreras().forEach((c) -> listModel.addElement(c));
     }
+    
+    //private void
 
     /**
      * This method is called from within the constructor to initialize the form.

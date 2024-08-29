@@ -7,14 +7,19 @@ public class Cuatrimestre {
     // -----------------------------------------------
     // ---------------|   Atributos   |---------------
     // -----------------------------------------------
+    private static Integer identificador_cuatrimestre = 0;
+    private final Integer cuatrimestreID;
     private List<Materia> materiasObligatorias;
     private List<Materia> materiasOptativas;
 
     // -----------------------------------------------
     // ---------------| Constructores |---------------
     // -----------------------------------------------
-    public Cuatrimestre() {}
+    public Cuatrimestre() {
+        this.cuatrimestreID = asignarID();
+    }
     public Cuatrimestre(List<Materia> materiasObligatorias) {
+        this();
         this.materiasObligatorias = materiasObligatorias;
     }
     public Cuatrimestre(List<Materia> materiasObligatorias, List<Materia> materiasOptativas) {
@@ -25,6 +30,9 @@ public class Cuatrimestre {
     // -----------------------------------------------
     // ---------------|    Metodos    |---------------
     // -----------------------------------------------
+    protected Integer asignarID(){
+        return identificador_cuatrimestre++;
+    }
     public List<Materia> listarMateriasObligatorias(){
         return materiasObligatorias;
     }
@@ -48,6 +56,10 @@ public class Cuatrimestre {
             materiasOptativas.add(materia);
         }
         return false;
+    }
+    
+    public Integer getCuatrimestreID(){
+        return this.cuatrimestreID;
     }
 
 }
