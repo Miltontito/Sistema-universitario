@@ -24,6 +24,12 @@ public class Alumno {
     // -----------------------------------------------
     public Alumno() {
         this.alumnoID = asignarID();
+        this.materiasQuePuedeCursar = new ArrayList<>();
+        this.materias = new ArrayList<>();
+    }
+    public Alumno(String nombre) {
+        this();
+        this.nombre = nombre;
     }
     public Alumno(Long legajo, Long dni, String nombre, String apellido) {
         this();

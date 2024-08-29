@@ -41,15 +41,13 @@ public class Carrera {
         this.nombre = nombre;
         this.codigoCarrera = codigoCarrera;
     }
-    public Carrera(String nombre, Long codigoCarrera, Integer cantMateriasOptativasParaAprobar, List<Cuatrimestre> cuatrimestres) {
+    public Carrera(String nombre, Long codigoCarrera, Integer cantMateriasOptativasParaAprobar) {
         this(nombre, codigoCarrera);
         this.cantMateriasOptativasParaAprobar = cantMateriasOptativasParaAprobar;
-        this.cuatrimestres = cuatrimestres;
     }
-    public Carrera(String nombre, Long codigoCarrera, Integer cantMateriasOptativasParaAprobar, List<Cuatrimestre> cuatrimestres, PlanDeEstudio planDeEstudio, List<Alumno> alumnos) {
-        this(nombre, codigoCarrera, cantMateriasOptativasParaAprobar, cuatrimestres);
+    public Carrera(String nombre, Long codigoCarrera, Integer cantMateriasOptativasParaAprobar, PlanDeEstudio planDeEstudio) {
+        this(nombre, codigoCarrera, cantMateriasOptativasParaAprobar);
         this.planDeEstudio = planDeEstudio;
-        this.alumnos = alumnos;
     }
 
     // -----------------------------------------

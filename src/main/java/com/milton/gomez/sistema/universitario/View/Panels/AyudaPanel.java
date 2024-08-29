@@ -60,35 +60,41 @@ public class AyudaPanel extends javax.swing.JPanel {
         Titulo_Panel.setLayout(Titulo_PanelLayout);
         Titulo_PanelLayout.setHorizontalGroup(
             Titulo_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Titulo_PanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(263, 263, 263))
             .addGroup(Titulo_PanelLayout.createSequentialGroup()
-                .addGap(171, 171, 171)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 447, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(Titulo_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(Titulo_PanelLayout.createSequentialGroup()
+                        .addGap(102, 102, 102)
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 586, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(Titulo_PanelLayout.createSequentialGroup()
+                        .addGap(265, 265, 265)
+                        .addComponent(jLabel1)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         Titulo_PanelLayout.setVerticalGroup(
             Titulo_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Titulo_PanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jLabel2.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel2.setText("¿Como usar las Tablas?");
 
+        jLabel5.setFont(new java.awt.Font("Liberation Sans", 0, 16)); // NOI18N
         jLabel5.setText("Haciendo uso de teclas como (CTRL) puede seleccionar multiples elementos.");
 
+        jLabel3.setFont(new java.awt.Font("Liberation Sans", 0, 16)); // NOI18N
         jLabel3.setText("Los elementos en una Tabla pueden ser seleccionados con un simple CLICK");
 
+        jLabel6.setFont(new java.awt.Font("Liberation Sans", 0, 16)); // NOI18N
         jLabel6.setText("Haciendo uso de teclas como (SHIFT) puede seleccionar multiples elementos adyacentes.");
 
+        jLabel4.setFont(new java.awt.Font("Liberation Sans", 0, 16)); // NOI18N
         jLabel4.setText("del mouse o manteniendo el CLICK");
 
+        jLabel12.setFont(new java.awt.Font("Liberation Sans", 0, 16)); // NOI18N
         jLabel12.setText("Estas acciones pueden aplicarse a listas también.");
 
         javax.swing.GroupLayout TablasInstruccion_TableLayout = new javax.swing.GroupLayout(TablasInstruccion_Table);
@@ -101,13 +107,13 @@ public class AyudaPanel extends javax.swing.JPanel {
                     .addComponent(jLabel2)
                     .addGroup(TablasInstruccion_TableLayout.createSequentialGroup()
                         .addGap(30, 30, 30)
-                        .addGroup(TablasInstruccion_TableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(TablasInstruccion_TableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel4)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 535, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel5)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel12))))
-                .addContainerGap(113, Short.MAX_VALUE))
+                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel12)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(124, Short.MAX_VALUE))
         );
         TablasInstruccion_TableLayout.setVerticalGroup(
             TablasInstruccion_TableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -129,14 +135,19 @@ public class AyudaPanel extends javax.swing.JPanel {
         jLabel7.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel7.setText("¿Como funcionan los botones?");
 
+        jLabel8.setFont(new java.awt.Font("Liberation Sans", 0, 16)); // NOI18N
         jLabel8.setText("funcionamiento dependerá del uso de estas.");
 
+        jLabel9.setFont(new java.awt.Font("Liberation Sans", 0, 16)); // NOI18N
         jLabel9.setText("Los botones normalmente tendrán campos que deberan ser llenados para su funcionamiento.");
 
+        jLabel10.setFont(new java.awt.Font("Liberation Sans", 0, 16)); // NOI18N
         jLabel10.setText("Cuando se tengan los elementos seleccionados los botones tendrán su funcionamiento, por ejemplo,");
 
+        jLabel11.setFont(new java.awt.Font("Liberation Sans", 0, 16)); // NOI18N
         jLabel11.setText("Habrá ocasiones en las que estos campos sean reemplazados por Tablas o Listas en ese caso el ");
 
+        jLabel13.setFont(new java.awt.Font("Liberation Sans", 0, 16)); // NOI18N
         jLabel13.setText("el boton BORRAR requiere que se seleccione uno o más elementos de su tabla correspondiente.");
 
         javax.swing.GroupLayout BotonesInstruccion_PanelLayout = new javax.swing.GroupLayout(BotonesInstruccion_Panel);
@@ -155,7 +166,7 @@ public class AyudaPanel extends javax.swing.JPanel {
                             .addComponent(jLabel10)
                             .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 717, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel13))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
         BotonesInstruccion_PanelLayout.setVerticalGroup(
             BotonesInstruccion_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -178,6 +189,7 @@ public class AyudaPanel extends javax.swing.JPanel {
         jLabel14.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel14.setText("Contacto");
 
+        jLabel16.setFont(new java.awt.Font("Liberation Sans", 0, 16)); // NOI18N
         jLabel16.setText("Ante cualquier duda o problema contactar con: miltonhernanjosuegomez@gmail.com");
 
         javax.swing.GroupLayout Contacto_PanelLayout = new javax.swing.GroupLayout(Contacto_Panel);
@@ -187,11 +199,12 @@ public class AyudaPanel extends javax.swing.JPanel {
             .addGroup(Contacto_PanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(Contacto_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel14)
                     .addGroup(Contacto_PanelLayout.createSequentialGroup()
                         .addGap(30, 30, 30)
-                        .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 535, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(154, Short.MAX_VALUE))
+                        .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, 755, Short.MAX_VALUE))
+                    .addGroup(Contacto_PanelLayout.createSequentialGroup()
+                        .addComponent(jLabel14)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         Contacto_PanelLayout.setVerticalGroup(
             Contacto_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -209,21 +222,22 @@ public class AyudaPanel extends javax.swing.JPanel {
             Body_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Body_PanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(Body_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(Body_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(Contacto_Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(TablasInstruccion_Table, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BotonesInstruccion_Panel, javax.swing.GroupLayout.PREFERRED_SIZE, 737, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(BotonesInstruccion_Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(77, 77, 77))
         );
         Body_PanelLayout.setVerticalGroup(
             Body_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Body_PanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(BotonesInstruccion_Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(TablasInstruccion_Table, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
+                .addGap(18, 18, 18)
                 .addComponent(Contacto_Panel, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(67, Short.MAX_VALUE))
+                .addContainerGap(77, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout Background_PanelLayout = new javax.swing.GroupLayout(Background_Panel);
@@ -248,7 +262,9 @@ public class AyudaPanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Background_Panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(Background_Panel, javax.swing.GroupLayout.PREFERRED_SIZE, 804, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

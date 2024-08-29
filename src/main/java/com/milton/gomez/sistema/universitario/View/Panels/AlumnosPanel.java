@@ -1,7 +1,9 @@
 package com.milton.gomez.sistema.universitario.View.Panels;
 
-import com.milton.gomez.sistema.universitario.Controller.ControllerAlumno;
+import com.milton.gomez.sistema.universitario.Controller.ControllerAlumnos;
+import com.milton.gomez.sistema.universitario.Model.Alumno;
 import com.milton.gomez.sistema.universitario.View.MainJFrame;
+import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
@@ -25,7 +27,10 @@ public class AlumnosPanel extends javax.swing.JPanel {
         
         // "ID", "Legajo", "DNI", "Nombre", "Apellido", "Carrera"
         DefaultTableModel model = (DefaultTableModel)Alumnos_Table.getModel();
-        ControllerAlumno.listarTodosLosAlumnos()
+        
+        model.setRowCount(0);
+        
+        ControllerAlumnos.listarTodosLosAlumnos()
                 .forEach((u) -> model
                         .addRow(new Object[]{
                             u.getAlumnoID(),
@@ -35,13 +40,58 @@ public class AlumnosPanel extends javax.swing.JPanel {
                             u.getApellido(), 
                             u.getCarrera().getNombre()}));
     }
-    
     private void alinearTablaAlumnos(){
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment( JLabel.RIGHT );
         Alumnos_Table.setDefaultRenderer(Object.class, centerRenderer);
     }
+    private void buscarAlumno(){
+        DefaultTableModel model = (DefaultTableModel)Alumnos_Table.getModel();
+        
+        if(Alumno_TextField.getText().length() == 8){
+            model.setRowCount(0);
+            try{
+                Alumno a = ControllerAlumnos.obtenerAlumnoPorDNI(Long.parseLong(Alumno_TextField.getText().toString()));
+                System.out.println(Integer.parseInt(Alumno_TextField.getText().toString()));
+                System.out.println(ControllerAlumnos.obtenerAlumnoPorDNI(Long.parseLong(Alumno_TextField.getText().toString())));
+                model.addRow(new Object[]{
+                a.getAlumnoID(),
+                a.getLegajo(), 
+                a.getDni(), 
+                a.getNombre(), 
+                a.getApellido(), 
+                a.getCarrera().getNombre()
+            });
+            }
+            catch(NumberFormatException e){
+                System.out.println("El dato introducido no es un numero");
+            }
+            catch(NullPointerException e){
+                System.out.println("No se encuentra el Alumno");
+            }
 
+        }
+        else if (Alumno_TextField.getText().length() == 6){
+            model.setRowCount(0);
+            try{
+                Alumno a = ControllerAlumnos.obtenerAlumnoPorLegajo(Long.parseLong(Alumno_TextField.getText().toString()));
+                model.addRow(new Object[]{
+                a.getAlumnoID(),
+                a.getLegajo(), 
+                a.getDni(), 
+                a.getNombre(), 
+                a.getApellido(), 
+                a.getCarrera().getNombre()
+            });
+            }
+            catch(NumberFormatException e){
+                System.out.println("El dato introducido no es un numero");
+            }
+            catch(NullPointerException e){
+                System.out.println("No se encuentra el Alumno");
+            }
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -51,6 +101,7 @@ public class AlumnosPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenu1 = new javax.swing.JMenu();
         Background_Panel = new javax.swing.JPanel();
         Header_Panel = new javax.swing.JPanel();
         Titulo_Label = new javax.swing.JLabel();
@@ -66,8 +117,13 @@ public class AlumnosPanel extends javax.swing.JPanel {
         Eliminar_Button = new javax.swing.JButton();
         Editar_Button = new javax.swing.JButton();
         Nuevo_Button = new javax.swing.JButton();
+        Detalles_Button = new javax.swing.JButton();
+        Refresh_Button = new javax.swing.JButton();
+
+        jMenu1.setText("jMenu1");
 
         Titulo_Label.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
+        Titulo_Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/people_icon.png"))); // NOI18N
         Titulo_Label.setText("Gestion de Alumnos");
 
         javax.swing.GroupLayout Header_PanelLayout = new javax.swing.GroupLayout(Header_Panel);
@@ -75,26 +131,35 @@ public class AlumnosPanel extends javax.swing.JPanel {
         Header_PanelLayout.setHorizontalGroup(
             Header_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Header_PanelLayout.createSequentialGroup()
-                .addContainerGap(194, Short.MAX_VALUE)
                 .addGroup(Header_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Header_PanelLayout.createSequentialGroup()
-                        .addComponent(Titulo_Label)
-                        .addGap(292, 292, 292))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Header_PanelLayout.createSequentialGroup()
-                        .addComponent(Separador_Separator, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(186, 186, 186))))
+                    .addGroup(Header_PanelLayout.createSequentialGroup()
+                        .addGap(187, 187, 187)
+                        .addComponent(Separador_Separator, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(Header_PanelLayout.createSequentialGroup()
+                        .addGap(232, 232, 232)
+                        .addComponent(Titulo_Label)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         Header_PanelLayout.setVerticalGroup(
             Header_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Header_PanelLayout.createSequentialGroup()
-                .addGap(17, 17, 17)
                 .addComponent(Titulo_Label)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Separador_Separator, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(1, 1, 1)
+                .addComponent(Separador_Separator)
+                .addContainerGap())
         );
 
-        Alumno_TextField.setText("Inserte el DNI o ID del Alumno...");
+        Alumno_TextField.setText("Inserte el DNI o Legajo del Alumno...");
+        Alumno_TextField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                Alumno_TextFieldFocusLost(evt);
+            }
+        });
+        Alumno_TextField.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                Alumno_TextFieldMousePressed(evt);
+            }
+        });
         Alumno_TextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Alumno_TextFieldActionPerformed(evt);
@@ -106,6 +171,11 @@ public class AlumnosPanel extends javax.swing.JPanel {
         Buscar_Button.setForeground(new java.awt.Color(255, 255, 255));
         Buscar_Button.setText("Buscar");
         Buscar_Button.setBorder(null);
+        Buscar_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Buscar_ButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout AlumnoBusqueda_PanelLayout = new javax.swing.GroupLayout(AlumnoBusqueda_Panel);
         AlumnoBusqueda_Panel.setLayout(AlumnoBusqueda_PanelLayout);
@@ -155,6 +225,9 @@ public class AlumnosPanel extends javax.swing.JPanel {
         Alumnos_Table.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         Alumnos_Table.setShowGrid(false);
         Alumnos_ScrollPane.setViewportView(Alumnos_Table);
+        if (Alumnos_Table.getColumnModel().getColumnCount() > 0) {
+            Alumnos_Table.getColumnModel().getColumn(0).setMaxWidth(100);
+        }
 
         javax.swing.GroupLayout ListAlumnos_PanelLayout = new javax.swing.GroupLayout(ListAlumnos_Panel);
         ListAlumnos_Panel.setLayout(ListAlumnos_PanelLayout);
@@ -190,13 +263,30 @@ public class AlumnosPanel extends javax.swing.JPanel {
             }
         });
 
+        Detalles_Button.setBackground(new java.awt.Color(204, 0, 0));
+        Detalles_Button.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        Detalles_Button.setForeground(new java.awt.Color(255, 255, 255));
+        Detalles_Button.setText("Detalles");
+        Detalles_Button.setBorder(null);
+
+        Refresh_Button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/refresh_icon.png"))); // NOI18N
+        Refresh_Button.setBorderPainted(false);
+        Refresh_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Refresh_ButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout AlumnoEditDelete_PanelLayout = new javax.swing.GroupLayout(AlumnoEditDelete_Panel);
         AlumnoEditDelete_Panel.setLayout(AlumnoEditDelete_PanelLayout);
         AlumnoEditDelete_PanelLayout.setHorizontalGroup(
             AlumnoEditDelete_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AlumnoEditDelete_PanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Refresh_Button)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
                 .addComponent(Nuevo_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(Detalles_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(Editar_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -210,8 +300,12 @@ public class AlumnosPanel extends javax.swing.JPanel {
                 .addGroup(AlumnoEditDelete_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Eliminar_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Editar_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Nuevo_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(44, Short.MAX_VALUE))
+                    .addComponent(Nuevo_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Detalles_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(14, Short.MAX_VALUE))
+            .addGroup(AlumnoEditDelete_PanelLayout.createSequentialGroup()
+                .addComponent(Refresh_Button)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout Body_PanelLayout = new javax.swing.GroupLayout(Body_Panel);
@@ -229,7 +323,8 @@ public class AlumnosPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ListAlumnos_Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(AlumnoEditDelete_Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(AlumnoEditDelete_Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(86, 86, 86))
         );
 
         javax.swing.GroupLayout Background_PanelLayout = new javax.swing.GroupLayout(Background_Panel);
@@ -259,7 +354,9 @@ public class AlumnosPanel extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Background_Panel, javax.swing.GroupLayout.PREFERRED_SIZE, 580, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(Background_Panel, javax.swing.GroupLayout.PREFERRED_SIZE, 574, Short.MAX_VALUE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -271,6 +368,28 @@ public class AlumnosPanel extends javax.swing.JPanel {
         MainJFrame.ShowJPanel(new NuevoAlumnoPanel());
     }//GEN-LAST:event_Nuevo_ButtonActionPerformed
 
+    private void Alumno_TextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_Alumno_TextFieldFocusLost
+        if(Alumno_TextField.getText().isEmpty()){
+            Alumno_TextField.setForeground(Color.gray);
+            Alumno_TextField.setText("Inserte el DNI o Legajo del Alumno...");
+        }
+    }//GEN-LAST:event_Alumno_TextFieldFocusLost
+
+    private void Refresh_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Refresh_ButtonActionPerformed
+        cargarAlumnos();
+    }//GEN-LAST:event_Refresh_ButtonActionPerformed
+
+    private void Alumno_TextFieldMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Alumno_TextFieldMousePressed
+        if(Alumno_TextField.getText().equals("Inserte el DNI o Legajo del Alumno...")){
+            Alumno_TextField.setText("");
+            Alumno_TextField.setForeground(Color.black);
+        }
+    }//GEN-LAST:event_Alumno_TextFieldMousePressed
+
+    private void Buscar_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Buscar_ButtonActionPerformed
+        buscarAlumno();
+    }//GEN-LAST:event_Buscar_ButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel AlumnoBusqueda_Panel;
@@ -281,12 +400,15 @@ public class AlumnosPanel extends javax.swing.JPanel {
     private javax.swing.JPanel Background_Panel;
     private javax.swing.JPanel Body_Panel;
     private javax.swing.JButton Buscar_Button;
+    private javax.swing.JButton Detalles_Button;
     private javax.swing.JButton Editar_Button;
     private javax.swing.JButton Eliminar_Button;
     private javax.swing.JPanel Header_Panel;
     private javax.swing.JPanel ListAlumnos_Panel;
     private javax.swing.JButton Nuevo_Button;
+    private javax.swing.JButton Refresh_Button;
     private javax.swing.JSeparator Separador_Separator;
     private javax.swing.JLabel Titulo_Label;
+    private javax.swing.JMenu jMenu1;
     // End of variables declaration//GEN-END:variables
 }
