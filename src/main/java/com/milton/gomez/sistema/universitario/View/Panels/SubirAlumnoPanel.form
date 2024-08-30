@@ -146,26 +146,35 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Roboto" size="18" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Legajo (6 caracteres)"/>
+            <Property name="text" type="java.lang.String" value="Legajo (6 caracteres) *"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="Legajo_TextField">
           <Properties>
             <Property name="text" type="java.lang.String" value="Ingrese el Legajo..."/>
           </Properties>
+          <Events>
+            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="Legajo_TextFieldFocusGained"/>
+            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="Legajo_TextFieldFocusLost"/>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="Legajo_TextFieldMousePressed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel3">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Roboto" size="18" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="DNI (8 caracteres)"/>
+            <Property name="text" type="java.lang.String" value="DNI (8 caracteres) *"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="DNI_TextField">
           <Properties>
             <Property name="text" type="java.lang.String" value="Ingrese el DNI..."/>
           </Properties>
+          <Events>
+            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="DNI_TextFieldFocusGained"/>
+            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="DNI_TextFieldFocusLost"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JSeparator" name="jSeparator2">
           <Properties>
@@ -177,33 +186,41 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Roboto" size="18" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Nombre"/>
+            <Property name="text" type="java.lang.String" value="Nombre *"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="Nombre_TextField">
           <Properties>
             <Property name="text" type="java.lang.String" value="Ingrese el Nombre..."/>
           </Properties>
+          <Events>
+            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="Nombre_TextFieldFocusGained"/>
+            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="Nombre_TextFieldFocusLost"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel5">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Roboto" size="18" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Apellido"/>
+            <Property name="text" type="java.lang.String" value="Apellido *"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="Apellido_TextField">
           <Properties>
             <Property name="text" type="java.lang.String" value="Ingrese el Apellido..."/>
           </Properties>
+          <Events>
+            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="Apellido_TextFieldFocusGained"/>
+            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="Apellido_TextFieldFocusLost"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel6">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Roboto" size="18" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Seleccione la Carrera (Max. 1)"/>
+            <Property name="text" type="java.lang.String" value="Seleccione la Carrera (Max. 1) *"/>
           </Properties>
         </Component>
         <Container class="javax.swing.JScrollPane" name="Carrera_ScrollPane">
@@ -235,7 +252,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Roboto" size="18" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Seleccione las Materias"/>
+            <Property name="text" type="java.lang.String" value="Seleccione las Materias *"/>
           </Properties>
         </Component>
         <Container class="javax.swing.JScrollPane" name="Materia_ScrollPane">
@@ -290,6 +307,9 @@
             <Property name="text" type="java.lang.String" value="Aceptar"/>
             <Property name="borderPainted" type="boolean" value="false"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

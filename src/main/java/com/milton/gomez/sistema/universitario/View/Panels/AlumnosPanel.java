@@ -1,7 +1,6 @@
 package com.milton.gomez.sistema.universitario.View.Panels;
 
 import com.milton.gomez.sistema.universitario.Controller.ControllerAlumnos;
-import com.milton.gomez.sistema.universitario.Model.ModelAlumno;
 import com.milton.gomez.sistema.universitario.View.ViewMain;
 import java.awt.Color;
 import javax.swing.JLabel;
@@ -37,27 +36,10 @@ public class AlumnosPanel extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel)Alumnos_Table.getModel();
         
         if(Alumno_TextField.getText().length() == 8){
-            ControllerAlumnos.obtenerAlumnoPorDNI(this.Alumnos_Table, this.Alumno_TextField);
+            Alumnos_Table.setModel(ControllerAlumnos.obtenerAlumnoPorDNI(Alumnos_Table, Alumno_TextField));
         }
         else if (Alumno_TextField.getText().length() == 6){
-            model.setRowCount(0);
-            try{
-                ModelAlumno a = ControllerAlumnos.obtenerAlumnoPorLegajo(Long.parseLong(Alumno_TextField.getText().toString()));
-                model.addRow(new Object[]{
-                a.getAlumnoID(),
-                a.getLegajo(), 
-                a.getDni(), 
-                a.getNombre(), 
-                a.getApellido(), 
-                a.getCarrera().getNombre()
-            });
-            }
-            catch(NumberFormatException e){
-                System.out.println("El dato introducido no es un numero");
-            }
-            catch(NullPointerException e){
-                System.out.println("No se encuentra el Alumno");
-            }
+            Alumnos_Table.setModel(ControllerAlumnos.obtenerAlumnoPorLegajo(Alumnos_Table, Alumno_TextField));
         }
         else if(Alumno_TextField.getText().equals("Inserte el DNI o Legajo del Alumno...")){
             cargarAlumnos();
@@ -244,6 +226,11 @@ public class AlumnosPanel extends javax.swing.JPanel {
         Detalles_Button.setForeground(new java.awt.Color(255, 255, 255));
         Detalles_Button.setText("Detalles");
         Detalles_Button.setBorder(null);
+        Detalles_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Detalles_ButtonActionPerformed(evt);
+            }
+        });
 
         Refresh_Button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/refresh_icon.png"))); // NOI18N
         Refresh_Button.setBorderPainted(false);
@@ -341,7 +328,7 @@ public class AlumnosPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_Alumno_TextFieldActionPerformed
 
     private void Nuevo_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Nuevo_ButtonActionPerformed
-        ViewMain.ShowJPanel(new NuevoAlumnoPanel());
+        ViewMain.ShowJPanel(new SubirAlumnoPanel());
     }//GEN-LAST:event_Nuevo_ButtonActionPerformed
 
     private void Alumno_TextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_Alumno_TextFieldFocusLost
@@ -378,6 +365,10 @@ public class AlumnosPanel extends javax.swing.JPanel {
             System.out.println(e.getMessage());
         }
     }//GEN-LAST:event_Eliminar_ButtonActionPerformed
+
+    private void Detalles_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Detalles_ButtonActionPerformed
+        ViewMain.ShowJPanel(new DetallesAlumno());
+    }//GEN-LAST:event_Detalles_ButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

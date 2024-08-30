@@ -49,49 +49,7 @@ public class CarrerasPanel extends javax.swing.JPanel {
         Carreras_Table.setDefaultRenderer(Object.class, centerRenderer);
     }
     private void buscarCarrera(){
-        DefaultTableModel model = (DefaultTableModel)Carreras_Table.getModel();
         
-        if(Carrera_TextField.getText().length() == 8){
-            model.setRowCount(0);
-            try{
-                ModelAlumno a = ControllerAlumnos.obtenerAlumnoPorDNI(Long.parseLong(Carrera_TextField.getText().toString()));
-                model.addRow(new Object[]{
-                a.getAlumnoID(),
-                a.getLegajo(), 
-                a.getDni(), 
-                a.getNombre(), 
-                a.getApellido(), 
-                a.getCarrera().getNombre()
-            });
-            }
-            catch(NumberFormatException e){
-                System.out.println("El dato introducido no es un numero");
-            }
-            catch(NullPointerException e){
-                System.out.println("No se encuentra el Alumno");
-            }
-
-        }
-        else if (Carrera_TextField.getText().length() == 6){
-            model.setRowCount(0);
-            try{
-                ModelAlumno a = ControllerAlumnos.obtenerAlumnoPorLegajo(Long.parseLong(Carrera_TextField.getText().toString()));
-                model.addRow(new Object[]{
-                a.getAlumnoID(),
-                a.getLegajo(), 
-                a.getDni(), 
-                a.getNombre(), 
-                a.getApellido(), 
-                a.getCarrera().getNombre()
-            });
-            }
-            catch(NumberFormatException e){
-                System.out.println("El dato introducido no es un numero");
-            }
-            catch(NullPointerException e){
-                System.out.println("No se encuentra el Alumno");
-            }
-        }
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -369,7 +327,7 @@ public class CarrerasPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_Carrera_TextFieldActionPerformed
 
     private void Nuevo_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Nuevo_ButtonActionPerformed
-        ViewMain.ShowJPanel(new NuevoAlumnoPanel());
+        ViewMain.ShowJPanel(new SubirAlumnoPanel());
     }//GEN-LAST:event_Nuevo_ButtonActionPerformed
 
     private void Carrera_TextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_Carrera_TextFieldFocusLost

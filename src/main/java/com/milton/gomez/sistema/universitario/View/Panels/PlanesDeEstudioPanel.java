@@ -59,7 +59,7 @@ public class PlanesDeEstudioPanel extends javax.swing.JPanel {
         Header_PanelLayout.setHorizontalGroup(
             Header_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Header_PanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(143, Short.MAX_VALUE)
                 .addGroup(Header_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Header_PanelLayout.createSequentialGroup()
                         .addComponent(jLabel1)
@@ -87,8 +87,8 @@ public class PlanesDeEstudioPanel extends javax.swing.JPanel {
             Body_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Body_PanelLayout.createSequentialGroup()
                 .addGap(56, 56, 56)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 656, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(68, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         Body_PanelLayout.setVerticalGroup(
             Body_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -130,7 +130,7 @@ public class PlanesDeEstudioPanel extends javax.swing.JPanel {
     private javax.swing.JPanel Background_Panel;
     private javax.swing.JPanel Body_Panel;
     private javax.swing.JPanel Header_Panel;
-    private javax.swing.JList<ModelPlanDeEstudio> PlanesDeEstudio_List;
+    private javax.swing.JList<com.milton.gomez.sistema.universitario.Model.ModelPlanDeEstudio> PlanesDeEstudio_List;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;

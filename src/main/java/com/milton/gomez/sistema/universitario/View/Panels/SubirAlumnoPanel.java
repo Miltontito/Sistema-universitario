@@ -6,6 +6,7 @@ package com.milton.gomez.sistema.universitario.View.Panels;
 
 import com.milton.gomez.sistema.universitario.Controller.ControllerCarreras;
 import com.milton.gomez.sistema.universitario.Model.ModelCarrera;
+import java.awt.Color;
 import javax.swing.DefaultListModel;
 import javax.swing.JLabel;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -15,12 +16,12 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author milton
  */
-public class NuevoAlumnoPanel extends javax.swing.JPanel {
+public class SubirAlumnoPanel extends javax.swing.JPanel {
 
     /**
      * Creates new form NuevoAlumnoPanel
      */
-    public NuevoAlumnoPanel() {
+    public SubirAlumnoPanel() {
         initComponents();
         listarCarreras();
         alinearTablaMaterias();
@@ -95,29 +96,66 @@ public class NuevoAlumnoPanel extends javax.swing.JPanel {
         jLabel1.setText("Crear nuevo Alumno");
 
         jLabel2.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
-        jLabel2.setText("Legajo (6 caracteres)");
+        jLabel2.setText("Legajo (6 caracteres) *");
 
         Legajo_TextField.setText("Ingrese el Legajo...");
+        Legajo_TextField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                Legajo_TextFieldFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                Legajo_TextFieldFocusLost(evt);
+            }
+        });
+        Legajo_TextField.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                Legajo_TextFieldMousePressed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
-        jLabel3.setText("DNI (8 caracteres)");
+        jLabel3.setText("DNI (8 caracteres) *");
 
         DNI_TextField.setText("Ingrese el DNI...");
+        DNI_TextField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                DNI_TextFieldFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                DNI_TextFieldFocusLost(evt);
+            }
+        });
 
         jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
         jLabel4.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
-        jLabel4.setText("Nombre");
+        jLabel4.setText("Nombre *");
 
         Nombre_TextField.setText("Ingrese el Nombre...");
+        Nombre_TextField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                Nombre_TextFieldFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                Nombre_TextFieldFocusLost(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
-        jLabel5.setText("Apellido");
+        jLabel5.setText("Apellido *");
 
         Apellido_TextField.setText("Ingrese el Apellido...");
+        Apellido_TextField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                Apellido_TextFieldFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                Apellido_TextFieldFocusLost(evt);
+            }
+        });
 
         jLabel6.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
-        jLabel6.setText("Seleccione la Carrera (Max. 1)");
+        jLabel6.setText("Seleccione la Carrera (Max. 1) *");
 
         Carreras_List.setFont(new java.awt.Font("Roboto", 0, 15)); // NOI18N
         Carreras_List.setModel(new DefaultListModel<>());
@@ -130,7 +168,7 @@ public class NuevoAlumnoPanel extends javax.swing.JPanel {
         Carrera_ScrollPane.setViewportView(Carreras_List);
 
         jLabel7.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
-        jLabel7.setText("Seleccione las Materias");
+        jLabel7.setText("Seleccione las Materias *");
 
         Materia_ScrollPane.setFont(new java.awt.Font("Roboto", 0, 15)); // NOI18N
 
@@ -167,6 +205,11 @@ public class NuevoAlumnoPanel extends javax.swing.JPanel {
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Aceptar");
         jButton1.setBorderPainted(false);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout Background_panelLayout = new javax.swing.GroupLayout(Background_panel);
         Background_panel.setLayout(Background_panelLayout);
@@ -266,12 +309,81 @@ public class NuevoAlumnoPanel extends javax.swing.JPanel {
         listarMaterias();
     }//GEN-LAST:event_Carreras_ListValueChanged
 
+    private void Legajo_TextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_Legajo_TextFieldFocusLost
+        if(Legajo_TextField.getText().isEmpty()){
+            Legajo_TextField.setForeground(Color.gray);
+            Legajo_TextField.setText("Ingrese el Legajo...");
+        }
+    }//GEN-LAST:event_Legajo_TextFieldFocusLost
+
+    private void Legajo_TextFieldMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Legajo_TextFieldMousePressed
+    
+    }//GEN-LAST:event_Legajo_TextFieldMousePressed
+
+    private void DNI_TextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_DNI_TextFieldFocusLost
+        if(DNI_TextField.getText().isEmpty()){
+            DNI_TextField.setForeground(Color.gray);
+            DNI_TextField.setText("Ingrese el DNI...");
+        }
+    }//GEN-LAST:event_DNI_TextFieldFocusLost
+
+    private void DNI_TextFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_DNI_TextFieldFocusGained
+        if(DNI_TextField.getText().equals("Ingrese el DNI...")){
+            DNI_TextField.setText("");
+            DNI_TextField.setForeground(Color.black);
+        }
+    }//GEN-LAST:event_DNI_TextFieldFocusGained
+
+    private void Legajo_TextFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_Legajo_TextFieldFocusGained
+        if(Legajo_TextField.getText().equals("Ingrese el Legajo...")){
+            Legajo_TextField.setText("");
+            Legajo_TextField.setForeground(Color.black);
+        }
+    }//GEN-LAST:event_Legajo_TextFieldFocusGained
+
+    private void Nombre_TextFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_Nombre_TextFieldFocusGained
+        if(Nombre_TextField.getText().equals("Ingrese el Nombre...")){
+            Nombre_TextField.setText("");
+            Nombre_TextField.setForeground(Color.black);
+        }
+    }//GEN-LAST:event_Nombre_TextFieldFocusGained
+
+    private void Nombre_TextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_Nombre_TextFieldFocusLost
+        if(Nombre_TextField.getText().isEmpty()){
+            Nombre_TextField.setForeground(Color.gray);
+            Nombre_TextField.setText("Ingrese el Nombre...");
+        }
+    }//GEN-LAST:event_Nombre_TextFieldFocusLost
+
+    private void Apellido_TextFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_Apellido_TextFieldFocusGained
+        if(Apellido_TextField.getText().equals("Ingrese el Apellido...")){
+            Apellido_TextField.setText("");
+            Apellido_TextField.setForeground(Color.black);
+        }
+    }//GEN-LAST:event_Apellido_TextFieldFocusGained
+
+    private void Apellido_TextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_Apellido_TextFieldFocusLost
+        if(Apellido_TextField.getText().isEmpty()){
+            Apellido_TextField.setForeground(Color.gray);
+            Apellido_TextField.setText("Ingrese el Apellido...");
+        }
+    }//GEN-LAST:event_Apellido_TextFieldFocusLost
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if(false){
+            
+        }
+        else{
+            javax.swing.JOptionPane.showOptionDialog(this, evt, TOOL_TIP_TEXT_KEY, WIDTH, HEIGHT, icon, options, ALLBITS);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField Apellido_TextField;
     private javax.swing.JPanel Background_panel;
     private javax.swing.JScrollPane Carrera_ScrollPane;
-    private javax.swing.JList<ModelCarrera> Carreras_List;
+    private javax.swing.JList<com.milton.gomez.sistema.universitario.Model.ModelCarrera> Carreras_List;
     private javax.swing.JTextField DNI_TextField;
     private javax.swing.JTextField Legajo_TextField;
     private javax.swing.JScrollPane Materia_ScrollPane;
