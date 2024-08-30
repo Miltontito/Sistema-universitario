@@ -5,7 +5,7 @@
 package com.milton.gomez.sistema.universitario;
 
 import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatMaterialLighterIJTheme;
-import com.milton.gomez.sistema.universitario.View.MainJFrame;
+import com.milton.gomez.sistema.universitario.View.ViewMain;
 
 
 
@@ -13,7 +13,7 @@ import com.milton.gomez.sistema.universitario.View.MainJFrame;
  *
  * @author milton
  */
-public class SistemaUniversitario {
+public class Main {
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -21,7 +21,7 @@ public class SistemaUniversitario {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MainJFrame().setVisible(true);
+                new ViewMain().setVisible(true);
             }
         });
     }

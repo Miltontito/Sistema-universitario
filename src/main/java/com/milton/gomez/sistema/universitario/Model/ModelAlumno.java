@@ -4,7 +4,7 @@ package com.milton.gomez.sistema.universitario.Model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Alumno {
+public class ModelAlumno {
     // -------------------------------------------
     // ---------------| Atributos |---------------
     // -------------------------------------------
@@ -15,34 +15,34 @@ public class Alumno {
     private Long dni;
     private String nombre;
     private String apellido;
-    private Carrera carrera;
-    private List<Materia> materiasQuePuedeCursar; //Cambia cada cuatrimestre
-    private List<Materia> materias; //todas las materias, aprobadas y cursando
+    private ModelCarrera carrera;
+    private List<ModelMateria> materiasQuePuedeCursar; //Cambia cada cuatrimestre
+    private List<ModelMateria> materias; //todas las materias, aprobadas y cursando
 
     // -----------------------------------------------
     // ---------------| Constructores |---------------
     // -----------------------------------------------
-    public Alumno() {
+    public ModelAlumno() {
         this.alumnoID = asignarID();
         this.materiasQuePuedeCursar = new ArrayList<>();
         this.materias = new ArrayList<>();
     }
-    public Alumno(String nombre) {
+    public ModelAlumno(String nombre) {
         this();
         this.nombre = nombre;
     }
-    public Alumno(Long legajo, Long dni, String nombre, String apellido) {
+    public ModelAlumno(Long legajo, Long dni, String nombre, String apellido) {
         this();
         this.legajo = legajo;
         this.dni = dni;
         this.nombre = nombre;
         this.apellido = apellido;
     }
-    public Alumno(Long legajo, Long dni, String nombre, String apellido, Carrera carrera) {
+    public ModelAlumno(Long legajo, Long dni, String nombre, String apellido, ModelCarrera carrera) {
         this(legajo, dni, nombre, apellido);
         this.carrera = carrera;
     }
-    public Alumno(Long legajo, Long dni, String nombre, String apellido, Carrera carrera, List<Materia> materiasQuePuedeCursar, List<Materia> materias) {
+    public ModelAlumno(Long legajo, Long dni, String nombre, String apellido, ModelCarrera carrera, List<ModelMateria> materiasQuePuedeCursar, List<ModelMateria> materias) {
         this(legajo, dni, nombre, apellido, carrera);
         this.materiasQuePuedeCursar = materiasQuePuedeCursar;
         this.materias = materias;
@@ -56,18 +56,18 @@ public class Alumno {
     protected Integer asignarID(){
         return identificador_alumno++;
     }
-    public Boolean inscribirseACarrera(Carrera carrera){
+    public Boolean inscribirseACarrera(ModelCarrera carrera){
         if (this.carrera != null){
             this.carrera = carrera;
             return true;
         }
         return false;
     }
-    public List<Materia> obtenerMateriasQuePuedeCursar(){
+    public List<ModelMateria> obtenerMateriasQuePuedeCursar(){
         materiasQuePuedeCursar = carrera.materiasQuePuedeCursar(this);
         return materiasQuePuedeCursar;
     }
-    public Boolean inscribirseAMateria(Materia materia){
+    public Boolean inscribirseAMateria(ModelMateria materia){
         /* si la materia se encuentra en la lista de materias que puede cursar entonces... */
         if(materiasQuePuedeCursar.contains(materia)){
             materias.add(materia);
@@ -75,9 +75,9 @@ public class Alumno {
         }
         return false;
     }
-    public List<Materia> obtenerMateriasQueCursa(){
-        List<Materia> cursadas = new ArrayList<>();
-        for(Materia materia : this.materias){
+    public List<ModelMateria> obtenerMateriasQueCursa(){
+        List<ModelMateria> cursadas = new ArrayList<>();
+        for(ModelMateria materia : this.materias){
             if(!materia.isMateriaAprobada()){
                 cursadas.add(materia);
             }
@@ -87,9 +87,9 @@ public class Alumno {
         }
         return cursadas;
     }
-    public List<Materia> obtenerMateriasAprobadas(){
-        List<Materia> aprobadas = new ArrayList<>();
-        for(Materia materia : this.materias){
+    public List<ModelMateria> obtenerMateriasAprobadas(){
+        List<ModelMateria> aprobadas = new ArrayList<>();
+        for(ModelMateria materia : this.materias){
             if(materia.isMateriaAprobada()){
                 aprobadas.add(materia);
             }
@@ -99,7 +99,7 @@ public class Alumno {
         }
         return aprobadas;
     }
-    public void setMateriaAprobada(Materia materia) {
+    public void setMateriaAprobada(ModelMateria materia) {
         this.materias.add(materia);
     }
 
@@ -119,13 +119,13 @@ public class Alumno {
     public String getApellido() {
         return apellido;
     }
-    public Carrera getCarrera() {
+    public ModelCarrera getCarrera() {
         return carrera;
     }
     public Integer getAlumnoID() {
         return alumnoID;
     }
-    public List<Materia> getMaterias(){
+    public List<ModelMateria> getMaterias(){
         return materias;
     }
 
@@ -145,10 +145,10 @@ public class Alumno {
     public void setApellido(String apellido) {
         this.apellido = apellido;
     }
-    public void setMaterias(List<Materia> materias) {
+    public void setMaterias(List<ModelMateria> materias) {
         this.materias = materias;
     }
-    public void setCarrera(Carrera carrera){
+    public void setCarrera(ModelCarrera carrera){
         this.carrera = carrera;
     }
 }

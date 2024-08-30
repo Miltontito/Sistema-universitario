@@ -5,8 +5,8 @@
 package com.milton.gomez.sistema.universitario.View.Panels;
 
 import com.milton.gomez.sistema.universitario.Controller.ControllerPlanesDeEstudio;
-import com.milton.gomez.sistema.universitario.Model.PlanDeEstudio;
 import javax.swing.DefaultListModel;
+import com.milton.gomez.sistema.universitario.Model.ModelPlanDeEstudio;
 
 /**
  *
@@ -24,7 +24,7 @@ public class PlanesDeEstudioPanel extends javax.swing.JPanel {
     
     private void listarPlanesDeEstudio(){
         // Obtener el modelo de la JList
-        DefaultListModel<PlanDeEstudio> listModel = (DefaultListModel<PlanDeEstudio>) PlanesDeEstudio_List.getModel();
+        DefaultListModel<ModelPlanDeEstudio> listModel = (DefaultListModel<ModelPlanDeEstudio>) PlanesDeEstudio_List.getModel();
 
         // Limpiar el modelo actual para evitar duplicados
         listModel.clear();
@@ -130,7 +130,7 @@ public class PlanesDeEstudioPanel extends javax.swing.JPanel {
     private javax.swing.JPanel Background_Panel;
     private javax.swing.JPanel Body_Panel;
     private javax.swing.JPanel Header_Panel;
-    private javax.swing.JList<PlanDeEstudio> PlanesDeEstudio_List;
+    private javax.swing.JList<ModelPlanDeEstudio> PlanesDeEstudio_List;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;

@@ -111,32 +111,32 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="AlumnoBusqueda_Panel" max="32767" attributes="0"/>
-                  <Component id="ListAlumnos_Panel" alignment="0" max="32767" attributes="0"/>
-                  <Component id="AlumnoEditDelete_Panel" alignment="0" max="32767" attributes="0"/>
+                  <Component id="CarreraBusqueda_Panel" max="32767" attributes="0"/>
+                  <Component id="ListCarreras_Panel" alignment="0" max="32767" attributes="0"/>
+                  <Component id="CarreraBottonButtons_Panel" alignment="0" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="AlumnoBusqueda_Panel" min="-2" max="-2" attributes="0"/>
+                      <Component id="CarreraBusqueda_Panel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="ListAlumnos_Panel" min="-2" max="-2" attributes="0"/>
+                      <Component id="ListCarreras_Panel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="AlumnoEditDelete_Panel" min="-2" max="-2" attributes="0"/>
+                      <Component id="CarreraBottonButtons_Panel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="86" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Container class="javax.swing.JPanel" name="AlumnoBusqueda_Panel">
+            <Container class="javax.swing.JPanel" name="CarreraBusqueda_Panel">
 
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="Alumno_TextField" max="32767" attributes="0"/>
+                          <Component id="Carrera_TextField" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="Buscar_Button" min="-2" pref="149" max="-2" attributes="0"/>
                       </Group>
@@ -147,7 +147,7 @@
                       <Group type="102" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="Alumno_TextField" pref="50" max="32767" attributes="0"/>
+                              <Component id="Carrera_TextField" pref="50" max="32767" attributes="0"/>
                               <Component id="Buscar_Button" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
@@ -156,14 +156,14 @@
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JTextField" name="Alumno_TextField">
+                <Component class="javax.swing.JTextField" name="Carrera_TextField">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Inserte el DNI o Legajo del Alumno..."/>
+                    <Property name="text" type="java.lang.String" value="Inserte el Nombre o Codigo de la Carrera..."/>
                   </Properties>
                   <Events>
-                    <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="Alumno_TextFieldFocusLost"/>
-                    <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="Alumno_TextFieldMousePressed"/>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Alumno_TextFieldActionPerformed"/>
+                    <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="Carrera_TextFieldFocusLost"/>
+                    <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="Carrera_TextFieldMousePressed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Carrera_TextFieldActionPerformed"/>
                   </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="Buscar_Button">
@@ -188,22 +188,22 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Container class="javax.swing.JPanel" name="ListAlumnos_Panel">
+            <Container class="javax.swing.JPanel" name="ListCarreras_Panel">
 
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="Alumnos_ScrollPane" alignment="0" max="32767" attributes="0"/>
+                      <Component id="Carrera_ScrollPane" alignment="0" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="Alumnos_ScrollPane" min="-2" pref="340" max="-2" attributes="0"/>
+                      <Component id="Carrera_ScrollPane" min="-2" pref="340" max="-2" attributes="0"/>
                   </Group>
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Container class="javax.swing.JScrollPane" name="Alumnos_ScrollPane">
+                <Container class="javax.swing.JScrollPane" name="Carrera_ScrollPane">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Roboto" size="15" style="0"/>
@@ -212,7 +212,7 @@
 
                   <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                   <SubComponents>
-                    <Component class="javax.swing.JTable" name="Alumnos_Table">
+                    <Component class="javax.swing.JTable" name="Carreras_Table">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Roboto" size="18" style="0"/>
@@ -274,7 +274,7 @@
                 </Container>
               </SubComponents>
             </Container>
-            <Container class="javax.swing.JPanel" name="AlumnoEditDelete_Panel">
+            <Container class="javax.swing.JPanel" name="CarreraBottonButtons_Panel">
 
               <Layout>
                 <DimensionLayout dim="0">
@@ -329,6 +329,9 @@
                       <Border info="null"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Eliminar_ButtonActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="Editar_Button">
                   <Properties>

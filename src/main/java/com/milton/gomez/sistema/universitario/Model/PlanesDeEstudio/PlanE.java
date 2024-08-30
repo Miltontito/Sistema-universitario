@@ -6,21 +6,21 @@ import com.milton.gomez.sistema.universitario.Model.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PlanE implements PlanDeEstudio {
+public class PlanE implements ModelPlanDeEstudio {
     @Override
-    public List<Materia> materiasQuePuedeCursar(Alumno alumno, Carrera carrera) {
+    public List<ModelMateria> materiasQuePuedeCursar(ModelAlumno alumno, ModelCarrera carrera) {
 
-        List<Materia> materiasQuePuedeCursar = new ArrayList<>();
+        List<ModelMateria> materiasQuePuedeCursar = new ArrayList<>();
 
 
         // Plan C - Verificar correlativas (mismo que Plan A)
-        List<Materia> materiasAlumno = new ArrayList<>();
-        for(Materia materia : alumno.getMaterias()){
+        List<ModelMateria> materiasAlumno = new ArrayList<>();
+        for(ModelMateria materia : alumno.getMaterias()){
             if(materia.isMateriaAprobada()){
                 materiasAlumno.add(materia);
             }
         }
-        for (Materia materia : carrera.obtenerMateriasDeLaCarrera()) {
+        for (ModelMateria materia : carrera.obtenerMateriasDeLaCarrera()) {
             /* si no existen correlativas o las materias aprobadas contienen a todas las correlativas... */
             if (materia.getCorrelativas() == null || materiasAlumno.containsAll(materia.getCorrelativas())) {
                 materiasQuePuedeCursar.add(materia);
@@ -28,7 +28,7 @@ public class PlanE implements PlanDeEstudio {
         }
 
 
-        List<Cuatrimestre> cuatrimestres = carrera.getCuatrimestres();
+        List<ModelCuatrimestre> cuatrimestres = carrera.getCuatrimestres();
         // Adicionalmente, verificar los últimos 5 cuatrimestres
         if (!aproboLosFinalesDeLosCuatrimestres(alumno, cuatrimestres)) {
             return new ArrayList<>(); // Retorna vacío si no se cumplen los requisitos
@@ -37,18 +37,18 @@ public class PlanE implements PlanDeEstudio {
         return materiasQuePuedeCursar;
     }
 
-    private boolean aproboLosFinalesDeLosCuatrimestres(Alumno alumno, List<Cuatrimestre> cuatrimestres) {
+    private boolean aproboLosFinalesDeLosCuatrimestres(ModelAlumno alumno, List<ModelCuatrimestre> cuatrimestres) {
         // Validar si hay al menos 5 cuatrimestres
         if (cuatrimestres.size() < 3) {
             return false;
         }
 
         // Tomar los primeros 5 cuatrimestres
-        List<Cuatrimestre> primerosCincoCuatrimestres = cuatrimestres.subList(cuatrimestres.size() - 3, cuatrimestres.size());
+        List<ModelCuatrimestre> primerosCincoCuatrimestres = cuatrimestres.subList(cuatrimestres.size() - 3, cuatrimestres.size());
 
         // Verificar que todas las materias (obligatorias y optativas) de esos cuatrimestres tengan finales aprobados
-        for (Cuatrimestre cuatrimestre : primerosCincoCuatrimestres) {
-            for (Materia materia : cuatrimestre.listarTodasLasMaterias()) {
+        for (ModelCuatrimestre cuatrimestre : primerosCincoCuatrimestres) {
+            for (ModelMateria materia : cuatrimestre.listarTodasLasMaterias()) {
                 if (!alumno.getMaterias().contains(materia) || !materia.isMateriaAprobada()) {
                     return false;
                 }
@@ -59,7 +59,6 @@ public class PlanE implements PlanDeEstudio {
     
     @Override
     public String toString(){
-        return """
-               Plan E: Un alumno puede cursar una materia si aprob\u00f3 los finales de las correlativas y los finales de todas las materias de 3 cuatrimestres previos.""";
+        return "Plan E";
     }
 }

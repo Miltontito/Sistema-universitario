@@ -5,7 +5,7 @@
 package com.milton.gomez.sistema.universitario.View.Panels;
 
 import com.milton.gomez.sistema.universitario.Controller.ControllerCarreras;
-import com.milton.gomez.sistema.universitario.Model.Carrera;
+import com.milton.gomez.sistema.universitario.Model.ModelCarrera;
 import javax.swing.DefaultListModel;
 import javax.swing.JLabel;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -28,7 +28,7 @@ public class NuevoAlumnoPanel extends javax.swing.JPanel {
     
     private void listarCarreras(){
         // Obtener el modelo de la JList
-        DefaultListModel<Carrera> listModel = (DefaultListModel<Carrera>) Carreras_List.getModel();
+        DefaultListModel<ModelCarrera> listModel = (DefaultListModel<ModelCarrera>) Carreras_List.getModel();
 
         // Limpiar el modelo actual para evitar duplicados
         listModel.clear();
@@ -271,7 +271,7 @@ public class NuevoAlumnoPanel extends javax.swing.JPanel {
     private javax.swing.JTextField Apellido_TextField;
     private javax.swing.JPanel Background_panel;
     private javax.swing.JScrollPane Carrera_ScrollPane;
-    private javax.swing.JList<Carrera> Carreras_List;
+    private javax.swing.JList<ModelCarrera> Carreras_List;
     private javax.swing.JTextField DNI_TextField;
     private javax.swing.JTextField Legajo_TextField;
     private javax.swing.JScrollPane Materia_ScrollPane;

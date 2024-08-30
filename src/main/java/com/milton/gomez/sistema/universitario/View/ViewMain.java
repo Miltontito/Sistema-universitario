@@ -9,10 +9,10 @@ import javax.swing.*;
  *
  * @author Milton Gómez
  */
-public class MainJFrame extends JFrame {
+public class ViewMain extends JFrame {
     int xMouse, yMouse;
 
-    public MainJFrame() {
+    public ViewMain() {
         initComponents();
         initContent();
         SetImageLabel(UNTDF_iconLabel, "/UNTDFLogoTransparente.png");

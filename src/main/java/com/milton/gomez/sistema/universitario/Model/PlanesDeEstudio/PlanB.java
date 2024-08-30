@@ -6,7 +6,7 @@ import com.milton.gomez.sistema.universitario.Model.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PlanB implements PlanDeEstudio {
+public class PlanB implements ModelPlanDeEstudio {
     /***
      *
      * @param alumno recibe el alumno del que se requiere recibir las materias que puede cursar.
@@ -14,14 +14,14 @@ public class PlanB implements PlanDeEstudio {
      * @return devuelve la lista de materias que pueden cursar los alumnos.
      */
     @Override
-    public List<Materia> materiasQuePuedeCursar(Alumno alumno, Carrera carrera) {
-        List<Materia> materiasQuePuedeCursar = new ArrayList<>();
+    public List<ModelMateria> materiasQuePuedeCursar(ModelAlumno alumno, ModelCarrera carrera) {
+        List<ModelMateria> materiasQuePuedeCursar = new ArrayList<>();
 
         // Obtiene todas las materias de la carrera
-        List<Materia> todasLasMaterias = carrera.obtenerMateriasDeLaCarrera();
+        List<ModelMateria> todasLasMaterias = carrera.obtenerMateriasDeLaCarrera();
 
         // Verifica si el alumno puede cursar cada materia bajo el Plan A
-        for (Materia materia : todasLasMaterias) {
+        for (ModelMateria materia : todasLasMaterias) {
 
             // Si la materia se encuentra en alumno --> está aprobada o la está cursando.
             boolean tieneLaMateria = alumno.getMaterias().contains(materia);
@@ -41,13 +41,13 @@ public class PlanB implements PlanDeEstudio {
      * @return retorna si puede cursar la materia o no.
      */
 
-    private Boolean puedeCursarMateria(Materia materia) {
+    private Boolean puedeCursarMateria(ModelMateria materia) {
         // Si la materia no tiene correlativas, puede cursarla
         if (materia.getCorrelativas() == null || materia.getCorrelativas().isEmpty()) {
             return true;
         }
         // Verifica que las correlativas tengan la cursada aprobada
-        for (Materia correlativa : materia.getCorrelativas()) {
+        for (ModelMateria correlativa : materia.getCorrelativas()) {
             if (!correlativa.isMateriaAprobada()) {
                 return false;
             }
@@ -57,6 +57,6 @@ public class PlanB implements PlanDeEstudio {
     
     @Override
     public String toString(){
-        return "Plan B: Un alumno puede cursar una materia si aprobó los finales de las correlativas";
+        return "Plan B";
     }
 }

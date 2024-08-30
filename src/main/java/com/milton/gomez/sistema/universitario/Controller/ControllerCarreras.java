@@ -5,10 +5,10 @@
 package com.milton.gomez.sistema.universitario.Controller;
 
 import com.milton.gomez.sistema.universitario.Iniciador.IniciadorCompleto;
-import com.milton.gomez.sistema.universitario.Model.Carrera;
-import com.milton.gomez.sistema.universitario.Model.ControladorUniversitario;
-import com.milton.gomez.sistema.universitario.Model.Cuatrimestre;
-import com.milton.gomez.sistema.universitario.Model.Materia;
+import com.milton.gomez.sistema.universitario.Model.ModelCarrera;
+import com.milton.gomez.sistema.universitario.Model.ModelControladorUniversitario;
+import com.milton.gomez.sistema.universitario.Model.ModelCuatrimestre;
+import com.milton.gomez.sistema.universitario.Model.ModelMateria;
 import java.util.List;
 
 /**
@@ -18,23 +18,27 @@ import java.util.List;
 public class ControllerCarreras {
     
     //Inicialización del controlador.
-    private static ControladorUniversitario cu = ControladorUniversitario.getInstance();
+    private static ModelControladorUniversitario cu = ModelControladorUniversitario.getInstance();
     
     
-    public static List<Carrera> listarTodasLasCarreras(){
+    public static List<ModelCarrera> listarTodasLasCarreras(){
         return cu.getCarreras();
     }
     
-    public static List<Cuatrimestre> listarTodosLosCuatrimestres(Integer carreraID){
+    public static List<ModelCuatrimestre> listarTodosLosCuatrimestres(Integer carreraID){
         return cu.getCarreras().get(carreraID).getCuatrimestres();
     }
     
-    public static Cuatrimestre listarCuatrimestre(Integer carreraID, Integer cuatrimestreID){
+    public static ModelCuatrimestre listarCuatrimestre(Integer carreraID, Integer cuatrimestreID){
         return cu.getCarreras().get(carreraID).getCuatrimestres().get(cuatrimestreID);
     }
     
-    public static List<Materia> listarMateriasDeLaCarrera(Integer carreraID){
+    public static List<ModelMateria> listarMateriasDeLaCarrera(Integer carreraID){
         cu.getCarreras().get(carreraID).getCuatrimestres().forEach((c) -> System.out.print(c.getCuatrimestreID()));
         return cu.getCarreras().get(carreraID).obtenerMateriasDeLaCarrera();
+    }
+    
+    public static void eliminarCarrera(Integer carreraID){
+        cu.eliminarCarrera(carreraID);
     }
 }

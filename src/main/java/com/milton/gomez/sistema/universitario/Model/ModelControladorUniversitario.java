@@ -10,34 +10,34 @@ import com.milton.gomez.sistema.universitario.Model.PlanesDeEstudio.PlanE;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ControladorUniversitario {
+public class ModelControladorUniversitario {
 
     // -------------------------------------------
     // ---------------| Atributos |---------------
     // -------------------------------------------
-    private static ControladorUniversitario instance;
-    private List<Carrera> carreras;
-    private List<Materia> materias;
-    private List<Alumno> alumnos;
-    private List<PlanDeEstudio> planesDeEstudios;
+    private static ModelControladorUniversitario instance;
+    private List<ModelCarrera> carreras;
+    private List<ModelMateria> materias;
+    private List<ModelAlumno> alumnos;
+    private List<ModelPlanDeEstudio> planesDeEstudios;
 
     // -----------------------------------------------
     // ---------------| Constructores |---------------
     // -----------------------------------------------
-    private ControladorUniversitario() {
+    private ModelControladorUniversitario() {
         this.carreras = new ArrayList<>();
         this.materias = new ArrayList<>();
         this.alumnos = new ArrayList<>();
         this.planesDeEstudios = new ArrayList<>();
     }
     
-    public static ControladorUniversitario getInstance(){
+    public static ModelControladorUniversitario getInstance(){
         if(instance == null){
-            instance = new ControladorUniversitario();
+            instance = new ModelControladorUniversitario();
             
+            IniciadorCompleto.inicializarPlanesDeEstudio();
             IniciadorCompleto.inicializarAlumnos();
             IniciadorCompleto.inicializarMaterias();
-            IniciadorCompleto.inicializarPlanesDeEstudio();
         }
         return instance;
         
@@ -47,8 +47,8 @@ public class ControladorUniversitario {
     // -----------------------------------------
     
     // Crear métodos
-    public Carrera crearCarrera(String nombre, Long codCarrera, Integer cantMateriasOptativas, PlanDeEstudio planDeEstudio, List<Cuatrimestre> cuatrimestres, List<Alumno> alumnos) {
-        Carrera nuevaCarrera = new Carrera();
+    public ModelCarrera crearCarrera(String nombre, Long codCarrera, Integer cantMateriasOptativas, ModelPlanDeEstudio planDeEstudio, List<ModelCuatrimestre> cuatrimestres, List<ModelAlumno> alumnos) {
+        ModelCarrera nuevaCarrera = new ModelCarrera();
         nuevaCarrera.setNombre(nombre);
         nuevaCarrera.setCodigoCarrera(codCarrera);
         nuevaCarrera.setCantMateriasOptativasParaAprobar(cantMateriasOptativas);
@@ -59,14 +59,14 @@ public class ControladorUniversitario {
         return nuevaCarrera;
     }
 
-    public Materia crearMateria(String codigoDeMateria, String nombre, Boolean promocionable, List<Materia> correlativas) {
-        Materia nuevaMateria = new Materia(codigoDeMateria, nombre, promocionable, correlativas != null ? correlativas : new ArrayList<>());
+    public ModelMateria crearMateria(String codigoDeMateria, String nombre, Boolean promocionable, List<ModelMateria> correlativas) {
+        ModelMateria nuevaMateria = new ModelMateria(codigoDeMateria, nombre, promocionable, correlativas != null ? correlativas : new ArrayList<>());
         this.materias.add(nuevaMateria);
         return nuevaMateria;
     }
 
-    public Alumno crearAlumno(String nombre, String apellido, Long legajo, Long dni, Carrera carrera) {
-        Alumno nuevoAlumno = new Alumno();
+    public ModelAlumno crearAlumno(String nombre, String apellido, Long legajo, Long dni, ModelCarrera carrera) {
+        ModelAlumno nuevoAlumno = new ModelAlumno();
         nuevoAlumno.setNombre(nombre);
         nuevoAlumno.setApellido(apellido);
         nuevoAlumno.setLegajo(legajo);
@@ -86,24 +86,24 @@ public class ControladorUniversitario {
 
 
     // Obtener métodos
-    public List<Carrera> obtenerCarreras() {
+    public List<ModelCarrera> obtenerCarreras() {
         return this.carreras;
     }
 
-    public List<Materia> obtenerMaterias() {
+    public List<ModelMateria> obtenerMaterias() {
         return this.materias;
     }
 
-    public List<Alumno> obtenerAlumnos() {
+    public List<ModelAlumno> obtenerAlumnos() {
         return this.alumnos;
     }
 
-    public List<PlanDeEstudio> obtenerPlanesDeEstudios() {
+    public List<ModelPlanDeEstudio> obtenerPlanesDeEstudios() {
         return this.planesDeEstudios;
     }
 
     // Actualizar métodos
-    public void actualizarCarrera(Carrera carreraActualizada) {
+    public void actualizarCarrera(ModelCarrera carreraActualizada) {
         for (int i = 0; i < carreras.size(); i++) {
             if (carreras.get(i).getCarreraID().equals(carreraActualizada.getCarreraID())) {
                 carreras.set(i, carreraActualizada);
@@ -112,7 +112,7 @@ public class ControladorUniversitario {
         }
     }
 
-    public void actualizarMateria(Materia materiaActualizada) {
+    public void actualizarMateria(ModelMateria materiaActualizada) {
         for (int i = 0; i < materias.size(); i++) {
             if (materias.get(i).getMateriaID().equals(materiaActualizada.getMateriaID())) {
                 materias.set(i, materiaActualizada);
@@ -121,7 +121,7 @@ public class ControladorUniversitario {
         }
     }
 
-    public void actualizarAlumno(Alumno alumnoActualizado) {
+    public void actualizarAlumno(ModelAlumno alumnoActualizado) {
         for (int i = 0; i < alumnos.size(); i++) {
             if (alumnos.get(i).getAlumnoID().equals(alumnoActualizado.getAlumnoID())) {
                 alumnos.set(i, alumnoActualizado);
@@ -142,33 +142,33 @@ public class ControladorUniversitario {
     }
     
     // Getters
-    public List<Carrera> getCarreras() {
+    public List<ModelCarrera> getCarreras() {
         return this.carreras;
     }
-    public List<Materia> getMaterias() {
+    public List<ModelMateria> getMaterias() {
         return this.materias;
     }
-    public List<Alumno> getAlumnos() {
+    public List<ModelAlumno> getAlumnos() {
         return this.alumnos;
     }
-    public List<PlanDeEstudio> getPlanesDeEstudios() {
+    public List<ModelPlanDeEstudio> getPlanesDeEstudios() {
         return this.planesDeEstudios;
     }
 
     // Setters
-    public void setCarreras(List<Carrera> carreras) {
+    public void setCarreras(List<ModelCarrera> carreras) {
         this.carreras = carreras;
     }
-    public void setMaterias(List<Materia> materias) {
+    public void setMaterias(List<ModelMateria> materias) {
         this.materias = materias;
     }
-    public void setAlumnos(List<Alumno> alumnos) {
+    public void setAlumnos(List<ModelAlumno> alumnos) {
         this.alumnos = alumnos;
     }
-    public void setPlanesDeEstudios(List<PlanDeEstudio> planesDeEstudios) {
+    public void setPlanesDeEstudios(List<ModelPlanDeEstudio> planesDeEstudios) {
         this.planesDeEstudios = planesDeEstudios;
     }
-    public void agregarCarrera(Carrera carrera){
+    public void agregarCarrera(ModelCarrera carrera){
         this.carreras.add(carrera);
     }
 }

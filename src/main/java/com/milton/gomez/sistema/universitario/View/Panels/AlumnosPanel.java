@@ -1,8 +1,8 @@
 package com.milton.gomez.sistema.universitario.View.Panels;
 
 import com.milton.gomez.sistema.universitario.Controller.ControllerAlumnos;
-import com.milton.gomez.sistema.universitario.Model.Alumno;
-import com.milton.gomez.sistema.universitario.View.MainJFrame;
+import com.milton.gomez.sistema.universitario.Model.ModelAlumno;
+import com.milton.gomez.sistema.universitario.View.ViewMain;
 import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -24,57 +24,25 @@ public class AlumnosPanel extends javax.swing.JPanel {
     }
     
     private void cargarAlumnos(){
-        
-        // "ID", "Legajo", "DNI", "Nombre", "Apellido", "Carrera"
-        DefaultTableModel model = (DefaultTableModel)Alumnos_Table.getModel();
-        
-        model.setRowCount(0);
-        
-        ControllerAlumnos.listarTodosLosAlumnos()
-                .forEach((u) -> model
-                        .addRow(new Object[]{
-                            u.getAlumnoID(),
-                            u.getLegajo(), 
-                            u.getDni(), 
-                            u.getNombre(), 
-                            u.getApellido(), 
-                            u.getCarrera().getNombre()}));
+        Alumnos_Table.setModel(ControllerAlumnos.listarTodosLosAlumnos(this.Alumnos_Table));
     }
     private void alinearTablaAlumnos(){
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
-        centerRenderer.setHorizontalAlignment( JLabel.RIGHT );
+        centerRenderer.setHorizontalAlignment( JLabel.CENTER );
         Alumnos_Table.setDefaultRenderer(Object.class, centerRenderer);
+        Alumnos_Table.setDefaultRenderer(Integer.class, centerRenderer);
+        Alumnos_Table.setDefaultRenderer(Long.class, centerRenderer);
     }
     private void buscarAlumno(){
         DefaultTableModel model = (DefaultTableModel)Alumnos_Table.getModel();
         
         if(Alumno_TextField.getText().length() == 8){
-            model.setRowCount(0);
-            try{
-                Alumno a = ControllerAlumnos.obtenerAlumnoPorDNI(Long.parseLong(Alumno_TextField.getText().toString()));
-                System.out.println(Integer.parseInt(Alumno_TextField.getText().toString()));
-                System.out.println(ControllerAlumnos.obtenerAlumnoPorDNI(Long.parseLong(Alumno_TextField.getText().toString())));
-                model.addRow(new Object[]{
-                a.getAlumnoID(),
-                a.getLegajo(), 
-                a.getDni(), 
-                a.getNombre(), 
-                a.getApellido(), 
-                a.getCarrera().getNombre()
-            });
-            }
-            catch(NumberFormatException e){
-                System.out.println("El dato introducido no es un numero");
-            }
-            catch(NullPointerException e){
-                System.out.println("No se encuentra el Alumno");
-            }
-
+            ControllerAlumnos.obtenerAlumnoPorDNI(this.Alumnos_Table, this.Alumno_TextField);
         }
         else if (Alumno_TextField.getText().length() == 6){
             model.setRowCount(0);
             try{
-                Alumno a = ControllerAlumnos.obtenerAlumnoPorLegajo(Long.parseLong(Alumno_TextField.getText().toString()));
+                ModelAlumno a = ControllerAlumnos.obtenerAlumnoPorLegajo(Long.parseLong(Alumno_TextField.getText().toString()));
                 model.addRow(new Object[]{
                 a.getAlumnoID(),
                 a.getLegajo(), 
@@ -90,6 +58,9 @@ public class AlumnosPanel extends javax.swing.JPanel {
             catch(NullPointerException e){
                 System.out.println("No se encuentra el Alumno");
             }
+        }
+        else if(Alumno_TextField.getText().equals("Inserte el DNI o Legajo del Alumno...")){
+            cargarAlumnos();
         }
     }
     /**
@@ -245,6 +216,11 @@ public class AlumnosPanel extends javax.swing.JPanel {
         Eliminar_Button.setForeground(new java.awt.Color(255, 255, 255));
         Eliminar_Button.setText("Eliminar");
         Eliminar_Button.setBorder(null);
+        Eliminar_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Eliminar_ButtonActionPerformed(evt);
+            }
+        });
 
         Editar_Button.setBackground(new java.awt.Color(204, 0, 0));
         Editar_Button.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
@@ -365,7 +341,7 @@ public class AlumnosPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_Alumno_TextFieldActionPerformed
 
     private void Nuevo_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Nuevo_ButtonActionPerformed
-        MainJFrame.ShowJPanel(new NuevoAlumnoPanel());
+        ViewMain.ShowJPanel(new NuevoAlumnoPanel());
     }//GEN-LAST:event_Nuevo_ButtonActionPerformed
 
     private void Alumno_TextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_Alumno_TextFieldFocusLost
@@ -389,6 +365,19 @@ public class AlumnosPanel extends javax.swing.JPanel {
     private void Buscar_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Buscar_ButtonActionPerformed
         buscarAlumno();
     }//GEN-LAST:event_Buscar_ButtonActionPerformed
+
+    private void Eliminar_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Eliminar_ButtonActionPerformed
+        DefaultTableModel model = (DefaultTableModel)Alumnos_Table.getModel();
+        try{
+           for(int i : Alumnos_Table.getSelectedRows()){
+               ControllerAlumnos.eliminarAlumno((Integer) Alumnos_Table.getValueAt(i,0));
+               model.removeRow(i);
+           }
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }//GEN-LAST:event_Eliminar_ButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

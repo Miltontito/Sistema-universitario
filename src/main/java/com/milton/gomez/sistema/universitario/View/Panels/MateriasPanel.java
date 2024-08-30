@@ -1,8 +1,9 @@
 package com.milton.gomez.sistema.universitario.View.Panels;
 
 import com.milton.gomez.sistema.universitario.Controller.ControllerAlumnos;
-import com.milton.gomez.sistema.universitario.Model.Alumno;
-import com.milton.gomez.sistema.universitario.View.MainJFrame;
+import com.milton.gomez.sistema.universitario.Controller.ControllerMaterias;
+import com.milton.gomez.sistema.universitario.Model.ModelAlumno;
+import com.milton.gomez.sistema.universitario.View.ViewMain;
 import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -19,28 +20,28 @@ public class MateriasPanel extends javax.swing.JPanel {
      */
     public MateriasPanel() {
         initComponents();
-        cargarAlumnos();
-        alinearTablaAlumnos();
+        cargarMaterias();
+        alinearTablaMaterias();
     }
     
-    private void cargarAlumnos(){
+    private void cargarMaterias(){
         
-        // "ID", "Legajo", "DNI", "Nombre", "Apellido", "Carrera"
+        // "ID", "Codigo", "Nombre", "esPromocionable?", "Correlativas"
         DefaultTableModel model = (DefaultTableModel)Alumnos_Table.getModel();
         
         model.setRowCount(0);
         
-        ControllerAlumnos.listarTodosLosAlumnos()
-                .forEach((u) -> model
+        ControllerMaterias.listarTodasLasMaterias()
+                .forEach((m) -> model
                         .addRow(new Object[]{
-                            u.getAlumnoID(),
-                            u.getLegajo(), 
-                            u.getDni(), 
-                            u.getNombre(), 
-                            u.getApellido(), 
-                            u.getCarrera().getNombre()}));
+                            m.getMateriaID(),
+                            m.getCodigoDeMateria(), 
+                            m.getNombre(), 
+                            m.isPromocionable(), 
+                            m.getCorrelativas()
+                        }));
     }
-    private void alinearTablaAlumnos(){
+    private void alinearTablaMaterias(){
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment( JLabel.RIGHT );
         Alumnos_Table.setDefaultRenderer(Object.class, centerRenderer);
@@ -51,9 +52,7 @@ public class MateriasPanel extends javax.swing.JPanel {
         if(Alumno_TextField.getText().length() == 8){
             model.setRowCount(0);
             try{
-                Alumno a = ControllerAlumnos.obtenerAlumnoPorDNI(Long.parseLong(Alumno_TextField.getText().toString()));
-                System.out.println(Integer.parseInt(Alumno_TextField.getText().toString()));
-                System.out.println(ControllerAlumnos.obtenerAlumnoPorDNI(Long.parseLong(Alumno_TextField.getText().toString())));
+                ModelAlumno a = ControllerAlumnos.obtenerAlumnoPorDNI(Long.parseLong(Alumno_TextField.getText().toString()));
                 model.addRow(new Object[]{
                 a.getAlumnoID(),
                 a.getLegajo(), 
@@ -74,7 +73,7 @@ public class MateriasPanel extends javax.swing.JPanel {
         else if (Alumno_TextField.getText().length() == 6){
             model.setRowCount(0);
             try{
-                Alumno a = ControllerAlumnos.obtenerAlumnoPorLegajo(Long.parseLong(Alumno_TextField.getText().toString()));
+                ModelAlumno a = ControllerAlumnos.obtenerAlumnoPorLegajo(Long.parseLong(Alumno_TextField.getText().toString()));
                 model.addRow(new Object[]{
                 a.getAlumnoID(),
                 a.getLegajo(), 
@@ -365,7 +364,7 @@ public class MateriasPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_Alumno_TextFieldActionPerformed
 
     private void Nuevo_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Nuevo_ButtonActionPerformed
-        MainJFrame.ShowJPanel(new NuevoAlumnoPanel());
+        ViewMain.ShowJPanel(new NuevoAlumnoPanel());
     }//GEN-LAST:event_Nuevo_ButtonActionPerformed
 
     private void Alumno_TextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_Alumno_TextFieldFocusLost
@@ -376,7 +375,7 @@ public class MateriasPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_Alumno_TextFieldFocusLost
 
     private void Refresh_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Refresh_ButtonActionPerformed
-        cargarAlumnos();
+        cargarMaterias();
     }//GEN-LAST:event_Refresh_ButtonActionPerformed
 
     private void Alumno_TextFieldMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Alumno_TextFieldMousePressed

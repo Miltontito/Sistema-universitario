@@ -3,7 +3,7 @@ package com.milton.gomez.sistema.universitario.Model;
 
 import java.util.List;
 
-public class Materia {
+public class ModelMateria {
     // -------------------------------------------
     // ---------------| Atributos |---------------
     // -------------------------------------------
@@ -15,27 +15,27 @@ public class Materia {
     private Boolean promocionable;
     private Boolean cursadaAprobada;
     private Boolean materiaAprobada;
-    private List<Materia> correlativas;
+    private List<ModelMateria> correlativas;
 
     // -----------------------------------------------
     // ---------------| Constructores |---------------
     // -----------------------------------------------
-    public Materia() {
+    public ModelMateria() {
         this.materiaID = asignarID();
     }
-    public Materia(String codigoDeMateria) {
+    public ModelMateria(String codigoDeMateria) {
         this();
         this.codigoDeMateria = codigoDeMateria;
     }
-    public Materia(String codigoDeMateria, String nombre) {
+    public ModelMateria(String codigoDeMateria, String nombre) {
         this(codigoDeMateria);
         this.nombre = nombre;
     }
-    public Materia(String codigoDeMateria, String nombre, Boolean promocionable) {
+    public ModelMateria(String codigoDeMateria, String nombre, Boolean promocionable) {
         this(codigoDeMateria, nombre);
         this.promocionable = promocionable;
     }
-    public Materia(String codigoDeMateria, String nombre, Boolean promocionable, List<Materia> correlativas) {
+    public ModelMateria(String codigoDeMateria, String nombre, Boolean promocionable, List<ModelMateria> correlativas) {
         this(codigoDeMateria, nombre, promocionable);
         this.correlativas = correlativas;
     }
@@ -50,7 +50,7 @@ public class Materia {
     public void esPromocionable(Boolean promocionable){
         this.promocionable = promocionable;
     }
-    public Boolean aprobarCursadaAlumno(Alumno alumno){
+    public Boolean aprobarCursadaAlumno(ModelAlumno alumno){
         if(this.promocionable){
             alumno.setMateriaAprobada(this);
             this.cursadaAprobada = true;
@@ -87,18 +87,21 @@ public class Materia {
     public Boolean isMateriaAprobada() {
         return materiaAprobada;
     }
-    public List<Materia> getCorrelativas() {
+    public List<ModelMateria> getCorrelativas() {
         if(correlativas.isEmpty() || correlativas == null){
             return null;
         }
         return correlativas;
+    }
+    public Boolean isPromocionable(){
+        return this.promocionable;
     }
 
     // -------------------------------------------
     // ----------------| Setters |----------------
     // -------------------------------------------
 
-    public void setCorrelativas(List<Materia> correlativas) {
+    public void setCorrelativas(List<ModelMateria> correlativas) {
         this.correlativas = correlativas;
     }
     public void setMateriaAprobada(Boolean materiaAprobada) {

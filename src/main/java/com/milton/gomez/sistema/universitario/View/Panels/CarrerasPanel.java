@@ -2,8 +2,8 @@ package com.milton.gomez.sistema.universitario.View.Panels;
 
 import com.milton.gomez.sistema.universitario.Controller.ControllerCarreras;
 import com.milton.gomez.sistema.universitario.Controller.ControllerAlumnos;
-import com.milton.gomez.sistema.universitario.Model.Alumno;
-import com.milton.gomez.sistema.universitario.View.MainJFrame;
+import com.milton.gomez.sistema.universitario.Model.ModelAlumno;
+import com.milton.gomez.sistema.universitario.View.ViewMain;
 import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -20,14 +20,14 @@ public class CarrerasPanel extends javax.swing.JPanel {
      */
     public CarrerasPanel() {
         initComponents();
-        cargarAlumnos();
-        alinearTablaAlumnos();
+        cargarCarreras();
+        alinearTablaCarreras();
     }
     
-    private void cargarAlumnos(){
+    private void cargarCarreras(){
         
         // "ID", "Codigo", "Nombre", "Materias Optativas", "Cuatrimestres", "Plan de Estudio"
-        DefaultTableModel model = (DefaultTableModel)Alumnos_Table.getModel();
+        DefaultTableModel model = (DefaultTableModel)Carreras_Table.getModel();
         
         model.setRowCount(0);
         
@@ -41,20 +41,20 @@ public class CarrerasPanel extends javax.swing.JPanel {
                             c.getCuatrimestres(), 
                             c.getPlanDeEstudio()}));
     }
-    private void alinearTablaAlumnos(){
+    private void alinearTablaCarreras(){
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
-        centerRenderer.setHorizontalAlignment( JLabel.RIGHT );
-        Alumnos_Table.setDefaultRenderer(Object.class, centerRenderer);
+        centerRenderer.setHorizontalAlignment( JLabel.CENTER );
+        Carreras_Table.setDefaultRenderer(Integer.class, centerRenderer);
+        Carreras_Table.setDefaultRenderer(Long.class, centerRenderer);
+        Carreras_Table.setDefaultRenderer(Object.class, centerRenderer);
     }
-    private void buscarAlumno(){
-        DefaultTableModel model = (DefaultTableModel)Alumnos_Table.getModel();
+    private void buscarCarrera(){
+        DefaultTableModel model = (DefaultTableModel)Carreras_Table.getModel();
         
-        if(Alumno_TextField.getText().length() == 8){
+        if(Carrera_TextField.getText().length() == 8){
             model.setRowCount(0);
             try{
-                Alumno a = ControllerAlumnos.obtenerAlumnoPorDNI(Long.parseLong(Alumno_TextField.getText().toString()));
-                System.out.println(Integer.parseInt(Alumno_TextField.getText().toString()));
-                System.out.println(ControllerAlumnos.obtenerAlumnoPorDNI(Long.parseLong(Alumno_TextField.getText().toString())));
+                ModelAlumno a = ControllerAlumnos.obtenerAlumnoPorDNI(Long.parseLong(Carrera_TextField.getText().toString()));
                 model.addRow(new Object[]{
                 a.getAlumnoID(),
                 a.getLegajo(), 
@@ -72,10 +72,10 @@ public class CarrerasPanel extends javax.swing.JPanel {
             }
 
         }
-        else if (Alumno_TextField.getText().length() == 6){
+        else if (Carrera_TextField.getText().length() == 6){
             model.setRowCount(0);
             try{
-                Alumno a = ControllerAlumnos.obtenerAlumnoPorLegajo(Long.parseLong(Alumno_TextField.getText().toString()));
+                ModelAlumno a = ControllerAlumnos.obtenerAlumnoPorLegajo(Long.parseLong(Carrera_TextField.getText().toString()));
                 model.addRow(new Object[]{
                 a.getAlumnoID(),
                 a.getLegajo(), 
@@ -108,13 +108,13 @@ public class CarrerasPanel extends javax.swing.JPanel {
         Titulo_Label = new javax.swing.JLabel();
         Separador_Separator = new javax.swing.JSeparator();
         Body_Panel = new javax.swing.JPanel();
-        AlumnoBusqueda_Panel = new javax.swing.JPanel();
-        Alumno_TextField = new javax.swing.JTextField();
+        CarreraBusqueda_Panel = new javax.swing.JPanel();
+        Carrera_TextField = new javax.swing.JTextField();
         Buscar_Button = new javax.swing.JButton();
-        ListAlumnos_Panel = new javax.swing.JPanel();
-        Alumnos_ScrollPane = new javax.swing.JScrollPane();
-        Alumnos_Table = new javax.swing.JTable();
-        AlumnoEditDelete_Panel = new javax.swing.JPanel();
+        ListCarreras_Panel = new javax.swing.JPanel();
+        Carrera_ScrollPane = new javax.swing.JScrollPane();
+        Carreras_Table = new javax.swing.JTable();
+        CarreraBottonButtons_Panel = new javax.swing.JPanel();
         Eliminar_Button = new javax.swing.JButton();
         Editar_Button = new javax.swing.JButton();
         Nuevo_Button = new javax.swing.JButton();
@@ -148,20 +148,20 @@ public class CarrerasPanel extends javax.swing.JPanel {
                 .addComponent(Separador_Separator, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        Alumno_TextField.setText("Inserte el DNI o Legajo del Alumno...");
-        Alumno_TextField.addFocusListener(new java.awt.event.FocusAdapter() {
+        Carrera_TextField.setText("Inserte el Nombre o Codigo de la Carrera...");
+        Carrera_TextField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
-                Alumno_TextFieldFocusLost(evt);
+                Carrera_TextFieldFocusLost(evt);
             }
         });
-        Alumno_TextField.addMouseListener(new java.awt.event.MouseAdapter() {
+        Carrera_TextField.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                Alumno_TextFieldMousePressed(evt);
+                Carrera_TextFieldMousePressed(evt);
             }
         });
-        Alumno_TextField.addActionListener(new java.awt.event.ActionListener() {
+        Carrera_TextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Alumno_TextFieldActionPerformed(evt);
+                Carrera_TextFieldActionPerformed(evt);
             }
         });
 
@@ -176,29 +176,29 @@ public class CarrerasPanel extends javax.swing.JPanel {
             }
         });
 
-        javax.swing.GroupLayout AlumnoBusqueda_PanelLayout = new javax.swing.GroupLayout(AlumnoBusqueda_Panel);
-        AlumnoBusqueda_Panel.setLayout(AlumnoBusqueda_PanelLayout);
-        AlumnoBusqueda_PanelLayout.setHorizontalGroup(
-            AlumnoBusqueda_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(AlumnoBusqueda_PanelLayout.createSequentialGroup()
-                .addComponent(Alumno_TextField)
+        javax.swing.GroupLayout CarreraBusqueda_PanelLayout = new javax.swing.GroupLayout(CarreraBusqueda_Panel);
+        CarreraBusqueda_Panel.setLayout(CarreraBusqueda_PanelLayout);
+        CarreraBusqueda_PanelLayout.setHorizontalGroup(
+            CarreraBusqueda_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CarreraBusqueda_PanelLayout.createSequentialGroup()
+                .addComponent(Carrera_TextField)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Buscar_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
-        AlumnoBusqueda_PanelLayout.setVerticalGroup(
-            AlumnoBusqueda_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(AlumnoBusqueda_PanelLayout.createSequentialGroup()
+        CarreraBusqueda_PanelLayout.setVerticalGroup(
+            CarreraBusqueda_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CarreraBusqueda_PanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(AlumnoBusqueda_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(Alumno_TextField, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+                .addGroup(CarreraBusqueda_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(Carrera_TextField, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
                     .addComponent(Buscar_Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        Alumnos_ScrollPane.setFont(new java.awt.Font("Roboto", 0, 15)); // NOI18N
+        Carrera_ScrollPane.setFont(new java.awt.Font("Roboto", 0, 15)); // NOI18N
 
-        Alumnos_Table.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
-        Alumnos_Table.setModel(new javax.swing.table.DefaultTableModel(
+        Carreras_Table.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        Carreras_Table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -221,24 +221,24 @@ public class CarrerasPanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        Alumnos_Table.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        Alumnos_Table.setShowGrid(false);
-        Alumnos_ScrollPane.setViewportView(Alumnos_Table);
-        if (Alumnos_Table.getColumnModel().getColumnCount() > 0) {
-            Alumnos_Table.getColumnModel().getColumn(0).setMaxWidth(100);
-            Alumnos_Table.getColumnModel().getColumn(1).setMaxWidth(200);
-            Alumnos_Table.getColumnModel().getColumn(3).setMaxWidth(100);
+        Carreras_Table.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        Carreras_Table.setShowGrid(false);
+        Carrera_ScrollPane.setViewportView(Carreras_Table);
+        if (Carreras_Table.getColumnModel().getColumnCount() > 0) {
+            Carreras_Table.getColumnModel().getColumn(0).setMaxWidth(100);
+            Carreras_Table.getColumnModel().getColumn(1).setMaxWidth(200);
+            Carreras_Table.getColumnModel().getColumn(3).setMaxWidth(100);
         }
 
-        javax.swing.GroupLayout ListAlumnos_PanelLayout = new javax.swing.GroupLayout(ListAlumnos_Panel);
-        ListAlumnos_Panel.setLayout(ListAlumnos_PanelLayout);
-        ListAlumnos_PanelLayout.setHorizontalGroup(
-            ListAlumnos_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Alumnos_ScrollPane)
+        javax.swing.GroupLayout ListCarreras_PanelLayout = new javax.swing.GroupLayout(ListCarreras_Panel);
+        ListCarreras_Panel.setLayout(ListCarreras_PanelLayout);
+        ListCarreras_PanelLayout.setHorizontalGroup(
+            ListCarreras_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(Carrera_ScrollPane)
         );
-        ListAlumnos_PanelLayout.setVerticalGroup(
-            ListAlumnos_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Alumnos_ScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
+        ListCarreras_PanelLayout.setVerticalGroup(
+            ListCarreras_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(Carrera_ScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         Eliminar_Button.setBackground(new java.awt.Color(204, 0, 0));
@@ -246,6 +246,11 @@ public class CarrerasPanel extends javax.swing.JPanel {
         Eliminar_Button.setForeground(new java.awt.Color(255, 255, 255));
         Eliminar_Button.setText("Eliminar");
         Eliminar_Button.setBorder(null);
+        Eliminar_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Eliminar_ButtonActionPerformed(evt);
+            }
+        });
 
         Editar_Button.setBackground(new java.awt.Color(204, 0, 0));
         Editar_Button.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
@@ -278,11 +283,11 @@ public class CarrerasPanel extends javax.swing.JPanel {
             }
         });
 
-        javax.swing.GroupLayout AlumnoEditDelete_PanelLayout = new javax.swing.GroupLayout(AlumnoEditDelete_Panel);
-        AlumnoEditDelete_Panel.setLayout(AlumnoEditDelete_PanelLayout);
-        AlumnoEditDelete_PanelLayout.setHorizontalGroup(
-            AlumnoEditDelete_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AlumnoEditDelete_PanelLayout.createSequentialGroup()
+        javax.swing.GroupLayout CarreraBottonButtons_PanelLayout = new javax.swing.GroupLayout(CarreraBottonButtons_Panel);
+        CarreraBottonButtons_Panel.setLayout(CarreraBottonButtons_PanelLayout);
+        CarreraBottonButtons_PanelLayout.setHorizontalGroup(
+            CarreraBottonButtons_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CarreraBottonButtons_PanelLayout.createSequentialGroup()
                 .addComponent(Refresh_Button)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
                 .addComponent(Nuevo_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -294,17 +299,17 @@ public class CarrerasPanel extends javax.swing.JPanel {
                 .addComponent(Eliminar_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
-        AlumnoEditDelete_PanelLayout.setVerticalGroup(
-            AlumnoEditDelete_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(AlumnoEditDelete_PanelLayout.createSequentialGroup()
+        CarreraBottonButtons_PanelLayout.setVerticalGroup(
+            CarreraBottonButtons_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CarreraBottonButtons_PanelLayout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addGroup(AlumnoEditDelete_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(CarreraBottonButtons_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Eliminar_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Editar_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Nuevo_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Detalles_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(AlumnoEditDelete_PanelLayout.createSequentialGroup()
+            .addGroup(CarreraBottonButtons_PanelLayout.createSequentialGroup()
                 .addComponent(Refresh_Button)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
@@ -313,18 +318,18 @@ public class CarrerasPanel extends javax.swing.JPanel {
         Body_Panel.setLayout(Body_PanelLayout);
         Body_PanelLayout.setHorizontalGroup(
             Body_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(AlumnoBusqueda_Panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(ListAlumnos_Panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(AlumnoEditDelete_Panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(CarreraBusqueda_Panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(ListCarreras_Panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(CarreraBottonButtons_Panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         Body_PanelLayout.setVerticalGroup(
             Body_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Body_PanelLayout.createSequentialGroup()
-                .addComponent(AlumnoBusqueda_Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(CarreraBusqueda_Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ListAlumnos_Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(ListCarreras_Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(AlumnoEditDelete_Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(CarreraBottonButtons_Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(86, 86, 86))
         );
 
@@ -359,51 +364,64 @@ public class CarrerasPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void Alumno_TextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Alumno_TextFieldActionPerformed
+    private void Carrera_TextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Carrera_TextFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_Alumno_TextFieldActionPerformed
+    }//GEN-LAST:event_Carrera_TextFieldActionPerformed
 
     private void Nuevo_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Nuevo_ButtonActionPerformed
-        MainJFrame.ShowJPanel(new NuevoAlumnoPanel());
+        ViewMain.ShowJPanel(new NuevoAlumnoPanel());
     }//GEN-LAST:event_Nuevo_ButtonActionPerformed
 
-    private void Alumno_TextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_Alumno_TextFieldFocusLost
-        if(Alumno_TextField.getText().isEmpty()){
-            Alumno_TextField.setForeground(Color.gray);
-            Alumno_TextField.setText("Inserte el DNI o Legajo del Alumno...");
+    private void Carrera_TextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_Carrera_TextFieldFocusLost
+        if(Carrera_TextField.getText().isEmpty()){
+            Carrera_TextField.setForeground(Color.gray);
+            Carrera_TextField.setText("Inserte el Nombre o Codigo de la Carrera...");
         }
-    }//GEN-LAST:event_Alumno_TextFieldFocusLost
+    }//GEN-LAST:event_Carrera_TextFieldFocusLost
 
     private void Refresh_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Refresh_ButtonActionPerformed
-        cargarAlumnos();
+        cargarCarreras();
     }//GEN-LAST:event_Refresh_ButtonActionPerformed
 
-    private void Alumno_TextFieldMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Alumno_TextFieldMousePressed
-        if(Alumno_TextField.getText().equals("Inserte el DNI o Legajo del Alumno...")){
-            Alumno_TextField.setText("");
-            Alumno_TextField.setForeground(Color.black);
+    private void Carrera_TextFieldMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Carrera_TextFieldMousePressed
+        if(Carrera_TextField.getText().equals("Inserte el Nombre o Codigo de la Carrera...")){
+            Carrera_TextField.setText("");
+            Carrera_TextField.setForeground(Color.black);
         }
-    }//GEN-LAST:event_Alumno_TextFieldMousePressed
+    }//GEN-LAST:event_Carrera_TextFieldMousePressed
 
     private void Buscar_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Buscar_ButtonActionPerformed
-        buscarAlumno();
+        buscarCarrera();
     }//GEN-LAST:event_Buscar_ButtonActionPerformed
+
+    private void Eliminar_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Eliminar_ButtonActionPerformed
+        DefaultTableModel model = (DefaultTableModel)Carreras_Table.getModel();
+        try{
+           for(int i : Carreras_Table.getSelectedRows()){
+               ControllerCarreras.eliminarCarrera((Integer) Carreras_Table.getValueAt(i,0));
+               model.removeRow(i);
+           }
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }//GEN-LAST:event_Eliminar_ButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel AlumnoBusqueda_Panel;
-    private javax.swing.JPanel AlumnoEditDelete_Panel;
-    private javax.swing.JTextField Alumno_TextField;
-    private javax.swing.JScrollPane Alumnos_ScrollPane;
-    private javax.swing.JTable Alumnos_Table;
     private javax.swing.JPanel Background_Panel;
     private javax.swing.JPanel Body_Panel;
     private javax.swing.JButton Buscar_Button;
+    private javax.swing.JPanel CarreraBottonButtons_Panel;
+    private javax.swing.JPanel CarreraBusqueda_Panel;
+    private javax.swing.JScrollPane Carrera_ScrollPane;
+    private javax.swing.JTextField Carrera_TextField;
+    private javax.swing.JTable Carreras_Table;
     private javax.swing.JButton Detalles_Button;
     private javax.swing.JButton Editar_Button;
     private javax.swing.JButton Eliminar_Button;
     private javax.swing.JPanel Header_Panel;
-    private javax.swing.JPanel ListAlumnos_Panel;
+    private javax.swing.JPanel ListCarreras_Panel;
     private javax.swing.JButton Nuevo_Button;
     private javax.swing.JButton Refresh_Button;
     private javax.swing.JSeparator Separador_Separator;
