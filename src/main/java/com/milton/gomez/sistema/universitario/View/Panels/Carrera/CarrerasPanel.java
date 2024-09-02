@@ -1,8 +1,8 @@
-package com.milton.gomez.sistema.universitario.View.Panels;
+package com.milton.gomez.sistema.universitario.View.Panels.Carrera;
 
-import com.milton.gomez.sistema.universitario.Controller.ControllerCarreras;
-import com.milton.gomez.sistema.universitario.Controller.ControllerAlumnos;
-import com.milton.gomez.sistema.universitario.Model.ModelAlumno;
+import com.milton.gomez.sistema.universitario.Controller.ControllerCarrera;
+import com.milton.gomez.sistema.universitario.Controller.ControllerAlumno;
+import com.milton.gomez.sistema.universitario.Model.Alumno;
 import com.milton.gomez.sistema.universitario.View.ViewMain;
 import java.awt.Color;
 import javax.swing.JLabel;
@@ -20,25 +20,25 @@ public class CarrerasPanel extends javax.swing.JPanel {
      */
     public CarrerasPanel() {
         initComponents();
-        cargarCarreras();
-        alinearTablaCarreras();
+        //cargarCarreras();
+        //alinearTablaCarreras();
     }
     
-    private void cargarCarreras(){
+    /*private void cargarCarreras(){
         
         // "ID", "Codigo", "Nombre", "Materias Optativas", "Cuatrimestres", "Plan de Estudio"
         DefaultTableModel model = (DefaultTableModel)Carreras_Table.getModel();
         
         model.setRowCount(0);
         
-        ControllerCarreras.listarTodasLasCarreras()
+        ControllerCarrera.listarTodasLasCarreras()
                 .forEach((c) -> model
                         .addRow(new Object[]{
                             c.getCarreraID(),
                             c.getCodigoCarrera(), 
                             c.getNombre(), 
                             c.getCantMateriasOptativasParaAprobar(), 
-                            c.getCuatrimestres(), 
+                            c.getCuatrimestres().size(), 
                             c.getPlanDeEstudio()}));
     }
     private void alinearTablaCarreras(){
@@ -47,9 +47,6 @@ public class CarrerasPanel extends javax.swing.JPanel {
         Carreras_Table.setDefaultRenderer(Integer.class, centerRenderer);
         Carreras_Table.setDefaultRenderer(Long.class, centerRenderer);
         Carreras_Table.setDefaultRenderer(Object.class, centerRenderer);
-    }
-    private void buscarCarrera(){
-        
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -161,11 +158,11 @@ public class CarrerasPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "ID", "Codigo", "Nombre", "Materias Optativas", "Cuatrimestres", "Plan de Estudio"
+                "ID", "Codigo", "Nombre", "Optativas", "Cuatrimestres", "Plan de Estudio"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.Long.class, java.lang.String.class, java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.Integer.class, java.lang.Long.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, true, false
@@ -185,7 +182,6 @@ public class CarrerasPanel extends javax.swing.JPanel {
         if (Carreras_Table.getColumnModel().getColumnCount() > 0) {
             Carreras_Table.getColumnModel().getColumn(0).setMaxWidth(100);
             Carreras_Table.getColumnModel().getColumn(1).setMaxWidth(200);
-            Carreras_Table.getColumnModel().getColumn(3).setMaxWidth(100);
         }
 
         javax.swing.GroupLayout ListCarreras_PanelLayout = new javax.swing.GroupLayout(ListCarreras_Panel);
@@ -215,6 +211,11 @@ public class CarrerasPanel extends javax.swing.JPanel {
         Editar_Button.setForeground(new java.awt.Color(255, 255, 255));
         Editar_Button.setText("Editar");
         Editar_Button.setBorder(null);
+        Editar_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Editar_ButtonActionPerformed(evt);
+            }
+        });
 
         Nuevo_Button.setBackground(new java.awt.Color(204, 0, 0));
         Nuevo_Button.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
@@ -232,6 +233,11 @@ public class CarrerasPanel extends javax.swing.JPanel {
         Detalles_Button.setForeground(new java.awt.Color(255, 255, 255));
         Detalles_Button.setText("Detalles");
         Detalles_Button.setBorder(null);
+        Detalles_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Detalles_ButtonActionPerformed(evt);
+            }
+        });
 
         Refresh_Button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/refresh_icon.png"))); // NOI18N
         Refresh_Button.setBorderPainted(false);
@@ -327,7 +333,7 @@ public class CarrerasPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_Carrera_TextFieldActionPerformed
 
     private void Nuevo_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Nuevo_ButtonActionPerformed
-        ViewMain.ShowJPanel(new SubirAlumnoPanel());
+        ViewMain.ShowJPanel(new SubirCarreraPanel());
     }//GEN-LAST:event_Nuevo_ButtonActionPerformed
 
     private void Carrera_TextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_Carrera_TextFieldFocusLost
@@ -338,7 +344,7 @@ public class CarrerasPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_Carrera_TextFieldFocusLost
 
     private void Refresh_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Refresh_ButtonActionPerformed
-        cargarCarreras();
+        //cargarCarreras();
     }//GEN-LAST:event_Refresh_ButtonActionPerformed
 
     private void Carrera_TextFieldMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Carrera_TextFieldMousePressed
@@ -349,21 +355,51 @@ public class CarrerasPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_Carrera_TextFieldMousePressed
 
     private void Buscar_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Buscar_ButtonActionPerformed
-        buscarCarrera();
+        if(Carreras_Table.getSelectedRow() != -1){
+            
+        }
+        else{
+            javax.swing.JOptionPane.showMessageDialog(this, "Debe seleccionar un Alumno primero. \n", "AVISO", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_Buscar_ButtonActionPerformed
 
     private void Eliminar_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Eliminar_ButtonActionPerformed
-        DefaultTableModel model = (DefaultTableModel)Carreras_Table.getModel();
-        try{
-           for(int i : Carreras_Table.getSelectedRows()){
-               ControllerCarreras.eliminarCarrera((Integer) Carreras_Table.getValueAt(i,0));
-               model.removeRow(i);
-           }
+        
+        if(Carreras_Table.getSelectedRow() != -1){
+            DefaultTableModel model = (DefaultTableModel)Carreras_Table.getModel();
+            try{
+               for(int i : Carreras_Table.getSelectedRows()){
+                   ControllerCarrera.eliminarCarrera((Integer) Carreras_Table.getValueAt(i,0));
+                   model.removeRow(i);
+               }
+            }
+            catch(Exception e){
+                System.out.println(e.getMessage());
+            }
         }
-        catch(Exception e){
-            System.out.println(e.getMessage());
+        else{
+            javax.swing.JOptionPane.showMessageDialog(this, "Debe seleccionar un Alumno primero. \n", "AVISO", javax.swing.JOptionPane.INFORMATION_MESSAGE);
         }
+        
     }//GEN-LAST:event_Eliminar_ButtonActionPerformed
+
+    private void Detalles_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Detalles_ButtonActionPerformed
+        if(Carreras_Table.getSelectedRow() != -1){
+            ViewMain.ShowJPanel(new DetallesCarrera());
+        }
+        else{
+            javax.swing.JOptionPane.showMessageDialog(this, "Debe seleccionar un Alumno primero. \n", "AVISO", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_Detalles_ButtonActionPerformed
+
+    private void Editar_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Editar_ButtonActionPerformed
+        
+        if(Carreras_Table.getSelectedRow() != -1){
+        }
+        else{
+            javax.swing.JOptionPane.showMessageDialog(this, "Debe seleccionar un Alumno primero. \n", "AVISO", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_Editar_ButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

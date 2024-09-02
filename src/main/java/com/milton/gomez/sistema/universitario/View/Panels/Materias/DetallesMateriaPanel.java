@@ -2,18 +2,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package com.milton.gomez.sistema.universitario.View.Panels;
+package com.milton.gomez.sistema.universitario.View.Panels.Materias;
 
 /**
  *
  * @author milton
  */
-public class DetallesAlumno extends javax.swing.JPanel {
+public class DetallesMateriaPanel extends javax.swing.JPanel {
 
     /**
-     * Creates new form DetallesAlumno
+     * Creates new form DetallesMateriaPanel
      */
-    public DetallesAlumno() {
+    public DetallesMateriaPanel() {
         initComponents();
     }
 

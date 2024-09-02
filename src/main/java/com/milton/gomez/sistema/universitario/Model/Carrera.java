@@ -1,11 +1,10 @@
 package com.milton.gomez.sistema.universitario.Model;
 
 
-import com.milton.gomez.sistema.universitario.Model.PlanesDeEstudio.PlanA;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ModelCarrera {
+public class Carrera {
 
     // -------------------------------------------
     // ---------------| Atributos |---------------
@@ -15,37 +14,37 @@ public class ModelCarrera {
     private String nombre;
     private Long codigoCarrera;
     private Integer cantMateriasOptativasParaAprobar;
-    private List<ModelCuatrimestre> cuatrimestres;
-    private ModelPlanDeEstudio planDeEstudio;
-    private List<ModelAlumno> alumnos;
+    private List<Cuatrimestre> cuatrimestres;
+    private PlanDeEstudio planDeEstudio;
+    private List<Alumno> alumnos;
 
     // -----------------------------------------------
     // ---------------| Constructores |---------------
     // -----------------------------------------------
-    public ModelCarrera() {
+    public Carrera() {
         this.carreraID = asignarID();
         this.cuatrimestres = new ArrayList<>();
     }
     
-    public ModelCarrera(String nombre) {
+    public Carrera(String nombre) {
         this();
         this.nombre = nombre;
     }
     
-    public ModelCarrera(Integer cantMateriasOptativasParaAprobar) {
+    public Carrera(Integer cantMateriasOptativasParaAprobar) {
         this();
         this.cantMateriasOptativasParaAprobar = cantMateriasOptativasParaAprobar;
     }
-    public ModelCarrera(String nombre, Long codigoCarrera) {
+    public Carrera(String nombre, Long codigoCarrera) {
         this();
         this.nombre = nombre;
         this.codigoCarrera = codigoCarrera;
     }
-    public ModelCarrera(String nombre, Long codigoCarrera, Integer cantMateriasOptativasParaAprobar) {
+    public Carrera(String nombre, Long codigoCarrera, Integer cantMateriasOptativasParaAprobar) {
         this(nombre, codigoCarrera);
         this.cantMateriasOptativasParaAprobar = cantMateriasOptativasParaAprobar;
     }
-    public ModelCarrera(String nombre, Long codigoCarrera, Integer cantMateriasOptativasParaAprobar, ModelPlanDeEstudio planDeEstudio) {
+    public Carrera(String nombre, Long codigoCarrera, Integer cantMateriasOptativasParaAprobar, PlanDeEstudio planDeEstudio) {
         this(nombre, codigoCarrera, cantMateriasOptativasParaAprobar);
         this.planDeEstudio = planDeEstudio;
     }
@@ -57,32 +56,32 @@ public class ModelCarrera {
         return identificador_carrera++;
     }
     public boolean crearCuatrimestre(){
-        this.cuatrimestres.add(new ModelCuatrimestre());
+        this.cuatrimestres.add(new Cuatrimestre());
         return true;
     }
-    public boolean crearCuatrimestre(List<ModelMateria> materias){
-        cuatrimestres.add(new ModelCuatrimestre(materias));
+    public boolean crearCuatrimestre(List<Materia> materias){
+        cuatrimestres.add(new Cuatrimestre(materias));
         return true;
     }
-    public ModelCarrera asignarCuatrimestre(ModelCuatrimestre cuatrimestre){
+    public Carrera asignarCuatrimestre(Cuatrimestre cuatrimestre){
         this.cuatrimestres.add(cuatrimestre);
         return this;
     }
-    public ModelCarrera setPlanDeEstudio(ModelPlanDeEstudio planDeEstudio){
+    public Carrera setPlanDeEstudio(PlanDeEstudio planDeEstudio){
         this.planDeEstudio = planDeEstudio;
         return this;
     }
-    public List<ModelMateria> materiasQuePuedeCursar(ModelAlumno alumno){
+    public List<Materia> materiasQuePuedeCursar(Alumno alumno){
         return planDeEstudio.materiasQuePuedeCursar(alumno, this);
     }
-    public Boolean sePuedeGraduar(ModelAlumno alumno){
+    public Boolean sePuedeGraduar(Alumno alumno){
 
         boolean cumpleLosRequisitos = true;
-        List<ModelMateria> obligatorias = new ArrayList<>();
-        List<ModelMateria> aprobadas = alumno.getMaterias();
+        List<Materia> obligatorias = new ArrayList<>();
+        List<Materia> aprobadas = alumno.getMaterias();
 
         //Por cada cuatrimestre retira las materias obligatorias.
-        for(ModelCuatrimestre cuatrimestre : this.cuatrimestres){
+        for(Cuatrimestre cuatrimestre : this.cuatrimestres){
             obligatorias.addAll(cuatrimestre.listarMateriasObligatorias());
         }
         //No es eficiente.
@@ -97,9 +96,9 @@ public class ModelCarrera {
         //Retorna false
         return cumpleLosRequisitos;
     }
-    public List<ModelMateria> obtenerMateriasDeLaCarrera(){
-        List<ModelMateria> materias = new ArrayList<>();
-        for(ModelCuatrimestre cuatrimestre : this.cuatrimestres){
+    public List<Materia> obtenerMateriasDeLaCarrera(){
+        List<Materia> materias = new ArrayList<>();
+        for(Cuatrimestre cuatrimestre : this.cuatrimestres){
             materias.addAll(cuatrimestre.listarTodasLasMaterias());
         }
         return materias;
@@ -123,13 +122,13 @@ public class ModelCarrera {
     public Long getCodigoCarrera() {
         return codigoCarrera;
     }
-    public List<ModelCuatrimestre> getCuatrimestres(){
+    public List<Cuatrimestre> getCuatrimestres(){
         return this.cuatrimestres;
     }
-    public List<ModelAlumno> getAlumnos(){
+    public List<Alumno> getAlumnos(){
         return this.alumnos;
     }
-    public ModelPlanDeEstudio getPlanDeEstudio() {
+    public PlanDeEstudio getPlanDeEstudio() {
         return planDeEstudio;
     }
 
@@ -145,10 +144,10 @@ public class ModelCarrera {
     public void setCodigoCarrera(Long codigoCarrera) {
         this.codigoCarrera = codigoCarrera;
     }
-    public void setCuatrimestres(List<ModelCuatrimestre> cuatrimestres){
+    public void setCuatrimestres(List<Cuatrimestre> cuatrimestres){
         this.cuatrimestres = cuatrimestres;
     }
-    public void setAlumnos(List<ModelAlumno> alumnos){
+    public void setAlumnos(List<Alumno> alumnos){
         this.alumnos = alumnos;
     }
 }

@@ -4,24 +4,24 @@
  */
 package com.milton.gomez.sistema.universitario.Controller;
 
-import com.milton.gomez.sistema.universitario.Model.ModelControladorUniversitario;
-import com.milton.gomez.sistema.universitario.Model.ModelMateria;
+import com.milton.gomez.sistema.universitario.Model.ControladorUniversitario;
+import com.milton.gomez.sistema.universitario.Model.Materia;
 import java.util.List;
 
 /**
  *
  * @author milton
  */
-public class ControllerMaterias {
+public class ControllerMateria {
     //Inicialización del controlador.
-    private static ModelControladorUniversitario cu = ModelControladorUniversitario.getInstance();
+    private static ControladorUniversitario cu = ControladorUniversitario.getInstance();
     
     
-    public static List<ModelMateria> listarTodasLasMaterias(){
+    public static List<Materia> listarTodasLasMaterias(){
         return cu.getMaterias();
     }
     
-    public static List<ModelMateria> listarCorrelativas(Integer carreraID){
+    public static List<Materia> listarCorrelativas(Integer carreraID){
         return cu.getMaterias().get(carreraID).getCorrelativas();
     }
     

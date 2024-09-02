@@ -2,11 +2,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package com.milton.gomez.sistema.universitario.View.Panels;
+package com.milton.gomez.sistema.universitario.View.Panels.Alumno;
 
-import com.milton.gomez.sistema.universitario.Controller.ControllerCarreras;
-import com.milton.gomez.sistema.universitario.Model.ModelCarrera;
-import java.awt.Color;
+import com.milton.gomez.sistema.universitario.View.Panels.Alumno.AlumnosPanel;
+import com.milton.gomez.sistema.universitario.Controller.ControllerAlumno;
+import com.milton.gomez.sistema.universitario.Controller.ControllerCarrera;
+import com.milton.gomez.sistema.universitario.Model.Carrera;
+import com.milton.gomez.sistema.universitario.Transferible.TransferibleAlumno;
+import com.milton.gomez.sistema.universitario.Transferible.TransferibleCarrera;
+import com.milton.gomez.sistema.universitario.View.ViewMain;
 import javax.swing.DefaultListModel;
 import javax.swing.JLabel;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -27,15 +31,32 @@ public class SubirAlumnoPanel extends javax.swing.JPanel {
         alinearTablaMaterias();
     }
     
+    public SubirAlumnoPanel(Integer id) {
+        this();
+        editableView(id);
+    }
+    
+    private void editableView(Integer id){
+        TransferibleAlumno alumno = new TransferibleAlumno();
+        alumno = ControllerAlumno.obtenerDatosDeAlumno(id);
+        
+        Title_Label.setText("Editar Alumno");
+        Legajo_TextField.setText(alumno.getLegajo().toString());
+        DNI_TextField.setText(alumno.getDni().toString());
+        Nombre_TextField.setText(alumno.getNombre().toString());
+        Apellido_TextField.setText(alumno.getApellido().toString());
+        Carreras_List.setSelectedValue(ControllerCarrera.obtenerCarreraPorId(id), true);
+    }
+    
     private void listarCarreras(){
         // Obtener el modelo de la JList
-        DefaultListModel<ModelCarrera> listModel = (DefaultListModel<ModelCarrera>) Carreras_List.getModel();
+        DefaultListModel<TransferibleCarrera> listModel = (DefaultListModel<TransferibleCarrera>) Carreras_List.getModel();
 
         // Limpiar el modelo actual para evitar duplicados
         listModel.clear();
 
         // Agregar cada carrera al modelo de la JList
-        ControllerCarreras.listarTodasLasCarreras().forEach((c) -> listModel.addElement(c));
+        ControllerCarrera.listarTodasLasCarreras().forEach((c) -> listModel.addElement(c));
     }
     
     private void listarMaterias(){
@@ -44,7 +65,7 @@ public class SubirAlumnoPanel extends javax.swing.JPanel {
         
         tableModel.setRowCount(0);
         
-        ControllerCarreras.listarTodosLosCuatrimestres(Carreras_List.getSelectedValue().getCarreraID())
+        ControllerCarrera.listarTodosLosCuatrimestres(Carreras_List.getSelectedValue().getId())
                 .forEach((c) -> c.listarTodasLasMaterias().forEach((m) -> tableModel
                         .addRow(new Object[]{
                             c.getCuatrimestreID()+1,
@@ -72,7 +93,7 @@ public class SubirAlumnoPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         Background_panel = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        Title_Label = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
         Legajo_TextField = new javax.swing.JTextField();
@@ -89,16 +110,15 @@ public class SubirAlumnoPanel extends javax.swing.JPanel {
         jLabel7 = new javax.swing.JLabel();
         Materia_ScrollPane = new javax.swing.JScrollPane();
         Materias_Table = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        Aceptar_Button = new javax.swing.JButton();
 
-        jLabel1.setFont(new java.awt.Font("Roboto Black", 0, 24)); // NOI18N
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/person_icon.png"))); // NOI18N
-        jLabel1.setText("Crear nuevo Alumno");
+        Title_Label.setFont(new java.awt.Font("Roboto Black", 0, 24)); // NOI18N
+        Title_Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/person_icon.png"))); // NOI18N
+        Title_Label.setText("Crear nuevo Alumno");
 
         jLabel2.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
-        jLabel2.setText("Legajo (6 caracteres) *");
+        jLabel2.setText("Legajo (6 numeros) *");
 
-        Legajo_TextField.setText("Ingrese el Legajo...");
         Legajo_TextField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 Legajo_TextFieldFocusGained(evt);
@@ -112,11 +132,15 @@ public class SubirAlumnoPanel extends javax.swing.JPanel {
                 Legajo_TextFieldMousePressed(evt);
             }
         });
+        Legajo_TextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Legajo_TextFieldActionPerformed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
-        jLabel3.setText("DNI (8 caracteres) *");
+        jLabel3.setText("DNI (8 numeros) *");
 
-        DNI_TextField.setText("Ingrese el DNI...");
         DNI_TextField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 DNI_TextFieldFocusGained(evt);
@@ -131,7 +155,6 @@ public class SubirAlumnoPanel extends javax.swing.JPanel {
         jLabel4.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel4.setText("Nombre *");
 
-        Nombre_TextField.setText("Ingrese el Nombre...");
         Nombre_TextField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 Nombre_TextFieldFocusGained(evt);
@@ -144,7 +167,6 @@ public class SubirAlumnoPanel extends javax.swing.JPanel {
         jLabel5.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel5.setText("Apellido *");
 
-        Apellido_TextField.setText("Ingrese el Apellido...");
         Apellido_TextField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 Apellido_TextFieldFocusGained(evt);
@@ -201,13 +223,13 @@ public class SubirAlumnoPanel extends javax.swing.JPanel {
             Materias_Table.getColumnModel().getColumn(0).setMaxWidth(100);
         }
 
-        jButton1.setBackground(new java.awt.Color(204, 0, 0));
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Aceptar");
-        jButton1.setBorderPainted(false);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        Aceptar_Button.setBackground(new java.awt.Color(204, 0, 0));
+        Aceptar_Button.setForeground(new java.awt.Color(255, 255, 255));
+        Aceptar_Button.setText("Aceptar");
+        Aceptar_Button.setBorderPainted(false);
+        Aceptar_Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                Aceptar_ButtonActionPerformed(evt);
             }
         });
 
@@ -219,7 +241,7 @@ public class SubirAlumnoPanel extends javax.swing.JPanel {
                 .addGroup(Background_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(Background_panelLayout.createSequentialGroup()
                         .addGap(224, 224, 224)
-                        .addComponent(jLabel1))
+                        .addComponent(Title_Label))
                     .addGroup(Background_panelLayout.createSequentialGroup()
                         .addGap(175, 175, 175)
                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 393, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -246,7 +268,7 @@ public class SubirAlumnoPanel extends javax.swing.JPanel {
                                     .addComponent(Materia_ScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Background_panelLayout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(Aceptar_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(57, 57, 57)))))
                 .addGap(23, 23, 23))
         );
@@ -254,7 +276,7 @@ public class SubirAlumnoPanel extends javax.swing.JPanel {
             Background_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Background_panelLayout.createSequentialGroup()
                 .addGap(17, 17, 17)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Title_Label, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(6, 6, 6)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(23, 23, 23)
@@ -289,7 +311,7 @@ public class SubirAlumnoPanel extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(Materia_ScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(46, 46, 46)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Aceptar_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(50, 50, 50))))
         );
 
@@ -310,10 +332,7 @@ public class SubirAlumnoPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_Carreras_ListValueChanged
 
     private void Legajo_TextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_Legajo_TextFieldFocusLost
-        if(Legajo_TextField.getText().isEmpty()){
-            Legajo_TextField.setForeground(Color.gray);
-            Legajo_TextField.setText("Ingrese el Legajo...");
-        }
+       
     }//GEN-LAST:event_Legajo_TextFieldFocusLost
 
     private void Legajo_TextFieldMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Legajo_TextFieldMousePressed
@@ -321,76 +340,76 @@ public class SubirAlumnoPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_Legajo_TextFieldMousePressed
 
     private void DNI_TextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_DNI_TextFieldFocusLost
-        if(DNI_TextField.getText().isEmpty()){
-            DNI_TextField.setForeground(Color.gray);
-            DNI_TextField.setText("Ingrese el DNI...");
-        }
+        
     }//GEN-LAST:event_DNI_TextFieldFocusLost
 
     private void DNI_TextFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_DNI_TextFieldFocusGained
-        if(DNI_TextField.getText().equals("Ingrese el DNI...")){
-            DNI_TextField.setText("");
-            DNI_TextField.setForeground(Color.black);
-        }
+      
     }//GEN-LAST:event_DNI_TextFieldFocusGained
 
     private void Legajo_TextFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_Legajo_TextFieldFocusGained
-        if(Legajo_TextField.getText().equals("Ingrese el Legajo...")){
-            Legajo_TextField.setText("");
-            Legajo_TextField.setForeground(Color.black);
-        }
+       
     }//GEN-LAST:event_Legajo_TextFieldFocusGained
 
     private void Nombre_TextFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_Nombre_TextFieldFocusGained
-        if(Nombre_TextField.getText().equals("Ingrese el Nombre...")){
-            Nombre_TextField.setText("");
-            Nombre_TextField.setForeground(Color.black);
-        }
+        
     }//GEN-LAST:event_Nombre_TextFieldFocusGained
 
     private void Nombre_TextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_Nombre_TextFieldFocusLost
-        if(Nombre_TextField.getText().isEmpty()){
-            Nombre_TextField.setForeground(Color.gray);
-            Nombre_TextField.setText("Ingrese el Nombre...");
-        }
+       
     }//GEN-LAST:event_Nombre_TextFieldFocusLost
 
     private void Apellido_TextFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_Apellido_TextFieldFocusGained
-        if(Apellido_TextField.getText().equals("Ingrese el Apellido...")){
-            Apellido_TextField.setText("");
-            Apellido_TextField.setForeground(Color.black);
-        }
     }//GEN-LAST:event_Apellido_TextFieldFocusGained
 
     private void Apellido_TextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_Apellido_TextFieldFocusLost
-        if(Apellido_TextField.getText().isEmpty()){
-            Apellido_TextField.setForeground(Color.gray);
-            Apellido_TextField.setText("Ingrese el Apellido...");
-        }
     }//GEN-LAST:event_Apellido_TextFieldFocusLost
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if(false){
-            
+    private void Aceptar_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Aceptar_ButtonActionPerformed
+        try{
+            if(!Legajo_TextField.getText().isEmpty() || !DNI_TextField.getText().isEmpty() || 
+                    !Nombre_TextField.getText().isEmpty() || !Apellido_TextField.getText().isEmpty() || 
+                    !(Carreras_List.getSelectedIndex() == -1) || !(Materias_Table.getSelectedRowCount() == 0)){
+
+                ControllerAlumno.crearAlumno(this ,Legajo_TextField, DNI_TextField, Nombre_TextField, 
+                        Apellido_TextField, Carreras_List, Materias_Table);
+
+                ViewMain.ShowJPanel(new AlumnosPanel());
+            }
+            else{
+                javax.swing.JOptionPane.showMessageDialog(this, "Debe llenar todos los campos. \n", "AVISO", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+                Legajo_TextField.requestFocus();
+            }
         }
-        else{
-            javax.swing.JOptionPane.showOptionDialog(this, evt, TOOL_TIP_TEXT_KEY, WIDTH, HEIGHT, icon, options, ALLBITS);
+        catch(NumberFormatException e){
+            e.getMessage();
+            e.printStackTrace();
+            javax.swing.JOptionPane.showMessageDialog(this, "El Legajo y el DNI deben ser numeros. \n", "AVISO", javax.swing.JOptionPane.INFORMATION_MESSAGE);
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+        catch(Exception e){
+            e.getMessage();
+            e.printStackTrace();
+            javax.swing.JOptionPane.showMessageDialog(this, "Ocurrió un problema al crear/actualizar al Alumno. \n", "ERROR", javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_Aceptar_ButtonActionPerformed
+
+    private void Legajo_TextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Legajo_TextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Legajo_TextFieldActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Aceptar_Button;
     private javax.swing.JTextField Apellido_TextField;
     private javax.swing.JPanel Background_panel;
     private javax.swing.JScrollPane Carrera_ScrollPane;
-    private javax.swing.JList<com.milton.gomez.sistema.universitario.Model.ModelCarrera> Carreras_List;
+    private javax.swing.JList<com.milton.gomez.sistema.universitario.Transferible.TransferibleCarrera> Carreras_List;
     private javax.swing.JTextField DNI_TextField;
     private javax.swing.JTextField Legajo_TextField;
     private javax.swing.JScrollPane Materia_ScrollPane;
     private javax.swing.JTable Materias_Table;
     private javax.swing.JTextField Nombre_TextField;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel Title_Label;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

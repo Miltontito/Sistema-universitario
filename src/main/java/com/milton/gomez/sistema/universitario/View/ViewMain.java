@@ -1,4 +1,7 @@
 package com.milton.gomez.sistema.universitario.View;
+import com.milton.gomez.sistema.universitario.View.Panels.Materias.MateriasPanel;
+import com.milton.gomez.sistema.universitario.View.Panels.Carrera.CarrerasPanel;
+import com.milton.gomez.sistema.universitario.View.Panels.Alumno.AlumnosPanel;
 import com.milton.gomez.sistema.universitario.View.Panels.*;
 import java.awt.BorderLayout;
 import java.awt.Color;

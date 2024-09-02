@@ -1,6 +1,7 @@
-package com.milton.gomez.sistema.universitario.View.Panels;
+package com.milton.gomez.sistema.universitario.View.Panels.Alumno;
 
-import com.milton.gomez.sistema.universitario.Controller.ControllerAlumnos;
+import com.milton.gomez.sistema.universitario.Controller.ControllerAlumno;
+import com.milton.gomez.sistema.universitario.Transferible.TransferibleAlumno;
 import com.milton.gomez.sistema.universitario.View.ViewMain;
 import java.awt.Color;
 import javax.swing.JLabel;
@@ -23,7 +24,8 @@ public class AlumnosPanel extends javax.swing.JPanel {
     }
     
     private void cargarAlumnos(){
-        Alumnos_Table.setModel(ControllerAlumnos.listarTodosLosAlumnos(this.Alumnos_Table));
+        TransferibleAlumno alumno = new TransferibleAlumno();
+        Alumnos_Table.setModel(ControllerAlumno.listarTodosLosAlumnos(this.Alumnos_Table));
     }
     private void alinearTablaAlumnos(){
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
@@ -36,13 +38,13 @@ public class AlumnosPanel extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel)Alumnos_Table.getModel();
         
         if(Alumno_TextField.getText().length() == 8){
-            Alumnos_Table.setModel(ControllerAlumnos.obtenerAlumnoPorDNI(Alumnos_Table, Alumno_TextField));
+            Alumnos_Table.setModel(ControllerAlumno.obtenerAlumnoPorDNI(Alumnos_Table, Alumno_TextField));
         }
         else if (Alumno_TextField.getText().length() == 6){
-            Alumnos_Table.setModel(ControllerAlumnos.obtenerAlumnoPorLegajo(Alumnos_Table, Alumno_TextField));
+            Alumnos_Table.setModel(ControllerAlumno.obtenerAlumnoPorLegajo(Alumnos_Table, Alumno_TextField));
         }
         else if(Alumno_TextField.getText().equals("Inserte el DNI o Legajo del Alumno...")){
-            cargarAlumnos();
+            javax.swing.JOptionPane.showMessageDialog(this, "Debe escribir un Legajo o un DNI. \n", "AVISO", javax.swing.JOptionPane.INFORMATION_MESSAGE);
         }
     }
     /**
@@ -209,6 +211,11 @@ public class AlumnosPanel extends javax.swing.JPanel {
         Editar_Button.setForeground(new java.awt.Color(255, 255, 255));
         Editar_Button.setText("Editar");
         Editar_Button.setBorder(null);
+        Editar_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Editar_ButtonActionPerformed(evt);
+            }
+        });
 
         Nuevo_Button.setBackground(new java.awt.Color(204, 0, 0));
         Nuevo_Button.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
@@ -318,7 +325,7 @@ public class AlumnosPanel extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(Background_Panel, javax.swing.GroupLayout.PREFERRED_SIZE, 574, Short.MAX_VALUE)
+                .addComponent(Background_Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 574, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -354,21 +361,42 @@ public class AlumnosPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_Buscar_ButtonActionPerformed
 
     private void Eliminar_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Eliminar_ButtonActionPerformed
-        DefaultTableModel model = (DefaultTableModel)Alumnos_Table.getModel();
-        try{
-           for(int i : Alumnos_Table.getSelectedRows()){
-               ControllerAlumnos.eliminarAlumno((Integer) Alumnos_Table.getValueAt(i,0));
-               model.removeRow(i);
-           }
+        
+        if(Alumnos_Table.getSelectedColumnCount() != 0){
+            DefaultTableModel model = (DefaultTableModel)Alumnos_Table.getModel();
+            try{
+                for(int i : Alumnos_Table.getSelectedRows()){
+                ControllerAlumno.eliminarAlumno((Integer) Alumnos_Table.getValueAt(i,0));
+                model.removeRow(i);
+                }
+            }
+            catch(Exception e){
+                System.out.println(e.getMessage());
+                e.printStackTrace();
+            }
         }
-        catch(Exception e){
-            System.out.println(e.getMessage());
+        else{
+            javax.swing.JOptionPane.showMessageDialog(this, "Debe seleccionar un Alumno primero. \n", "AVISO", javax.swing.JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_Eliminar_ButtonActionPerformed
 
     private void Detalles_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Detalles_ButtonActionPerformed
-        ViewMain.ShowJPanel(new DetallesAlumno());
+        if(Alumnos_Table.getSelectedRow() != -1){
+            ViewMain.ShowJPanel(new DetallesAlumno((Integer) Alumnos_Table.getValueAt(Alumnos_Table.getSelectedRow(),0)));
+        }
+        else{
+            javax.swing.JOptionPane.showMessageDialog(this, "Debe seleccionar un Alumno primero. \n", "AVISO", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_Detalles_ButtonActionPerformed
+
+    private void Editar_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Editar_ButtonActionPerformed
+        if(Alumnos_Table.getSelectedRow() != -1){
+            ViewMain.ShowJPanel(new SubirAlumnoPanel((Integer) Alumnos_Table.getValueAt(Alumnos_Table.getSelectedRow(),0)));
+        }
+        else{
+            javax.swing.JOptionPane.showMessageDialog(this, "Debe seleccionar un Alumno primero. \n", "AVISO", javax.swing.JOptionPane.INFORMATION_MESSAGE);            
+        }
+    }//GEN-LAST:event_Editar_ButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

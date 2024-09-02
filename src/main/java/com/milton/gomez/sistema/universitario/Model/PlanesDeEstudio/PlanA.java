@@ -7,7 +7,7 @@ import com.milton.gomez.sistema.universitario.Model.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PlanA implements ModelPlanDeEstudio {
+public class PlanA implements PlanDeEstudio {
     /***
      *
      * @param alumno recibe el alumno del que se requiere recibir las materias que puede cursar.
@@ -15,20 +15,20 @@ public class PlanA implements ModelPlanDeEstudio {
      * @return devuelve la lista de materias que pueden cursar los alumnos.
      */
     @Override
-    public List<ModelMateria> materiasQuePuedeCursar(ModelAlumno alumno, ModelCarrera carrera) {
-        List<ModelMateria> materiasQuePuedeCursar = new ArrayList<>();
+    public List<Materia> materiasQuePuedeCursar(Alumno alumno, Carrera carrera) {
+        List<Materia> materiasQuePuedeCursar = new ArrayList<>();
 
         // Obtiene todas las materias de la carrera
-        List<ModelMateria> todasLasMaterias = carrera.obtenerMateriasDeLaCarrera();
+        List<Materia> todasLasMaterias = carrera.obtenerMateriasDeLaCarrera();
 
         // Verifica si el alumno puede cursar cada materia bajo el Plan A
-        for (ModelMateria materia : todasLasMaterias) {
+        for (Materia materia : todasLasMaterias) {
 
             // Si la materia se encuentra en alumno --> está aprobada o la está cursando.
             boolean tieneLaMateria = alumno.getMaterias().contains(materia);
 
             // si puede cursar la materia y NO está en alumno...
-            if (puedeCursarMateria(materia) & !tieneLaMateria) {
+            if (puedeCursarMateria(alumno, materia) & !tieneLaMateria) {
                 materiasQuePuedeCursar.add(materia);
             }
         }
@@ -41,15 +41,15 @@ public class PlanA implements ModelPlanDeEstudio {
      * @param materia recibe una materia para evaluar si aprobo las correlativas o no.
      * @return retorna si puede cursar la materia o no.
      */
-    private Boolean puedeCursarMateria(ModelMateria materia) {
+    private Boolean puedeCursarMateria(Alumno alumno, Materia materia) {
         // Si la materia no tiene correlativas, puede cursarla
         if (materia.getCorrelativas() == null || materia.getCorrelativas().isEmpty()) {
             return true;
         }
 
         // Verifica que las correlativas tengan la cursada aprobada
-        for (ModelMateria correlativa : materia.getCorrelativas()) {
-            if (!correlativa.isCursadaAprobada()) {
+        for (Materia correlativa : materia.getCorrelativas()) {
+            if (!alumno.obtenerCursadasAprobadas().contains(correlativa)) {
                 return false;
             }
         }

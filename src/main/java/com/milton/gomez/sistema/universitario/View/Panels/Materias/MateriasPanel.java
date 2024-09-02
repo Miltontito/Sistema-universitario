@@ -1,8 +1,9 @@
-package com.milton.gomez.sistema.universitario.View.Panels;
+package com.milton.gomez.sistema.universitario.View.Panels.Materias;
 
-import com.milton.gomez.sistema.universitario.Controller.ControllerAlumnos;
-import com.milton.gomez.sistema.universitario.Controller.ControllerMaterias;
-import com.milton.gomez.sistema.universitario.Model.ModelAlumno;
+import com.milton.gomez.sistema.universitario.View.Panels.Alumno.SubirAlumnoPanel;
+import com.milton.gomez.sistema.universitario.Controller.ControllerAlumno;
+import com.milton.gomez.sistema.universitario.Controller.ControllerMateria;
+import com.milton.gomez.sistema.universitario.Model.Alumno;
 import com.milton.gomez.sistema.universitario.View.ViewMain;
 import java.awt.Color;
 import javax.swing.JLabel;
@@ -31,7 +32,7 @@ public class MateriasPanel extends javax.swing.JPanel {
         
         model.setRowCount(0);
         
-        ControllerMaterias.listarTodasLasMaterias()
+        ControllerMateria.listarTodasLasMaterias()
                 .forEach((m) -> model
                         .addRow(new Object[]{
                             m.getMateriaID(),
@@ -225,6 +226,11 @@ public class MateriasPanel extends javax.swing.JPanel {
         Detalles_Button.setForeground(new java.awt.Color(255, 255, 255));
         Detalles_Button.setText("Detalles");
         Detalles_Button.setBorder(null);
+        Detalles_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Detalles_ButtonActionPerformed(evt);
+            }
+        });
 
         Refresh_Button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/refresh_icon.png"))); // NOI18N
         Refresh_Button.setBorderPainted(false);
@@ -322,7 +328,7 @@ public class MateriasPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_Alumno_TextFieldActionPerformed
 
     private void Nuevo_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Nuevo_ButtonActionPerformed
-        ViewMain.ShowJPanel(new SubirAlumnoPanel());
+        ViewMain.ShowJPanel(new SubirMateriaPanel());
     }//GEN-LAST:event_Nuevo_ButtonActionPerformed
 
     private void Alumno_TextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_Alumno_TextFieldFocusLost
@@ -346,6 +352,10 @@ public class MateriasPanel extends javax.swing.JPanel {
     private void Buscar_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Buscar_ButtonActionPerformed
         buscarAlumno();
     }//GEN-LAST:event_Buscar_ButtonActionPerformed
+
+    private void Detalles_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Detalles_ButtonActionPerformed
+        ViewMain.ShowJPanel(new DetallesMateriaPanel());
+    }//GEN-LAST:event_Detalles_ButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

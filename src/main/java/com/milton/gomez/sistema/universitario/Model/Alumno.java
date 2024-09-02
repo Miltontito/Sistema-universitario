@@ -4,7 +4,7 @@ package com.milton.gomez.sistema.universitario.Model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ModelAlumno {
+public class Alumno {
     // -------------------------------------------
     // ---------------| Atributos |---------------
     // -------------------------------------------
@@ -15,37 +15,37 @@ public class ModelAlumno {
     private Long dni;
     private String nombre;
     private String apellido;
-    private ModelCarrera carrera;
-    private List<ModelMateria> materiasQuePuedeCursar; //Cambia cada cuatrimestre
-    private List<ModelMateria> materias; //todas las materias, aprobadas y cursando
+    private Carrera carrera;
+    private List<Materia> materiasQuePuedeCursar; //Cambia cada cuatrimestre
+    private List<Cursada> cursadas;
 
     // -----------------------------------------------
     // ---------------| Constructores |---------------
     // -----------------------------------------------
-    public ModelAlumno() {
+    public Alumno() {
         this.alumnoID = asignarID();
         this.materiasQuePuedeCursar = new ArrayList<>();
-        this.materias = new ArrayList<>();
+        this.cursadas = new ArrayList<>();
     }
-    public ModelAlumno(String nombre) {
+    public Alumno(String nombre) {
         this();
         this.nombre = nombre;
     }
-    public ModelAlumno(Long legajo, Long dni, String nombre, String apellido) {
+    public Alumno(Long legajo, Long dni, String nombre, String apellido) {
         this();
         this.legajo = legajo;
         this.dni = dni;
         this.nombre = nombre;
         this.apellido = apellido;
     }
-    public ModelAlumno(Long legajo, Long dni, String nombre, String apellido, ModelCarrera carrera) {
+    public Alumno(Long legajo, Long dni, String nombre, String apellido, Carrera carrera) {
         this(legajo, dni, nombre, apellido);
         this.carrera = carrera;
     }
-    public ModelAlumno(Long legajo, Long dni, String nombre, String apellido, ModelCarrera carrera, List<ModelMateria> materiasQuePuedeCursar, List<ModelMateria> materias) {
+     public Alumno(Long legajo, Long dni, String nombre, String apellido, Carrera carrera, List<Materia> materiasQuePuedeCursar, List<Cursada> cursadas) {
         this(legajo, dni, nombre, apellido, carrera);
         this.materiasQuePuedeCursar = materiasQuePuedeCursar;
-        this.materias = materias;
+        this.cursadas = cursadas;
     }
 
 
@@ -53,54 +53,66 @@ public class ModelAlumno {
     // ---------------| Métodos |---------------
     // -----------------------------------------
 
-    protected Integer asignarID(){
+    private Integer asignarID(){
         return identificador_alumno++;
     }
-    public Boolean inscribirseACarrera(ModelCarrera carrera){
+    public Boolean inscribirseACarrera(Carrera carrera){
         if (this.carrera != null){
             this.carrera = carrera;
             return true;
         }
         return false;
     }
-    public List<ModelMateria> obtenerMateriasQuePuedeCursar(){
+    public List<Materia> obtenerMateriasQuePuedeCursar(){
         materiasQuePuedeCursar = carrera.materiasQuePuedeCursar(this);
         return materiasQuePuedeCursar;
     }
-    public Boolean inscribirseAMateria(ModelMateria materia){
+    public Boolean inscribirseAMateria(Materia materia){
         /* si la materia se encuentra en la lista de materias que puede cursar entonces... */
         if(materiasQuePuedeCursar.contains(materia)){
-            materias.add(materia);
+            cursadas.add(new Cursada(materia));
             return true;
         }
         return false;
     }
-    public List<ModelMateria> obtenerMateriasQueCursa(){
-        List<ModelMateria> cursadas = new ArrayList<>();
-        for(ModelMateria materia : this.materias){
-            if(!materia.isMateriaAprobada()){
-                cursadas.add(materia);
+    public List<Materia> obtenerMateriasQueCursa(){
+        List<Materia> materias = new ArrayList<>();
+        if(!this.cursadas.isEmpty()){
+            for(Cursada cursada : this.cursadas){
+                if(cursada.getCursando()){
+                    materias.add(cursada.getMateria());
+                }
             }
         }
-        if(cursadas.isEmpty()){
-            return null;
-        }
-        return cursadas;
+        return materias;
     }
-    public List<ModelMateria> obtenerMateriasAprobadas(){
-        List<ModelMateria> aprobadas = new ArrayList<>();
-        for(ModelMateria materia : this.materias){
-            if(materia.isMateriaAprobada()){
-                aprobadas.add(materia);
+    public List<Materia> obtenerCursadasAprobadas(){
+        List<Materia> aprobadas = new ArrayList<>();
+        if(!this.cursadas.isEmpty()){
+            for(Cursada cursada : this.cursadas){
+                if(cursada.getCursadaAprobada()){
+                    aprobadas.add(cursada.getMateria());
+                }
             }
         }
-        if(aprobadas.isEmpty()){
-            return null;
-        }
+        
         return aprobadas;
     }
-    public void setMateriaAprobada(ModelMateria materia) {
-        this.materias.add(materia);
+    public List<Materia> obtenerMateriasAprobadas(){
+        List<Materia> aprobadas = new ArrayList<>();
+        if(!this.cursadas.isEmpty()){
+            for(Cursada cursada : this.cursadas){
+                if(cursada.getMateriaAprobada()){
+                    aprobadas.add(cursada.getMateria());
+                }
+            }
+        }
+        
+        return aprobadas;
+    }
+    public void setMateriaAprobada(Materia materia) {
+        Cursada cursada = new Cursada(materia);
+        cursada.setMateriaAprobada(Boolean.TRUE);
     }
 
     // -----------------------------------------
@@ -119,14 +131,19 @@ public class ModelAlumno {
     public String getApellido() {
         return apellido;
     }
-    public ModelCarrera getCarrera() {
+    public Carrera getCarrera() {
         return carrera;
     }
     public Integer getAlumnoID() {
         return alumnoID;
     }
-    public List<ModelMateria> getMaterias(){
+    public List<Materia> getMaterias(){
+        List<Materia> materias = new ArrayList<>();
+        this.cursadas.forEach((c) -> materias.add(c.getMateria()));
         return materias;
+    }
+    public List<Cursada> getCursadas() {
+        return cursadas;
     }
 
     // -----------------------------------------
@@ -145,10 +162,19 @@ public class ModelAlumno {
     public void setApellido(String apellido) {
         this.apellido = apellido;
     }
-    public void setMaterias(List<ModelMateria> materias) {
-        this.materias = materias;
+    public void setMaterias(List<Materia> materias) {
+        List<Cursada> nuevaCursada = new ArrayList<>();
+        materias.forEach((m) -> nuevaCursada.add(new Cursada(m)));
+        this.cursadas.addAll(nuevaCursada);
     }
-    public void setCarrera(ModelCarrera carrera){
+    public void setCarrera(Carrera carrera){
         this.carrera = carrera;
     }
+
+    public void setCursadas(List<Cursada> cursadas) {
+        this.cursadas = cursadas;
+    }
+    
+    
+    
 }

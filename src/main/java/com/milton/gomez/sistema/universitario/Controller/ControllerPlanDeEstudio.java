@@ -4,19 +4,19 @@
  */
 package com.milton.gomez.sistema.universitario.Controller;
 
-import com.milton.gomez.sistema.universitario.Model.ModelControladorUniversitario;
+import com.milton.gomez.sistema.universitario.Model.ControladorUniversitario;
 import java.util.List;
-import com.milton.gomez.sistema.universitario.Model.ModelPlanDeEstudio;
+import com.milton.gomez.sistema.universitario.Model.PlanDeEstudio;
 
 /**
  *
  * @author miltongomez
  */
-public class ControllerPlanesDeEstudio {
+public class ControllerPlanDeEstudio {
     //Inicialización del controlador.
-    private static ModelControladorUniversitario cu = ModelControladorUniversitario.getInstance();
+    private static ControladorUniversitario cu = ControladorUniversitario.getInstance();
     
-    public static List<ModelPlanDeEstudio> listarTodosLosPlaneDeEstudio(){
+    public static List<PlanDeEstudio> listarTodosLosPlaneDeEstudio(){
         return cu.getPlanesDeEstudios();
     }
 }
