@@ -1,5 +1,7 @@
 package com.milton.gomez.sistema.universitario.Transferible;
 
+import com.milton.gomez.sistema.universitario.Model.Carrera;
+import com.milton.gomez.sistema.universitario.Model.Cursada;
 import java.util.List;
 
 /**
@@ -12,8 +14,8 @@ public class TransferibleAlumno {
     private Long dni;
     private String nombre;
     private String apellido;
-    private TransferibleCarrera carrera;
-    private List<TransferibleCursada> cursadas;
+    private Carrera carrera;
+    private List<Cursada> cursadas;
 
     // Getters y setters
     public Integer getId() {
@@ -56,19 +58,21 @@ public class TransferibleAlumno {
         this.apellido = apellido;
     }
 
-    public TransferibleCarrera getCarrera() {
+    public Carrera getCarrera() {
         return carrera;
     }
 
-    public void setCarrera(TransferibleCarrera carrera) {
+    public void setCarrera(Carrera carrera) {
         this.carrera = carrera;
     }
 
-    public List<TransferibleCursada> getCursadas() {
+    public List<Cursada> getCursadas() {
         return cursadas;
     }
 
-    public void setCursadas(List<TransferibleCursada> cursadas) {
+    public void setCursadas(List<Cursada> cursadas) {
         this.cursadas = cursadas;
     }
+    
+    
 }

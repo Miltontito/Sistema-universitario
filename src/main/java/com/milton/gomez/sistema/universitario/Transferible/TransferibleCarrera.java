@@ -1,5 +1,7 @@
 package com.milton.gomez.sistema.universitario.Transferible;
 
+import com.milton.gomez.sistema.universitario.Model.Alumno;
+import com.milton.gomez.sistema.universitario.Model.Cuatrimestre;
 import com.milton.gomez.sistema.universitario.Model.PlanDeEstudio;
 import java.util.List;
 
@@ -12,9 +14,9 @@ public class TransferibleCarrera {
     private String nombre;
     private Long codigoCarrera;
     private Integer cantMateriasOptativasParaAprobar;
-    private List<TransferibleCuatrimestre> cuatrimestres;
+    private List<Cuatrimestre> cuatrimestres;
     private PlanDeEstudio planDeEstudio;
-    private List<TransferibleAlumno> alumnos;
+    private List<Alumno> alumnos;
 
     public Integer getId() {
         return id;
@@ -48,11 +50,11 @@ public class TransferibleCarrera {
         this.cantMateriasOptativasParaAprobar = cantMateriasOptativasParaAprobar;
     }
 
-    public List<TransferibleCuatrimestre> getCuatrimestres() {
+    public List<Cuatrimestre> getCuatrimestres() {
         return cuatrimestres;
     }
 
-    public void setCuatrimestres(List<TransferibleCuatrimestre> cuatrimestres) {
+    public void setCuatrimestres(List<Cuatrimestre> cuatrimestres) {
         this.cuatrimestres = cuatrimestres;
     }
 
@@ -64,13 +66,15 @@ public class TransferibleCarrera {
         this.planDeEstudio = planDeEstudio;
     }
 
-    public List<TransferibleAlumno> getAlumnos() {
+    public List<Alumno> getAlumnos() {
         return alumnos;
     }
 
-    public void setAlumnos(List<TransferibleAlumno> alumnos) {
+    public void setAlumnos(List<Alumno> alumnos) {
         this.alumnos = alumnos;
     }
+
+    
     
     
 }

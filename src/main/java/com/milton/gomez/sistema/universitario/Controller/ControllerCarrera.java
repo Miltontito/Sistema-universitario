@@ -4,14 +4,10 @@
  */
 package com.milton.gomez.sistema.universitario.Controller;
 
-import com.milton.gomez.sistema.universitario.Iniciador.IniciadorCompleto;
 import com.milton.gomez.sistema.universitario.Model.Carrera;
 import com.milton.gomez.sistema.universitario.Model.ControladorUniversitario;
 import com.milton.gomez.sistema.universitario.Model.Cuatrimestre;
 import com.milton.gomez.sistema.universitario.Model.Materia;
-import com.milton.gomez.sistema.universitario.Transferible.TransferibleCarrera;
-import com.milton.gomez.sistema.universitario.Transformador.TransformadorCarrera;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,13 +19,12 @@ public class ControllerCarrera {
     //Inicialización del controlador.
     private static ControladorUniversitario cu = ControladorUniversitario.getInstance();
     
-    public static List<TransferibleCarrera> listarTodasLasCarreras(){
-        List<TransferibleCarrera> carreras = TransformadorCarrera.toTransferibleList(cu.getCarreras());
-        return carreras;
+    public static List<Carrera> listarTodasLasCarreras(){
+        return cu.getCarreras();
     }
     
-    public static TransferibleCarrera obtenerCarreraPorId(Integer id){
-        return TransformadorCarrera.toTransferible(cu.getCarreras().get(id));
+    public static Carrera obtenerCarreraPorId(Integer id){
+        return cu.getCarreras().get(id);
     }
     
     public static List<Cuatrimestre> listarTodosLosCuatrimestres(Integer carreraID){

@@ -4,12 +4,10 @@
  */
 package com.milton.gomez.sistema.universitario.View.Panels.Alumno;
 
-import com.milton.gomez.sistema.universitario.View.Panels.Alumno.AlumnosPanel;
 import com.milton.gomez.sistema.universitario.Controller.ControllerAlumno;
 import com.milton.gomez.sistema.universitario.Controller.ControllerCarrera;
 import com.milton.gomez.sistema.universitario.Model.Carrera;
 import com.milton.gomez.sistema.universitario.Transferible.TransferibleAlumno;
-import com.milton.gomez.sistema.universitario.Transferible.TransferibleCarrera;
 import com.milton.gomez.sistema.universitario.View.ViewMain;
 import javax.swing.DefaultListModel;
 import javax.swing.JLabel;
@@ -37,20 +35,20 @@ public class SubirAlumnoPanel extends javax.swing.JPanel {
     }
     
     private void editableView(Integer id){
-        TransferibleAlumno alumno = new TransferibleAlumno();
-        alumno = ControllerAlumno.obtenerDatosDeAlumno(id);
+        TransferibleAlumno alumno = ControllerAlumno.obtenerDatosDeAlumno(id);
         
         Title_Label.setText("Editar Alumno");
         Legajo_TextField.setText(alumno.getLegajo().toString());
         DNI_TextField.setText(alumno.getDni().toString());
-        Nombre_TextField.setText(alumno.getNombre().toString());
-        Apellido_TextField.setText(alumno.getApellido().toString());
-        Carreras_List.setSelectedValue(ControllerCarrera.obtenerCarreraPorId(id), true);
+        Nombre_TextField.setText(alumno.getNombre());
+        Apellido_TextField.setText(alumno.getApellido());
+        Carreras_List.setSelectedValue(alumno.getCarrera(), true);
+        Materias_Table
     }
     
     private void listarCarreras(){
         // Obtener el modelo de la JList
-        DefaultListModel<TransferibleCarrera> listModel = (DefaultListModel<TransferibleCarrera>) Carreras_List.getModel();
+        DefaultListModel<Carrera> listModel = (DefaultListModel<Carrera>) Carreras_List.getModel();
 
         // Limpiar el modelo actual para evitar duplicados
         listModel.clear();
@@ -65,7 +63,7 @@ public class SubirAlumnoPanel extends javax.swing.JPanel {
         
         tableModel.setRowCount(0);
         
-        ControllerCarrera.listarTodosLosCuatrimestres(Carreras_List.getSelectedValue().getId())
+        ControllerCarrera.listarTodosLosCuatrimestres(Carreras_List.getSelectedValue().getCarreraID())
                 .forEach((c) -> c.listarTodasLasMaterias().forEach((m) -> tableModel
                         .addRow(new Object[]{
                             c.getCuatrimestreID()+1,
@@ -403,7 +401,7 @@ public class SubirAlumnoPanel extends javax.swing.JPanel {
     private javax.swing.JTextField Apellido_TextField;
     private javax.swing.JPanel Background_panel;
     private javax.swing.JScrollPane Carrera_ScrollPane;
-    private javax.swing.JList<com.milton.gomez.sistema.universitario.Transferible.TransferibleCarrera> Carreras_List;
+    private javax.swing.JList<com.milton.gomez.sistema.universitario.Model.Carrera> Carreras_List;
     private javax.swing.JTextField DNI_TextField;
     private javax.swing.JTextField Legajo_TextField;
     private javax.swing.JScrollPane Materia_ScrollPane;

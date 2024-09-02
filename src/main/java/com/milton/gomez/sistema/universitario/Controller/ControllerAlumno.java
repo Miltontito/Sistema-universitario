@@ -5,11 +5,9 @@ import com.milton.gomez.sistema.universitario.Model.Carrera;
 import com.milton.gomez.sistema.universitario.Model.ControladorUniversitario;
 import com.milton.gomez.sistema.universitario.Model.Materia;
 import com.milton.gomez.sistema.universitario.Transferible.TransferibleAlumno;
-import com.milton.gomez.sistema.universitario.Transformador.TransformadorAlumno;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultListModel;
-import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JTable;
@@ -62,15 +60,16 @@ public class ControllerAlumno {
         TransferibleAlumno transferible = new TransferibleAlumno();
         try{
             Alumno a = getAlumnoPorID(id);
-            transferible = TransformadorAlumno.toTransferible(a);
+            transferible.setId(a.getAlumnoID());
+            transferible.setLegajo(a.getLegajo());
+            transferible.setDni(a.getDni());
+            transferible.setApellido(a.getApellido());
+            transferible.setNombre(a.getNombre());
+            transferible.setCursadas(a.getCursadas());
+            transferible.setCarrera(a.getCarrera());
             return transferible;
         }
-        catch(NumberFormatException e){
-            e.printStackTrace();
-            System.out.println("El dato introducido no es un numero");
-        }
         catch(NullPointerException e){
-            e.printStackTrace();
             System.out.println("No se encuentra el Alumno");
         }
         return transferible;
