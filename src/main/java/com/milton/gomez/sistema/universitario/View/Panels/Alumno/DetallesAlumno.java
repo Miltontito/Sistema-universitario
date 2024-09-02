@@ -5,9 +5,9 @@
 package com.milton.gomez.sistema.universitario.View.Panels.Alumno;
 
 import com.milton.gomez.sistema.universitario.Controller.ControllerAlumno;
-import java.util.List;
+import com.milton.gomez.sistema.universitario.Transferible.TransferibleAlumno;
+import com.milton.gomez.sistema.universitario.View.ViewMain;
 import javax.swing.DefaultListModel;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -15,21 +15,29 @@ import javax.swing.table.DefaultTableModel;
  */
 public class DetallesAlumno extends javax.swing.JPanel {
 
+    private Integer alumnoID;
     /**
      * Creates new form DetallesAlumno
+     * @param alumnoID
      */
     public DetallesAlumno(Integer alumnoID) {
         initComponents();
-        //initDetalles(alumnoID);
+        initDetalles(alumnoID);
     }
-/*
+    
     private void initDetalles(Integer alumnoID){
-        ControllerAlumno.obtenerDatosDeAlumno(alumnoID, ID_Label, Title_Label, 
-                Legajo_Label, DNI_Label, 
-                Carrera_Label, Cursadas_List, 
-                Aprobadas_List, MateriasQuePuedeCursar_List);
+        this.alumnoID = alumnoID;
+        TransferibleAlumno alumno = ControllerAlumno.obtenerDatosDeAlumno(alumnoID);
+        Title_Label.setText(alumno.getNombre() + " " + alumno.getApellido());
+        ID_Label.setText(alumno.getId().toString());
+        Legajo_Label.setText(alumno.getLegajo().toString());
+        DNI_Label.setText(alumno.getDni().toString());
+        Carrera_Label.setText(alumno.getCarrera().toString());
+        MateriasQuePuedeCursar_List.setModel(ControllerAlumno.obtenerMateriasQuePuedeCursar(alumnoID, MateriasQuePuedeCursar_List));
+        Cursadas_List.setModel(ControllerAlumno.obtenerMateriasCursando(alumnoID, Cursadas_List));
+        Aprobadas_List.setModel(ControllerAlumno.obtenerMateriasAprobadas(alumnoID, Aprobadas_List));
     }
-  */  
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -282,7 +290,9 @@ public class DetallesAlumno extends javax.swing.JPanel {
 
     private void Inscribirse_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Inscribirse_ButtonActionPerformed
         if(MateriasQuePuedeCursar_List.getSelectedIndices().length != 0){
-            //ControllerAlumnos.asignarMaterias( MateriasQuePuedeCursar_List.getSelectedValuesList());
+            ControllerAlumno.inscribirAlumno(alumnoID, MateriasQuePuedeCursar_List.getSelectedValuesList());
+            javax.swing.JOptionPane.showMessageDialog(this, "El alumno se inscribió exitosamente a la/las materias. \n", "AVISO", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            ViewMain.ShowJPanel(new DetallesAlumno(alumnoID));
         }
         else{
             javax.swing.JOptionPane.showMessageDialog(this, "Debe seleccionar minimamente una materia. \n", "AVISO", javax.swing.JOptionPane.INFORMATION_MESSAGE);

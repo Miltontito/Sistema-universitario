@@ -365,10 +365,17 @@ public class AlumnosPanel extends javax.swing.JPanel {
         if(Alumnos_Table.getSelectedColumnCount() != 0){
             DefaultTableModel model = (DefaultTableModel)Alumnos_Table.getModel();
             try{
-                for(int i : Alumnos_Table.getSelectedRows()){
-                ControllerAlumno.eliminarAlumno((Integer) Alumnos_Table.getValueAt(i,0));
-                model.removeRow(i);
-                }
+                // filas seleccionadas
+                int[] filasSeleccionadas = Alumnos_Table.getSelectedRows();
+
+                // Recorre las filas seleccionadas en orden inverso
+                for (int i = filasSeleccionadas.length - 1; i >= 0; i--) {
+                    int fila = filasSeleccionadas[i];
+                    // Elimina el alumno usando el índice correspondiente
+                    ControllerAlumno.eliminarAlumno((Integer) Alumnos_Table.getValueAt(fila, 0));
+                    // Elimina la fila del modelo
+                    model.removeRow(fila);
+}
             }
             catch(Exception e){
                 System.out.println(e.getMessage());

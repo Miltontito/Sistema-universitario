@@ -1,9 +1,12 @@
 package com.milton.gomez.sistema.universitario.Iniciador;
 
+import com.milton.gomez.sistema.universitario.Model.Alumno;
 import com.milton.gomez.sistema.universitario.Model.Carrera;
 import com.milton.gomez.sistema.universitario.Model.ControladorUniversitario;
-import com.milton.gomez.sistema.universitario.Model.PlanesDeEstudio.PlanA;
+import com.milton.gomez.sistema.universitario.Model.Cuatrimestre;
+import com.milton.gomez.sistema.universitario.Model.Materia;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -46,6 +49,9 @@ public class IniciadorCompleto {
         controlador.obtenerCarreras().forEach((c) -> c.crearCuatrimestre());
         System.out.println("Por cada Carrera en el controlador se crean cuatrimestres.");
         
+        //Creo un cuatrimestre extra para sistemas
+        controlador.getCarreras().get(0).crearCuatrimestre();
+        
         controlador.obtenerCarreras().get(0).getCuatrimestres().get(0).addMateriaObligatoria(
                 controlador.crearMateria("FEO1", "Algebra", Boolean.TRUE, null));
         
@@ -54,8 +60,33 @@ public class IniciadorCompleto {
         
         controlador.obtenerCarreras().get(0).getCuatrimestres().get(0).addMateriaObligatoria(
                 controlador.crearMateria("FEO3", "Elementos de Informatica", Boolean.TRUE, null));
+        
+        List<Materia> materia = new ArrayList<>();
+        materia.add(controlador.obtenerCarreras().get(0).getCuatrimestres().get(0).getMateriasObligatorias().get(0));
+        
+        controlador.obtenerCarreras().get(0).getCuatrimestres().get(1).addMateriaObligatoria(
+                controlador.crearMateria("FEO4", "Algoritmica y Programación I", Boolean.TRUE, materia));
         System.out.println("Se crean materias y se asignan al cuatrimestre respectivo de las carreras");
         return controlador;
         
+    }
+    
+    public static ControladorUniversitario asignarMaterias(){
+        
+        ControladorUniversitario controlador = ControladorUniversitario.getInstance();
+        
+        //Obtiene el primer cuatrimestre de sistemas.
+        Cuatrimestre cuatrimestre0_Sistemas = controlador.getCarreras().get(0).getCuatrimestres().get(0);
+        
+        //Obtiene el primer alumno (el cual cursa sistemas)
+        Alumno alumno = controlador.getAlumnos().get(0);
+        
+        //Agrega las materias del primer cuatrimestre en el alumno
+        alumno.setMaterias(cuatrimestre0_Sistemas.listarTodasLasMaterias());
+        
+        //Apruebo al alumno en la primera materia
+        alumno.getCursadas().get(0).setMateriaAprobada(Boolean.TRUE);
+        
+        return controlador;
     }
 }

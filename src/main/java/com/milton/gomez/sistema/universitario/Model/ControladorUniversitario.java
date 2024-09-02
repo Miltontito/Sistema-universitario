@@ -38,6 +38,7 @@ public class ControladorUniversitario {
             IniciadorCompleto.inicializarPlanesDeEstudio();
             IniciadorCompleto.inicializarAlumnos();
             IniciadorCompleto.inicializarMaterias();
+            IniciadorCompleto.asignarMaterias();
         }
         return instance;
         
@@ -122,12 +123,7 @@ public class ControladorUniversitario {
     }
 
     public void actualizarAlumno(Alumno alumnoActualizado) {
-        for (int i = 0; i < alumnos.size(); i++) {
-            if (alumnos.get(i).getAlumnoID().equals(alumnoActualizado.getAlumnoID())) {
-                alumnos.set(i, alumnoActualizado);
-                break;
-            }
-        }
+        this.getAlumnos().set(alumnoActualizado.getAlumnoID(), alumnoActualizado);
     }
 
     // Eliminar métodos

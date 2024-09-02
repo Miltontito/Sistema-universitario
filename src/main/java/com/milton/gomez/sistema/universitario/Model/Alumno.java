@@ -10,7 +10,7 @@ public class Alumno {
     // -------------------------------------------
 
     private static Integer identificador_alumno = 0;
-    private final Integer alumnoID;
+    private Integer alumnoID;
     private Long legajo;
     private Long dni;
     private String nombre;
@@ -42,9 +42,8 @@ public class Alumno {
         this(legajo, dni, nombre, apellido);
         this.carrera = carrera;
     }
-     public Alumno(Long legajo, Long dni, String nombre, String apellido, Carrera carrera, List<Materia> materiasQuePuedeCursar, List<Cursada> cursadas) {
+     public Alumno(Long legajo, Long dni, String nombre, String apellido, Carrera carrera, List<Cursada> cursadas) {
         this(legajo, dni, nombre, apellido, carrera);
-        this.materiasQuePuedeCursar = materiasQuePuedeCursar;
         this.cursadas = cursadas;
     }
 
@@ -165,7 +164,7 @@ public class Alumno {
     public void setMaterias(List<Materia> materias) {
         List<Cursada> nuevaCursada = new ArrayList<>();
         materias.forEach((m) -> nuevaCursada.add(new Cursada(m)));
-        this.cursadas.addAll(nuevaCursada);
+        this.cursadas = nuevaCursada;
     }
     public void setCarrera(Carrera carrera){
         this.carrera = carrera;
@@ -175,6 +174,8 @@ public class Alumno {
         this.cursadas = cursadas;
     }
     
-    
+    public void setId(Integer id){
+        this.alumnoID = id;
+    }
     
 }

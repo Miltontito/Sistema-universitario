@@ -7,23 +7,34 @@ public class Cuatrimestre {
     // -----------------------------------------------
     // ---------------|   Atributos   |---------------
     // -----------------------------------------------
-    private static Integer identificador_cuatrimestre = 0;
-    private final Integer cuatrimestreID;
     private List<Materia> materiasObligatorias;
     private List<Materia> materiasOptativas;
-
+    private Integer numeroCuatrimestre;
     // -----------------------------------------------
     // ---------------| Constructores |---------------
     // -----------------------------------------------
-    public Cuatrimestre() {
-        this.cuatrimestreID = asignarID();
+    
+    public Cuatrimestre(){
         this.materiasObligatorias = new ArrayList<>();
         this.materiasOptativas = new ArrayList<>();
+        this.numeroCuatrimestre = -1;
+    }
+    
+    public Cuatrimestre(Integer numeroCuatrimestre) {
+        this();
+        this.numeroCuatrimestre = numeroCuatrimestre;
     }
     public Cuatrimestre(List<Materia> materiasObligatorias) {
         this();
         this.materiasObligatorias = materiasObligatorias;
     }
+    
+    public Cuatrimestre(List<Materia> materiasObligatorias, Integer numeroCuatrimestre) {
+        this();
+        this.materiasObligatorias = materiasObligatorias;
+        this.numeroCuatrimestre = numeroCuatrimestre;
+    }
+    
     public Cuatrimestre(List<Materia> materiasObligatorias, List<Materia> materiasOptativas) {
         this(materiasObligatorias);
         this.materiasOptativas = materiasOptativas;
@@ -32,9 +43,6 @@ public class Cuatrimestre {
     // -----------------------------------------------
     // ---------------|    Metodos    |---------------
     // -----------------------------------------------
-    private Integer asignarID(){
-        return identificador_cuatrimestre++;
-    }
     public List<Materia> listarMateriasObligatorias(){
         return materiasObligatorias;
     }
@@ -60,13 +68,11 @@ public class Cuatrimestre {
         return false;
     }
     
-    public Integer getCuatrimestreID(){
-        return this.cuatrimestreID;
-    }
-    
     @Override
     public String toString(){
-        return getCuatrimestreID().toString();
+        Integer numero = numeroCuatrimestre;
+        numero++;
+        return numero.toString();
     }
 
     public List<Materia> getMateriasObligatorias() {
@@ -83,6 +89,14 @@ public class Cuatrimestre {
 
     public void setMateriasOptativas(List<Materia> materiasOptativas) {
         this.materiasOptativas = materiasOptativas;
+    }
+
+    public Integer getNumeroCuatrimestre() {
+        return numeroCuatrimestre;
+    }
+
+    public void setNumeroCuatrimestre(Integer numeroCuatrimestre) {
+        this.numeroCuatrimestre = numeroCuatrimestre;
     }
 
     

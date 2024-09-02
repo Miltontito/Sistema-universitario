@@ -36,7 +36,7 @@ public class ControllerCarrera {
     }
     
     public static List<Materia> listarMateriasDeLaCarrera(Integer carreraID){
-        cu.getCarreras().get(carreraID).getCuatrimestres().forEach((c) -> System.out.print(c.getCuatrimestreID()));
+        cu.getCarreras().get(carreraID).getCuatrimestres().forEach((c) -> System.out.print(c.getNumeroCuatrimestre()));
         return cu.getCarreras().get(carreraID).obtenerMateriasDeLaCarrera();
     }
     

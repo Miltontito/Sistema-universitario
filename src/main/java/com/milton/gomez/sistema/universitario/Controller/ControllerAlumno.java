@@ -3,6 +3,7 @@ package com.milton.gomez.sistema.universitario.Controller;
 import com.milton.gomez.sistema.universitario.Model.Alumno;
 import com.milton.gomez.sistema.universitario.Model.Carrera;
 import com.milton.gomez.sistema.universitario.Model.ControladorUniversitario;
+import com.milton.gomez.sistema.universitario.Model.Cursada;
 import com.milton.gomez.sistema.universitario.Model.Materia;
 import com.milton.gomez.sistema.universitario.Transferible.TransferibleAlumno;
 import java.util.ArrayList;
@@ -116,7 +117,7 @@ public class ControllerAlumno {
 
     
     
-    private static DefaultListModel obtenerMateriasCursando(Integer id, JList lista){
+    public static DefaultListModel obtenerMateriasCursando(Integer id, JList lista){
         // Obtenemos el modelo de la JList materias
         DefaultListModel model = (DefaultListModel) lista.getModel();
         Alumno a = getAlumnoPorID(id);
@@ -125,7 +126,7 @@ public class ControllerAlumno {
         
         return model;
     }
-    private static DefaultListModel obtenerMateriasAprobadas(Integer id, JList lista){
+    public static DefaultListModel obtenerMateriasAprobadas(Integer id, JList lista){
         // Obtenemos el modelo de la JList materias
         DefaultListModel model = (DefaultListModel) lista.getModel();
         
@@ -135,7 +136,7 @@ public class ControllerAlumno {
         
         return model;
     }
-    private static DefaultListModel obtenerMateriasQuePuedeCursar(Integer id, JList lista){
+    public static DefaultListModel obtenerMateriasQuePuedeCursar(Integer id, JList lista){
         // Obtenemos el modelo de la JList materias
         DefaultListModel model = (DefaultListModel) lista.getModel();
         
@@ -144,6 +145,10 @@ public class ControllerAlumno {
         model.addAll(a.obtenerMateriasQuePuedeCursar());
         
         return model;
+    }
+    
+    public static List<Materia> listarMateriasQuePuedeCursar(Integer alumnoID){
+        return cu.getAlumnos().get(alumnoID).obtenerMateriasQuePuedeCursar();
     }
     
     
@@ -204,5 +209,24 @@ public class ControllerAlumno {
 
         cu.crearAlumno(nombre, apellido, legajo, dni, carrera, materias);
         javax.swing.JOptionPane.showMessageDialog(panel, "El alumno fue creado con éxito. \n", "AVISO", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+    }
+    
+    public static void actualizarAlumno(TransferibleAlumno alumno){
+        Alumno alumnoFinal = new Alumno();
+        alumnoFinal.setId(alumno.getId());
+        alumnoFinal.setLegajo(alumno.getLegajo());
+        alumnoFinal.setDni(alumno.getDni());
+        alumnoFinal.setNombre(alumno.getNombre());
+        alumnoFinal.setApellido(alumno.getApellido());
+        alumnoFinal.setCarrera(alumno.getCarrera());
+        alumnoFinal.setCursadas(alumno.getCursadas());
+        
+        cu.actualizarAlumno(alumnoFinal);
+    }
+    
+    public static void inscribirAlumno(Integer id, List<Materia> materias){
+        for(Materia m : materias){
+            cu.getAlumnos().get(id).inscribirseAMateria(m);
+        }
     }
 }

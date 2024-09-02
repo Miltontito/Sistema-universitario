@@ -17,7 +17,8 @@ public class Carrera {
     private List<Cuatrimestre> cuatrimestres;
     private PlanDeEstudio planDeEstudio;
     private List<Alumno> alumnos;
-
+    private Integer nroCuatrimestre = 0;
+    
     // -----------------------------------------------
     // ---------------| Constructores |---------------
     // -----------------------------------------------
@@ -56,11 +57,14 @@ public class Carrera {
         return identificador_carrera++;
     }
     public boolean crearCuatrimestre(){
-        this.cuatrimestres.add(new Cuatrimestre());
+        this.cuatrimestres.add(new Cuatrimestre(nroCuatrimestre));
+        nroCuatrimestre++;
         return true;
     }
+    
     public boolean crearCuatrimestre(List<Materia> materias){
-        cuatrimestres.add(new Cuatrimestre(materias));
+        this.cuatrimestres.add(new Cuatrimestre(materias, nroCuatrimestre));
+        nroCuatrimestre++;
         return true;
     }
     public Carrera asignarCuatrimestre(Cuatrimestre cuatrimestre){

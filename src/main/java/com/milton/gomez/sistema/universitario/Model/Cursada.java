@@ -11,9 +11,14 @@ public class Cursada {
     private Boolean cursando;
     
     public Cursada() {
+        this.materia = null;
+        this.cursadaAprobada = Boolean.FALSE;
+        this.materiaAprobada = Boolean.FALSE;
+        this.cursando = Boolean.FALSE;
     }
     
     public Cursada(Materia materia) {
+        this();
         this.materia = materia;
         this.cursadaAprobada = Boolean.FALSE;
         this.materiaAprobada = Boolean.FALSE;
@@ -47,6 +52,9 @@ public class Cursada {
             this.materiaAprobada = materiaAprobada;
             this.cursando = Boolean.FALSE;
             this.cursadaAprobada = Boolean.TRUE;
+        }
+        else{
+            this.materiaAprobada = materiaAprobada;
         }
     }
 

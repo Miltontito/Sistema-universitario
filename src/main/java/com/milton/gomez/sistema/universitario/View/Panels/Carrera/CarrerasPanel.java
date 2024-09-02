@@ -20,11 +20,11 @@ public class CarrerasPanel extends javax.swing.JPanel {
      */
     public CarrerasPanel() {
         initComponents();
-        //cargarCarreras();
-        //alinearTablaCarreras();
+        cargarCarreras();
+        alinearTablaCarreras();
     }
     
-    /*private void cargarCarreras(){
+    private void cargarCarreras(){
         
         // "ID", "Codigo", "Nombre", "Materias Optativas", "Cuatrimestres", "Plan de Estudio"
         DefaultTableModel model = (DefaultTableModel)Carreras_Table.getModel();
@@ -355,11 +355,11 @@ public class CarrerasPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_Carrera_TextFieldMousePressed
 
     private void Buscar_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Buscar_ButtonActionPerformed
-        if(Carreras_Table.getSelectedRow() != -1){
+        if(!Carrera_TextField.getText().equals("Inserte el Nombre o Codigo de la Carrera...")){
             
         }
         else{
-            javax.swing.JOptionPane.showMessageDialog(this, "Debe seleccionar un Alumno primero. \n", "AVISO", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            javax.swing.JOptionPane.showMessageDialog(this, "Debe ingresar el Nombre o Código de la carrera primero. \n", "AVISO", javax.swing.JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_Buscar_ButtonActionPerformed
 
@@ -378,7 +378,7 @@ public class CarrerasPanel extends javax.swing.JPanel {
             }
         }
         else{
-            javax.swing.JOptionPane.showMessageDialog(this, "Debe seleccionar un Alumno primero. \n", "AVISO", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            javax.swing.JOptionPane.showMessageDialog(this, "Debe seleccionar una Carrera primero. \n", "AVISO", javax.swing.JOptionPane.INFORMATION_MESSAGE);
         }
         
     }//GEN-LAST:event_Eliminar_ButtonActionPerformed
@@ -388,7 +388,7 @@ public class CarrerasPanel extends javax.swing.JPanel {
             ViewMain.ShowJPanel(new DetallesCarrera());
         }
         else{
-            javax.swing.JOptionPane.showMessageDialog(this, "Debe seleccionar un Alumno primero. \n", "AVISO", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            javax.swing.JOptionPane.showMessageDialog(this, "Debe seleccionar una Carrera primero. \n", "AVISO", javax.swing.JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_Detalles_ButtonActionPerformed
 
@@ -397,7 +397,7 @@ public class CarrerasPanel extends javax.swing.JPanel {
         if(Carreras_Table.getSelectedRow() != -1){
         }
         else{
-            javax.swing.JOptionPane.showMessageDialog(this, "Debe seleccionar un Alumno primero. \n", "AVISO", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            javax.swing.JOptionPane.showMessageDialog(this, "Debe seleccionar una Carrera primero. \n", "AVISO", javax.swing.JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_Editar_ButtonActionPerformed
 

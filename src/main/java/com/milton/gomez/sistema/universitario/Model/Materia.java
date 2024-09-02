@@ -1,6 +1,7 @@
 package com.milton.gomez.sistema.universitario.Model;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Materia {
@@ -20,6 +21,7 @@ public class Materia {
     // -----------------------------------------------
     public Materia() {
         this.materiaID = asignarID();
+        this.correlativas = new ArrayList<>();
     }
     public Materia(String codigoDeMateria) {
         this();
@@ -68,9 +70,6 @@ public class Materia {
         return nombre;
     }
     public List<Materia> getCorrelativas() {
-        if(correlativas.isEmpty() || correlativas == null){
-            return null;
-        }
         return correlativas;
     }
     public Boolean isPromocionable(){

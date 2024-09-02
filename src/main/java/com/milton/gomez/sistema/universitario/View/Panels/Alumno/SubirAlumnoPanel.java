@@ -7,10 +7,15 @@ package com.milton.gomez.sistema.universitario.View.Panels.Alumno;
 import com.milton.gomez.sistema.universitario.Controller.ControllerAlumno;
 import com.milton.gomez.sistema.universitario.Controller.ControllerCarrera;
 import com.milton.gomez.sistema.universitario.Model.Carrera;
+import com.milton.gomez.sistema.universitario.Model.Cursada;
+import com.milton.gomez.sistema.universitario.Model.Materia;
 import com.milton.gomez.sistema.universitario.Transferible.TransferibleAlumno;
 import com.milton.gomez.sistema.universitario.View.ViewMain;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JLabel;
+import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
@@ -23,17 +28,25 @@ public class SubirAlumnoPanel extends javax.swing.JPanel {
     /**
      * Creates new form NuevoAlumnoPanel
      */
+    
+    private Boolean isEdicion = Boolean.FALSE;
+    private Integer alumnoId = null;
+    
     public SubirAlumnoPanel() {
         initComponents();
         listarCarreras();
         alinearTablaMaterias();
     }
     
+    //Si recibe un ID se trata de una edición.
     public SubirAlumnoPanel(Integer id) {
         this();
+        alumnoId = id;
+        isEdicion = Boolean.TRUE;
         editableView(id);
     }
     
+    //Genera la nueva vista de la edición del alumno
     private void editableView(Integer id){
         TransferibleAlumno alumno = ControllerAlumno.obtenerDatosDeAlumno(id);
         
@@ -43,7 +56,36 @@ public class SubirAlumnoPanel extends javax.swing.JPanel {
         Nombre_TextField.setText(alumno.getNombre());
         Apellido_TextField.setText(alumno.getApellido());
         Carreras_List.setSelectedValue(alumno.getCarrera(), true);
-        Materias_Table
+        seleccionarMateriasAlumno(alumno);
+    }
+    
+    //Se muestran las materias seleccionadas del alumno.
+    private void seleccionarMateriasAlumno(TransferibleAlumno alumno){
+        
+        List<Cursada> cursadasSeleccionadas = alumno.getCursadas(); // se obtienen las cursadas del alumno
+
+        DefaultTableModel tableModel = (DefaultTableModel) Materias_Table.getModel();
+        ListSelectionModel selectionModel = Materias_Table.getSelectionModel();
+
+        // Limpia la selección previa
+        selectionModel.clearSelection();
+
+        // Recorre las filas de la tabla
+        for (int row = 0; row < tableModel.getRowCount(); row++) {
+            // Obtenemos la materia
+            Materia materiaTabla = (Materia) tableModel.getValueAt(row, 1);
+
+            // Verifica si alguna cursada contiene la materia mostrada en la fila de la tabla
+            for (Cursada cursada : cursadasSeleccionadas) {
+                if (cursada.getMateria().equals(materiaTabla) & !cursada.getMateriaAprobada()) {
+                    // Selecciona la fila si coincide
+                    selectionModel.addSelectionInterval(row, row);
+                    break;
+                }
+            }
+        }
+        Materias_Table.setSelectionModel(selectionModel);
+
     }
     
     private void listarCarreras(){
@@ -64,19 +106,47 @@ public class SubirAlumnoPanel extends javax.swing.JPanel {
         tableModel.setRowCount(0);
         
         ControllerCarrera.listarTodosLosCuatrimestres(Carreras_List.getSelectedValue().getCarreraID())
-                .forEach((c) -> c.listarTodasLasMaterias().forEach((m) -> tableModel
-                        .addRow(new Object[]{
-                            c.getCuatrimestreID()+1,
-                            m})));
-        
-        
+            .forEach(cuatrimestre -> {
+                cuatrimestre.listarTodasLasMaterias().forEach(materia -> {
+                    // Solo agregamos la materia si la lista de correlativas está vacía
+                    if (materia.getCorrelativas().isEmpty()) {
+                        tableModel.addRow(new Object[]{cuatrimestre.toString(), materia});
+                    }
+                });
+            });
     }
     
+    /*
+    // carga las materias en la edicion del alumno
+    private void listarMaterias(Integer alumnoID){
+        // Obtenemos el modelo de la JList materias
+        DefaultTableModel tableModel = (DefaultTableModel) Materias_Table.getModel();
+        
+        tableModel.setRowCount(0);
+        
+        ControllerCarrera.listarTodosLosCuatrimestres(Carreras_List.getSelectedValue().getCarreraID())
+                .forEach(c -> c.listarTodasLasMaterias().forEach(m -> {
+                    if(ControllerAlumno.listarMateriasQuePuedeCursar(alumnoID).contains(m)){
+                        tableModel.addRow(new Object[]{c.toString(), m});
+            }
+        }));
+    }
+    */
     private void alinearTablaMaterias(){
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment( JLabel.LEFT );
         Materias_Table.setDefaultRenderer(Object.class, centerRenderer);
         Materias_Table.setDefaultRenderer(Integer.class, centerRenderer);
+    }
+    
+    private List<Cursada> obtenerMateriasSeleccionadas(){
+        List<Cursada> cursadas = new ArrayList<>();
+        int[] filasSeleccionadas = Materias_Table.getSelectedRows();
+        for (int i = 0; i < filasSeleccionadas.length; i++) {
+            int fila = filasSeleccionadas[i];
+            cursadas.add(new Cursada((Materia) Materias_Table.getValueAt(fila, 1)));
+        }
+        return cursadas;
     }
     
     //private void
@@ -191,6 +261,11 @@ public class SubirAlumnoPanel extends javax.swing.JPanel {
         jLabel7.setText("Seleccione las Materias *");
 
         Materia_ScrollPane.setFont(new java.awt.Font("Roboto", 0, 15)); // NOI18N
+        Materia_ScrollPane.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                Materia_ScrollPaneFocusGained(evt);
+            }
+        });
 
         Materias_Table.setFont(new java.awt.Font("Roboto", 0, 15)); // NOI18N
         Materias_Table.setModel(new javax.swing.table.DefaultTableModel(
@@ -214,6 +289,11 @@ public class SubirAlumnoPanel extends javax.swing.JPanel {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        Materias_Table.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                Materias_TableFocusGained(evt);
             }
         });
         Materia_ScrollPane.setViewportView(Materias_Table);
@@ -326,7 +406,14 @@ public class SubirAlumnoPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void Carreras_ListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_Carreras_ListValueChanged
-        listarMaterias();
+        
+        //if(isEdicion){
+            //listarMaterias(this.alumnoId);
+        //}
+        //else{
+            listarMaterias();
+        //}
+        
     }//GEN-LAST:event_Carreras_ListValueChanged
 
     private void Legajo_TextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_Legajo_TextFieldFocusLost
@@ -368,9 +455,23 @@ public class SubirAlumnoPanel extends javax.swing.JPanel {
             if(!Legajo_TextField.getText().isEmpty() || !DNI_TextField.getText().isEmpty() || 
                     !Nombre_TextField.getText().isEmpty() || !Apellido_TextField.getText().isEmpty() || 
                     !(Carreras_List.getSelectedIndex() == -1) || !(Materias_Table.getSelectedRowCount() == 0)){
-
-                ControllerAlumno.crearAlumno(this ,Legajo_TextField, DNI_TextField, Nombre_TextField, 
+                
+                if(isEdicion){
+                    TransferibleAlumno alumno = new TransferibleAlumno();
+                    alumno.setId(alumnoId);
+                    alumno.setLegajo(Long.valueOf(Legajo_TextField.getText()));
+                    alumno.setDni(Long.valueOf(DNI_TextField.getText()));
+                    alumno.setNombre(Nombre_TextField.getText());
+                    alumno.setApellido(Apellido_TextField.getText());
+                    alumno.setCarrera(Carreras_List.getSelectedValue());
+                    alumno.setCursadas(obtenerMateriasSeleccionadas());
+                    ControllerAlumno.actualizarAlumno(alumno);
+                }
+                else{
+                    ControllerAlumno.crearAlumno(this ,Legajo_TextField, DNI_TextField, Nombre_TextField, 
                         Apellido_TextField, Carreras_List, Materias_Table);
+                }
+                
 
                 ViewMain.ShowJPanel(new AlumnosPanel());
             }
@@ -394,6 +495,14 @@ public class SubirAlumnoPanel extends javax.swing.JPanel {
     private void Legajo_TextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Legajo_TextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_Legajo_TextFieldActionPerformed
+
+    private void Materia_ScrollPaneFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_Materia_ScrollPaneFocusGained
+        
+    }//GEN-LAST:event_Materia_ScrollPaneFocusGained
+
+    private void Materias_TableFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_Materias_TableFocusGained
+
+    }//GEN-LAST:event_Materias_TableFocusGained
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
