@@ -12,7 +12,7 @@ public class Carrera {
     private static Integer identificador_carrera = 0;
     private final Integer carreraID;
     private String nombre;
-    private Long codigoCarrera;
+    private String codigoCarrera;
     private Integer cantMateriasOptativasParaAprobar;
     private List<Cuatrimestre> cuatrimestres;
     private PlanDeEstudio planDeEstudio;
@@ -36,16 +36,16 @@ public class Carrera {
         this();
         this.cantMateriasOptativasParaAprobar = cantMateriasOptativasParaAprobar;
     }
-    public Carrera(String nombre, Long codigoCarrera) {
+    public Carrera(String nombre, String codigoCarrera) {
         this();
         this.nombre = nombre;
         this.codigoCarrera = codigoCarrera;
     }
-    public Carrera(String nombre, Long codigoCarrera, Integer cantMateriasOptativasParaAprobar) {
+    public Carrera(String nombre, String codigoCarrera, Integer cantMateriasOptativasParaAprobar) {
         this(nombre, codigoCarrera);
         this.cantMateriasOptativasParaAprobar = cantMateriasOptativasParaAprobar;
     }
-    public Carrera(String nombre, Long codigoCarrera, Integer cantMateriasOptativasParaAprobar, PlanDeEstudio planDeEstudio) {
+    public Carrera(String nombre, String codigoCarrera, Integer cantMateriasOptativasParaAprobar, PlanDeEstudio planDeEstudio) {
         this(nombre, codigoCarrera, cantMateriasOptativasParaAprobar);
         this.planDeEstudio = planDeEstudio;
     }
@@ -66,6 +66,10 @@ public class Carrera {
         this.cuatrimestres.add(new Cuatrimestre(materias, nroCuatrimestre));
         nroCuatrimestre++;
         return true;
+    }
+    
+    public void borrarCuatrimestre(Integer nroCuatrimestre){
+        this.cuatrimestres.remove(this.cuatrimestres.get(nroCuatrimestre));
     }
     public Carrera asignarCuatrimestre(Cuatrimestre cuatrimestre){
         this.cuatrimestres.add(cuatrimestre);
@@ -123,7 +127,7 @@ public class Carrera {
     public String getNombre() {
         return nombre;
     }
-    public Long getCodigoCarrera() {
+    public String getCodigoCarrera() {
         return codigoCarrera;
     }
     public List<Cuatrimestre> getCuatrimestres(){
@@ -145,7 +149,7 @@ public class Carrera {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    public void setCodigoCarrera(Long codigoCarrera) {
+    public void setCodigoCarrera(String codigoCarrera) {
         this.codigoCarrera = codigoCarrera;
     }
     public void setCuatrimestres(List<Cuatrimestre> cuatrimestres){

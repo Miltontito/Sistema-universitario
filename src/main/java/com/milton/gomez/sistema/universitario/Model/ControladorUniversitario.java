@@ -48,7 +48,7 @@ public class ControladorUniversitario {
     // -----------------------------------------
     
     // Crear métodos
-    public Carrera crearCarrera(String nombre, Long codCarrera, Integer cantMateriasOptativas, PlanDeEstudio planDeEstudio, List<Cuatrimestre> cuatrimestres, List<Alumno> alumnos) {
+    public Carrera crearCarrera(String nombre, String codCarrera, Integer cantMateriasOptativas, PlanDeEstudio planDeEstudio, List<Cuatrimestre> cuatrimestres, List<Alumno> alumnos) {
         Carrera nuevaCarrera = new Carrera();
         nuevaCarrera.setNombre(nombre);
         nuevaCarrera.setCodigoCarrera(codCarrera);
@@ -103,28 +103,6 @@ public class ControladorUniversitario {
         return this.planesDeEstudios;
     }
 
-    // Actualizar métodos
-    public void actualizarCarrera(Carrera carreraActualizada) {
-        for (int i = 0; i < carreras.size(); i++) {
-            if (carreras.get(i).getCarreraID().equals(carreraActualizada.getCarreraID())) {
-                carreras.set(i, carreraActualizada);
-                break;
-            }
-        }
-    }
-
-    public void actualizarMateria(Materia materiaActualizada) {
-        for (int i = 0; i < materias.size(); i++) {
-            if (materias.get(i).getMateriaID().equals(materiaActualizada.getMateriaID())) {
-                materias.set(i, materiaActualizada);
-                break;
-            }
-        }
-    }
-
-    public void actualizarAlumno(Alumno alumnoActualizado) {
-        this.getAlumnos().set(alumnoActualizado.getAlumnoID(), alumnoActualizado);
-    }
 
     // Eliminar métodos
     public void eliminarCarrera(Integer carreraID) {

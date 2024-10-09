@@ -116,6 +116,8 @@ public class ViewMain extends JFrame {
         Alumnos_Button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/people_icon.png"))); // NOI18N
         Alumnos_Button.setText("Alumnos");
         Alumnos_Button.setBorder(null);
+        Alumnos_Button.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Alumnos_Button.setHideActionText(true);
         Alumnos_Button.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         Alumnos_Button.setPreferredSize(new java.awt.Dimension(128, 64));
         Alumnos_Button.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -136,6 +138,7 @@ public class ViewMain extends JFrame {
         Carreras_Button.setText("Carrera");
         Carreras_Button.setBorder(null);
         Carreras_Button.setBorderPainted(false);
+        Carreras_Button.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         Carreras_Button.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         Carreras_Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -150,6 +153,7 @@ public class ViewMain extends JFrame {
         Materias_Button.setText("Materias");
         Materias_Button.setBorder(null);
         Materias_Button.setBorderPainted(false);
+        Materias_Button.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         Materias_Button.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         Materias_Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -164,6 +168,7 @@ public class ViewMain extends JFrame {
         PlanesDeEstudio_Button.setText("Planes de Estudio");
         PlanesDeEstudio_Button.setBorder(null);
         PlanesDeEstudio_Button.setBorderPainted(false);
+        PlanesDeEstudio_Button.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         PlanesDeEstudio_Button.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         PlanesDeEstudio_Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -178,6 +183,7 @@ public class ViewMain extends JFrame {
         Ayuda_Button.setText("Ayuda");
         Ayuda_Button.setBorder(null);
         Ayuda_Button.setBorderPainted(false);
+        Ayuda_Button.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         Ayuda_Button.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         Ayuda_Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -246,6 +252,7 @@ public class ViewMain extends JFrame {
                 HeaderPanelMousePressed(evt);
             }
         });
+        HeaderPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         ExitPanel.setBackground(new java.awt.Color(204, 0, 0));
 
@@ -254,7 +261,7 @@ public class ViewMain extends JFrame {
         ExitText.setForeground(new java.awt.Color(255, 255, 255));
         ExitText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         ExitText.setIcon(new javax.swing.ImageIcon(getClass().getResource("/close_icon.png"))); // NOI18N
-        ExitText.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        ExitText.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         ExitText.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 ExitTextMouseClicked(evt);
@@ -271,19 +278,23 @@ public class ViewMain extends JFrame {
         ExitPanel.setLayout(ExitPanelLayout);
         ExitPanelLayout.setHorizontalGroup(
             ExitPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(ExitText, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(ExitText, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
         );
         ExitPanelLayout.setVerticalGroup(
             ExitPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(ExitText, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(ExitText, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
         );
+
+        HeaderPanel.add(ExitPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 0, 70, 70));
 
         Title_Label.setFont(new java.awt.Font("Roboto", 0, 30)); // NOI18N
         Title_Label.setForeground(new java.awt.Color(255, 255, 255));
         Title_Label.setText("Sistema Universitario");
+        HeaderPanel.add(Title_Label, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 0, -1, 70));
 
         MinimizePanel.setBackground(new java.awt.Color(204, 0, 0));
 
+        Minimize_Label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Minimize_Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/minimize_icon.png"))); // NOI18N
         Minimize_Label.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -301,33 +312,16 @@ public class ViewMain extends JFrame {
         MinimizePanel.setLayout(MinimizePanelLayout);
         MinimizePanelLayout.setHorizontalGroup(
             MinimizePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Minimize_Label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(Minimize_Label, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
         );
         MinimizePanelLayout.setVerticalGroup(
             MinimizePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Minimize_Label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(Minimize_Label, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
         );
 
-        javax.swing.GroupLayout HeaderPanelLayout = new javax.swing.GroupLayout(HeaderPanel);
-        HeaderPanel.setLayout(HeaderPanelLayout);
-        HeaderPanelLayout.setHorizontalGroup(
-            HeaderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(HeaderPanelLayout.createSequentialGroup()
-                .addGap(477, 477, 477)
-                .addComponent(Title_Label)
-                .addGap(142, 142, 142)
-                .addComponent(MinimizePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(2, 2, 2)
-                .addComponent(ExitPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        HeaderPanelLayout.setVerticalGroup(
-            HeaderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Title_Label, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(MinimizePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(ExitPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
+        HeaderPanel.add(MinimizePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 0, 70, 70));
 
-        BackgroundPanel.add(HeaderPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1030, 64));
+        BackgroundPanel.add(HeaderPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1030, 70));
 
         ContentPanel.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -370,19 +364,6 @@ public class ViewMain extends JFrame {
         this.setLocation(x- xMouse, y - yMouse);
     }//GEN-LAST:event_HeaderPanelMouseDragged
 
-    private void ExitTextMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ExitTextMouseExited
-        ExitPanel.setBackground(new Color(204, 0, 0));
-    }//GEN-LAST:event_ExitTextMouseExited
-
-    //efecto Hover como css
-    private void ExitTextMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ExitTextMouseEntered
-        ExitPanel.setBackground(Color.red);
-    }//GEN-LAST:event_ExitTextMouseEntered
-
-    private void ExitTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ExitTextMouseClicked
-        System.exit(0);
-    }//GEN-LAST:event_ExitTextMouseClicked
-
     private void PlanesDeEstudio_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PlanesDeEstudio_ButtonActionPerformed
         ShowJPanel(new PlanesDeEstudioPanel());
     }//GEN-LAST:event_PlanesDeEstudio_ButtonActionPerformed
@@ -415,21 +396,34 @@ public class ViewMain extends JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_UNTDF_iconLabelMouseEntered
 
-    private void Minimize_LabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Minimize_LabelMouseClicked
-        this.setState(Frame.ICONIFIED);
-    }//GEN-LAST:event_Minimize_LabelMouseClicked
-
-    private void Minimize_LabelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Minimize_LabelMouseEntered
-        MinimizePanel.setBackground(Color.red);
-    }//GEN-LAST:event_Minimize_LabelMouseEntered
+    private void HeaderPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HeaderPanelMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_HeaderPanelMouseClicked
 
     private void Minimize_LabelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Minimize_LabelMouseExited
         MinimizePanel.setBackground(new Color(204, 0, 0));
     }//GEN-LAST:event_Minimize_LabelMouseExited
 
-    private void HeaderPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HeaderPanelMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_HeaderPanelMouseClicked
+    private void Minimize_LabelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Minimize_LabelMouseEntered
+        MinimizePanel.setBackground(Color.red);
+    }//GEN-LAST:event_Minimize_LabelMouseEntered
+
+    private void Minimize_LabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Minimize_LabelMouseClicked
+        this.setState(Frame.ICONIFIED);
+    }//GEN-LAST:event_Minimize_LabelMouseClicked
+
+    private void ExitTextMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ExitTextMouseExited
+        ExitPanel.setBackground(new Color(204, 0, 0));
+    }//GEN-LAST:event_ExitTextMouseExited
+
+    //efecto Hover como css
+    private void ExitTextMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ExitTextMouseEntered
+        ExitPanel.setBackground(Color.red);
+    }//GEN-LAST:event_ExitTextMouseEntered
+
+    private void ExitTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ExitTextMouseClicked
+        System.exit(0);
+    }//GEN-LAST:event_ExitTextMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Alumnos_Button;

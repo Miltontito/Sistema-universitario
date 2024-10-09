@@ -25,16 +25,16 @@ public class IniciadorCompleto {
     public static ControladorUniversitario inicializarAlumnos(){
         ControladorUniversitario controlador = ControladorUniversitario.getInstance();
         
-        controlador.crearAlumno("Milton", "Gómez", Long.valueOf("445760"), Long.valueOf("44576730"), new Carrera("Sistemas", Long.valueOf("123"),0, controlador.getPlanesDeEstudios().get(0)), new ArrayList<>());
-        controlador.crearAlumno("Laura", "Pérez", Long.valueOf("445770"), Long.valueOf("44576731"), new Carrera("Medios", Long.valueOf("123"),0, controlador.getPlanesDeEstudios().get(0)), new ArrayList<>());
-        controlador.crearAlumno("Carlos", "Rodríguez", Long.valueOf("445780"), Long.valueOf("44576732"), new Carrera("Sociologia", Long.valueOf("123"),0, controlador.getPlanesDeEstudios().get(0)), new ArrayList<>());
-        controlador.crearAlumno("Ana", "Martínez", Long.valueOf("445790"), Long.valueOf("44576733"), new Carrera("Ciencia politica", Long.valueOf("123"),0, controlador.getPlanesDeEstudios().get(0)), new ArrayList<>());
-        controlador.crearAlumno("Juan", "Fernández", Long.valueOf("445800"), Long.valueOf("44576734"), new Carrera("Gestion", Long.valueOf("123"),0, controlador.getPlanesDeEstudios().get(0)), new ArrayList<>());
-        controlador.crearAlumno("María", "López", Long.valueOf("445810"), Long.valueOf("44576735"), new Carrera("Geologia", Long.valueOf("123"),0, controlador.getPlanesDeEstudios().get(0)), new ArrayList<>());
-        controlador.crearAlumno("Jorge", "Sánchez", Long.valueOf("445820"), Long.valueOf("44576736"), new Carrera("Abogacia", Long.valueOf("123"),0, controlador.getPlanesDeEstudios().get(0)), new ArrayList<>());
-        controlador.crearAlumno("Patricia", "Romero", Long.valueOf("445830"), Long.valueOf("44576737"), new Carrera("Criminologia", Long.valueOf("123"),0, controlador.getPlanesDeEstudios().get(0)), new ArrayList<>());
-        controlador.crearAlumno("Luis", "Díaz", Long.valueOf("445840"), Long.valueOf("44576738"), new Carrera("Psicologia", Long.valueOf("123"),0, controlador.getPlanesDeEstudios().get(0)), new ArrayList<>());
-        controlador.crearAlumno("Sofía", "Gutiérrez", Long.valueOf("445850"), Long.valueOf("44576739"), new Carrera("Bromatologia", Long.valueOf("123"),0, controlador.getPlanesDeEstudios().get(0)), new ArrayList<>());
+        controlador.crearAlumno("Milton", "Gómez", Long.valueOf("445760"), Long.valueOf("44576730"), new Carrera("Sistemas", "A1",0, controlador.getPlanesDeEstudios().get(0)), new ArrayList<>());
+        controlador.crearAlumno("Laura", "Pérez", Long.valueOf("445770"), Long.valueOf("44576731"), new Carrera("Medios", "A2",0, controlador.getPlanesDeEstudios().get(0)), new ArrayList<>());
+        controlador.crearAlumno("Carlos", "Rodríguez", Long.valueOf("445780"), Long.valueOf("44576732"), new Carrera("Sociologia", "A3",0, controlador.getPlanesDeEstudios().get(0)), new ArrayList<>());
+        controlador.crearAlumno("Ana", "Martínez", Long.valueOf("445790"), Long.valueOf("44576733"), new Carrera("Ciencia politica", "B1",0, controlador.getPlanesDeEstudios().get(0)), new ArrayList<>());
+        controlador.crearAlumno("Juan", "Fernández", Long.valueOf("445800"), Long.valueOf("44576734"), new Carrera("Gestion", "B2",0, controlador.getPlanesDeEstudios().get(0)), new ArrayList<>());
+        controlador.crearAlumno("María", "López", Long.valueOf("445810"), Long.valueOf("44576735"), new Carrera("Geologia", "B3",0, controlador.getPlanesDeEstudios().get(0)), new ArrayList<>());
+        controlador.crearAlumno("Jorge", "Sánchez", Long.valueOf("445820"), Long.valueOf("44576736"), new Carrera("Abogacia", "C1",0, controlador.getPlanesDeEstudios().get(0)), new ArrayList<>());
+        controlador.crearAlumno("Patricia", "Romero", Long.valueOf("445830"), Long.valueOf("44576737"), new Carrera("Criminologia", "C2",0, controlador.getPlanesDeEstudios().get(0)), new ArrayList<>());
+        controlador.crearAlumno("Luis", "Díaz", Long.valueOf("445840"), Long.valueOf("44576738"), new Carrera("Psicologia", "C3",0, controlador.getPlanesDeEstudios().get(0)), new ArrayList<>());
+        controlador.crearAlumno("Sofía", "Gutiérrez", Long.valueOf("445850"), Long.valueOf("44576739"), new Carrera("Bromatologia", "D1",0, controlador.getPlanesDeEstudios().get(0)), new ArrayList<>());
         System.out.println("Se crean alumnos con carreras");
         //Almacena las carreras creadas por los usuarios
         controlador.obtenerAlumnos().forEach((a) -> controlador.agregarCarrera(a.getCarrera()));

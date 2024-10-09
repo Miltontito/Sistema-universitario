@@ -9,6 +9,8 @@ import com.milton.gomez.sistema.universitario.Model.ControladorUniversitario;
 import com.milton.gomez.sistema.universitario.Model.Cuatrimestre;
 import com.milton.gomez.sistema.universitario.Model.Materia;
 import java.util.List;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -42,5 +44,40 @@ public class ControllerCarrera {
     
     public static void eliminarCarrera(Integer carreraID){
         cu.eliminarCarrera(carreraID);
+    }
+    
+    public static DefaultTableModel obtenerCarrera(JTable table, String busqueda){
+        DefaultTableModel model = (DefaultTableModel)table.getModel();
+        model.setRowCount(0);
+        try{
+            Carrera c = getCarrera(busqueda);
+            model.addRow(new Object[]{
+            c.getCarreraID(),
+            c.getCodigoCarrera(),
+            c.getNombre(),
+            c.getCantMateriasOptativasParaAprobar(),
+            c.getCuatrimestres().size(),
+            c.getPlanDeEstudio()
+        });
+        }
+        catch(NullPointerException e){
+            System.out.println("No se encuentra la carrera");
+        }
+        return model;
+    }
+    private static Carrera getCarrera(String busqueda){
+        for (Carrera carrera : cu.obtenerCarreras()) {
+            if (carrera.getNombre().equals(busqueda)) {
+                return carrera;
+            }
+            else if(carrera.getCodigoCarrera().equals(busqueda)){
+                return carrera;
+            }
+        }
+        return null;
+    }
+    
+    public static Cuatrimestre crearCuatrimestre(Integer nroCuatrimestre){
+        return new Cuatrimestre(nroCuatrimestre);
     }
 }

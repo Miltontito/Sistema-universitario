@@ -151,9 +151,19 @@ public class Alumno {
     /* Se elige retornar al alumno por buenas prácticas */
 
     public void setLegajo(Long legajo) {
-        this.legajo = legajo;}
+        if (legajo.toString().length() == 6) {
+            this.legajo = legajo;
+        } else {
+            throw new IllegalArgumentException("El legajo debe tener 6 dígitos.");
+        }
+    }
+    
     public void setDni(Long dni) {
-        this.dni = dni;
+        if (dni.toString().length() == 8) {
+            this.dni = dni;
+        } else {
+            throw new IllegalArgumentException("El DNI debe tener 8 dígitos.");
+        }
     }
     public void setNombre(String nombre) {
         this.nombre = nombre;

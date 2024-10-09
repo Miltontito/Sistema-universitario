@@ -116,7 +116,7 @@ public class SubirAlumnoPanel extends javax.swing.JPanel {
             });
     }
     
-    /*
+    
     // carga las materias en la edicion del alumno
     private void listarMaterias(Integer alumnoID){
         // Obtenemos el modelo de la JList materias
@@ -126,12 +126,12 @@ public class SubirAlumnoPanel extends javax.swing.JPanel {
         
         ControllerCarrera.listarTodosLosCuatrimestres(Carreras_List.getSelectedValue().getCarreraID())
                 .forEach(c -> c.listarTodasLasMaterias().forEach(m -> {
-                    if(ControllerAlumno.listarMateriasQuePuedeCursar(alumnoID).contains(m)){
+                    if(ControllerAlumno.listarMateriasQuePuedeCursar(alumnoID).contains(m) || ControllerAlumno.listarMateriasQueCursa(alumnoID).contains(m)){
                         tableModel.addRow(new Object[]{c.toString(), m});
             }
         }));
     }
-    */
+    
     private void alinearTablaMaterias(){
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment( JLabel.LEFT );
@@ -407,12 +407,12 @@ public class SubirAlumnoPanel extends javax.swing.JPanel {
 
     private void Carreras_ListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_Carreras_ListValueChanged
         
-        //if(isEdicion){
-            //listarMaterias(this.alumnoId);
-        //}
-        //else{
+        if(isEdicion){
+            listarMaterias(this.alumnoId);
+        }
+        else{
             listarMaterias();
-        //}
+        }
         
     }//GEN-LAST:event_Carreras_ListValueChanged
 
@@ -484,6 +484,10 @@ public class SubirAlumnoPanel extends javax.swing.JPanel {
             e.getMessage();
             e.printStackTrace();
             javax.swing.JOptionPane.showMessageDialog(this, "El Legajo y el DNI deben ser numeros. \n", "AVISO", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        }
+        catch(IllegalArgumentException e){
+            e.printStackTrace();
+            javax.swing.JOptionPane.showMessageDialog(this, e.getMessage(), "ERROR", javax.swing.JOptionPane.ERROR_MESSAGE);
         }
         catch(Exception e){
             e.getMessage();

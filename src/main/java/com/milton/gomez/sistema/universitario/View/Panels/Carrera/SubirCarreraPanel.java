@@ -5,16 +5,95 @@
 
 package com.milton.gomez.sistema.universitario.View.Panels.Carrera;
 
+import com.milton.gomez.sistema.universitario.Controller.ControllerCarrera;
+import com.milton.gomez.sistema.universitario.Controller.ControllerMateria;
+import com.milton.gomez.sistema.universitario.Controller.ControllerPlanDeEstudio;
+import com.milton.gomez.sistema.universitario.Model.Cuatrimestre;
+import com.milton.gomez.sistema.universitario.Model.Materia;
+import com.milton.gomez.sistema.universitario.Model.PlanDeEstudio;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.DefaultListModel;
+import javax.swing.ListSelectionModel;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author milton
  */
 public class SubirCarreraPanel extends javax.swing.JPanel {
 
+    private Integer carreraId;
+    private Boolean isEdicion = false;
+    private Integer nroCuatrimestre = 0;
+    private List<Materia> materiasDisponibles = ControllerMateria.listarTodasLasMaterias();
+    
     /** Creates new form SubirCarreraPanel */
     public SubirCarreraPanel() {
         initComponents();
+        listarPlanesDeEstudio();
+        configurarEventosTabla();
     }
+    
+    public SubirCarreraPanel(Integer carreraId) {
+        initComponents();
+        this.carreraId = carreraId;
+        this.isEdicion = true;
+    }
+    
+    private void listarPlanesDeEstudio(){
+        DefaultListModel<PlanDeEstudio> listModel = (DefaultListModel<PlanDeEstudio>) PlanesDeEstudio_List.getModel();
+        
+        listModel.clear();
+        
+        ControllerPlanDeEstudio.listarTodosLosPlaneDeEstudio().forEach(p -> listModel.addElement(p));
+    }
+    
+    private void listarMaterias(){
+        DefaultListModel<Materia> listModel = (DefaultListModel<Materia>) Materias_List.getModel();
+        listModel.clear();
+        this.materiasDisponibles.forEach(m -> listModel.addElement(m));
+    }
+    
+    // Método para configurar eventos, en este caso un Selection Listener de la tabla Cuatrimestres.
+    private void configurarEventosTabla() {
+        ListSelectionModel seleccionModel = Cuatrimestres_Table.getSelectionModel();
+        seleccionModel.addListSelectionListener(e -> {
+            if (!e.getValueIsAdjusting()) {
+                int filaSeleccionada = Cuatrimestres_Table.getSelectedRow();
+                if (filaSeleccionada != -1) {
+                    listarMaterias();
+                }
+            }
+        });
+    }
+    private void asignarMateria(boolean esObligatoria) {
+        // Obtener la materia seleccionada en la lista
+        List<Materia> materiasObligatorias = new ArrayList<>();
+        Materia materiaSeleccionada = Materias_List.getSelectedValue();
+        if (materiaSeleccionada == null) {
+            // Manejar el caso en que no se seleccionó ninguna materia
+            return;
+        }
+
+        // Obtener el cuatrimestre seleccionado en la tabla
+        int filaSeleccionada = Cuatrimestres_Table.getSelectedRow();
+        if (filaSeleccionada == -1) {
+            // Manejar el caso en que no se seleccionó ningún cuatrimestre
+            return;
+        }
+
+        // Asignar la materia al cuatrimestre
+        DefaultTableModel tableModel = (DefaultTableModel) Cuatrimestres_Table.getModel();
+        if (esObligatoria) {
+            materiasObligatorias.add(materiaSeleccionada);
+            tableModel.setValueAt(materiasObligatorias, filaSeleccionada, 2); // Columna de obligatoria
+            
+        } else {
+            tableModel.setValueAt(materiaSeleccionada.getNombre(), filaSeleccionada, 1); // Columna de opcional
+        }
+    }
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -27,151 +106,260 @@ public class SubirCarreraPanel extends javax.swing.JPanel {
 
         Background_Panel = new javax.swing.JPanel();
         Title_Panel = new javax.swing.JPanel();
+        Separador_Separator = new javax.swing.JSeparator();
+        Titulo_Label = new javax.swing.JLabel();
         Body_Panel = new javax.swing.JPanel();
         Nombre_TextField = new javax.swing.JTextField();
         CodigoCarrera_TextField = new javax.swing.JTextField();
-        jTextField1 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        Cuatrimestres_Table = new javax.swing.JTable();
+        removeCuatrimestre_Button = new javax.swing.JButton();
+        addCuatrimestre_Button = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jList2 = new javax.swing.JList<>();
+        PlanesDeEstudio_List = new javax.swing.JList<>();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jList3 = new javax.swing.JList<>();
-        jButton3 = new javax.swing.JButton();
+        Materias_List = new javax.swing.JList<>();
+        Opcional_Button = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        Obligatoria_Button = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JSeparator();
+        Subir_Button = new javax.swing.JButton();
+
+        setMaximumSize(new java.awt.Dimension(780, 580));
+
+        Titulo_Label.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
+        Titulo_Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carrera_icon.png"))); // NOI18N
+        Titulo_Label.setText("Crear nueva Carrera");
 
         javax.swing.GroupLayout Title_PanelLayout = new javax.swing.GroupLayout(Title_Panel);
         Title_Panel.setLayout(Title_PanelLayout);
         Title_PanelLayout.setHorizontalGroup(
             Title_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Title_PanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(Title_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(Title_PanelLayout.createSequentialGroup()
+                        .addGap(51, 51, 51)
+                        .addComponent(Titulo_Label))
+                    .addComponent(Separador_Separator, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(176, 176, 176))
         );
         Title_PanelLayout.setVerticalGroup(
             Title_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 50, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Title_PanelLayout.createSequentialGroup()
+                .addComponent(Titulo_Label)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Separador_Separator, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        Nombre_TextField.setText("Nombre");
+        Nombre_TextField.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         Nombre_TextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Nombre_TextFieldActionPerformed(evt);
             }
         });
 
-        CodigoCarrera_TextField.setText("CodigoCarrera");
-
-        jTextField1.setText("cant. materias optativas");
-
-        jLabel1.setText("¿Cuantos cuatrimestres tendra?");
-
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane1.setViewportView(jList1);
-
-        jButton1.setText("-");
-
-        jButton2.setText("+");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        CodigoCarrera_TextField.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        CodigoCarrera_TextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                CodigoCarrera_TextFieldActionPerformed(evt);
             }
         });
 
-        jLabel2.setText("Seleccione el plan de estudio");
+        jLabel1.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        jLabel1.setText("Seleccione un Cuatrimestre *");
 
-        jList2.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
+        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+        jScrollPane1.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jScrollPane1PropertyChange(evt);
+            }
         });
-        jScrollPane2.setViewportView(jList2);
 
-        jLabel3.setText("Seleccione un cuatrimestre y eliga las materias que tendra");
+        Cuatrimestres_Table.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
 
-        jList3.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
+            },
+            new String [] {
+                "Num", "Optativa", "Obligatoria"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
         });
-        jScrollPane3.setViewportView(jList3);
+        Cuatrimestres_Table.setColumnSelectionAllowed(true);
+        Cuatrimestres_Table.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                Cuatrimestres_TablePropertyChange(evt);
+            }
+        });
+        jScrollPane1.setViewportView(Cuatrimestres_Table);
+        Cuatrimestres_Table.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        if (Cuatrimestres_Table.getColumnModel().getColumnCount() > 0) {
+            Cuatrimestres_Table.getColumnModel().getColumn(0).setMaxWidth(50);
+        }
 
-        jButton3.setText("Añadir");
+        removeCuatrimestre_Button.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        removeCuatrimestre_Button.setText("-");
+        removeCuatrimestre_Button.setBorderPainted(false);
+        removeCuatrimestre_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removeCuatrimestre_ButtonActionPerformed(evt);
+            }
+        });
+
+        addCuatrimestre_Button.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        addCuatrimestre_Button.setText("+");
+        addCuatrimestre_Button.setBorderPainted(false);
+        addCuatrimestre_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addCuatrimestre_ButtonActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        jLabel2.setText("Seleccione el plan de estudio *");
+
+        PlanesDeEstudio_List.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        PlanesDeEstudio_List.setModel(new DefaultListModel<>());
+        PlanesDeEstudio_List.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane2.setViewportView(PlanesDeEstudio_List);
+
+        jLabel3.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        jLabel3.setText("Seleccione las materias *");
+
+        Materias_List.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        Materias_List.setModel(new DefaultListModel<>());
+        jScrollPane3.setViewportView(Materias_List);
+
+        Opcional_Button.setBackground(new java.awt.Color(204, 0, 0));
+        Opcional_Button.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        Opcional_Button.setText("Opcional");
+        Opcional_Button.setBorderPainted(false);
+        Opcional_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Opcional_ButtonActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        jLabel4.setText("Nombre *");
+
+        jLabel5.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        jLabel5.setText("Codigo *");
+
+        Obligatoria_Button.setBackground(new java.awt.Color(204, 0, 0));
+        Obligatoria_Button.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        Obligatoria_Button.setText("Obligatoria");
+        Obligatoria_Button.setBorderPainted(false);
+        Obligatoria_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Obligatoria_ButtonActionPerformed(evt);
+            }
+        });
+
+        jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
+
+        Subir_Button.setBackground(new java.awt.Color(204, 0, 0));
+        Subir_Button.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        Subir_Button.setText("Subir");
+        Subir_Button.setBorderPainted(false);
 
         javax.swing.GroupLayout Body_PanelLayout = new javax.swing.GroupLayout(Body_Panel);
         Body_Panel.setLayout(Body_PanelLayout);
         Body_PanelLayout.setHorizontalGroup(
             Body_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(Body_PanelLayout.createSequentialGroup()
-                .addGap(97, 97, 97)
-                .addComponent(jButton1)
-                .addGap(53, 53, 53)
-                .addComponent(jButton2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
-                .addGroup(Body_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Body_PanelLayout.createSequentialGroup()
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(109, 109, 109)))
-                .addGap(50, 50, 50))
-            .addGroup(Body_PanelLayout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addGroup(Body_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(Body_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(Nombre_TextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(CodigoCarrera_TextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(Body_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(36, 36, 36))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Body_PanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton3)
-                .addGap(241, 241, 241))
+                .addGroup(Body_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(Body_PanelLayout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addGroup(Body_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(Body_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel1)
+                                .addComponent(jLabel4)
+                                .addComponent(jLabel5)
+                                .addComponent(Nombre_TextField, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
+                                .addComponent(CodigoCarrera_TextField))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(Body_PanelLayout.createSequentialGroup()
+                        .addGap(135, 135, 135)
+                        .addComponent(removeCuatrimestre_Button)
+                        .addGap(37, 37, 37)
+                        .addComponent(addCuatrimestre_Button)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(Body_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(Body_PanelLayout.createSequentialGroup()
+                        .addGap(67, 67, 67)
+                        .addGroup(Body_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2)
+                            .addGroup(Body_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(Body_PanelLayout.createSequentialGroup()
+                                    .addComponent(Opcional_Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(Obligatoria_Button))
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(51, 51, 51))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Body_PanelLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Subir_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(108, 108, 108))))
         );
         Body_PanelLayout.setVerticalGroup(
             Body_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Body_PanelLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(34, 34, 34)
                 .addGroup(Body_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(Body_PanelLayout.createSequentialGroup()
-                        .addComponent(Nombre_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(CodigoCarrera_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(Body_PanelLayout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(Body_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(Body_PanelLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(Body_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton2)
-                            .addComponent(jButton1)))
-                    .addGroup(Body_PanelLayout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton3)
-                .addContainerGap(39, Short.MAX_VALUE))
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(Body_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(Body_PanelLayout.createSequentialGroup()
+                                .addComponent(Nombre_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(36, 36, 36)
+                                .addComponent(jLabel5))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(Body_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(Body_PanelLayout.createSequentialGroup()
+                                .addGap(47, 47, 47)
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(Body_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(Opcional_Button)
+                                    .addComponent(Obligatoria_Button))
+                                .addGap(37, 37, 37)
+                                .addComponent(Subir_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(Body_PanelLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(CodigoCarrera_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(Body_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(addCuatrimestre_Button)
+                                    .addComponent(removeCuatrimestre_Button))
+                                .addGap(51, 51, 51))))))
         );
 
         javax.swing.GroupLayout Background_PanelLayout = new javax.swing.GroupLayout(Background_Panel);
@@ -205,30 +393,69 @@ public class SubirCarreraPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_Nombre_TextFieldActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void addCuatrimestre_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCuatrimestre_ButtonActionPerformed
+        DefaultTableModel listModel = (DefaultTableModel) Cuatrimestres_Table.getModel();
+        
+        Cuatrimestre c = ControllerCarrera.crearCuatrimestre(nroCuatrimestre);
+        listModel.addRow(new Object[]{c, c.getMateriasOptativas(), c.getMateriasOptativas()});
+        
+        nroCuatrimestre++;
+    }//GEN-LAST:event_addCuatrimestre_ButtonActionPerformed
+
+    private void CodigoCarrera_TextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CodigoCarrera_TextFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_CodigoCarrera_TextFieldActionPerformed
+
+    private void removeCuatrimestre_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeCuatrimestre_ButtonActionPerformed
+        DefaultTableModel listModel = (DefaultTableModel) Cuatrimestres_Table.getModel();
+        if(listModel.getRowCount() != 0){
+            listModel.removeRow(listModel.getRowCount()-1);
+            nroCuatrimestre--;
+        }
+    }//GEN-LAST:event_removeCuatrimestre_ButtonActionPerformed
+
+    private void Opcional_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Opcional_ButtonActionPerformed
+        asignarMateria(false); // true para obligatoria
+    }//GEN-LAST:event_Opcional_ButtonActionPerformed
+
+    private void jScrollPane1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jScrollPane1PropertyChange
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jScrollPane1PropertyChange
+
+    private void Cuatrimestres_TablePropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_Cuatrimestres_TablePropertyChange
+        listarPlanesDeEstudio();
+    }//GEN-LAST:event_Cuatrimestres_TablePropertyChange
+
+    private void Obligatoria_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Obligatoria_ButtonActionPerformed
+        asignarMateria(true); // true para obligatoria
+    }//GEN-LAST:event_Obligatoria_ButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Background_Panel;
     private javax.swing.JPanel Body_Panel;
     private javax.swing.JTextField CodigoCarrera_TextField;
+    private javax.swing.JTable Cuatrimestres_Table;
+    private javax.swing.JList<com.milton.gomez.sistema.universitario.Model.Materia> Materias_List;
     private javax.swing.JTextField Nombre_TextField;
+    private javax.swing.JButton Obligatoria_Button;
+    private javax.swing.JButton Opcional_Button;
+    private javax.swing.JList<com.milton.gomez.sistema.universitario.Model.PlanDeEstudio> PlanesDeEstudio_List;
+    private javax.swing.JSeparator Separador_Separator;
+    private javax.swing.JButton Subir_Button;
     private javax.swing.JPanel Title_Panel;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JLabel Titulo_Label;
+    private javax.swing.JButton addCuatrimestre_Button;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JList<String> jList1;
-    private javax.swing.JList<String> jList2;
-    private javax.swing.JList<String> jList3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JButton removeCuatrimestre_Button;
     // End of variables declaration//GEN-END:variables
 
 }

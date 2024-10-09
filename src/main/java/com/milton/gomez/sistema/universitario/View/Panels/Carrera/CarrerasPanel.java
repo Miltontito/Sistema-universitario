@@ -103,6 +103,7 @@ public class CarrerasPanel extends javax.swing.JPanel {
                 .addComponent(Separador_Separator, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
+        Carrera_TextField.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         Carrera_TextField.setText("Inserte el Nombre o Codigo de la Carrera...");
         Carrera_TextField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -344,7 +345,7 @@ public class CarrerasPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_Carrera_TextFieldFocusLost
 
     private void Refresh_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Refresh_ButtonActionPerformed
-        //cargarCarreras();
+        cargarCarreras();
     }//GEN-LAST:event_Refresh_ButtonActionPerformed
 
     private void Carrera_TextFieldMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Carrera_TextFieldMousePressed
@@ -356,7 +357,13 @@ public class CarrerasPanel extends javax.swing.JPanel {
 
     private void Buscar_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Buscar_ButtonActionPerformed
         if(!Carrera_TextField.getText().equals("Inserte el Nombre o Codigo de la Carrera...")){
-            
+            try{
+                String busqueda = Carrera_TextField.getText();
+                Carreras_Table.setModel(ControllerCarrera.obtenerCarrera(Carreras_Table, busqueda));
+            }
+            catch(Exception e){
+                e.printStackTrace();
+            }
         }
         else{
             javax.swing.JOptionPane.showMessageDialog(this, "Debe ingresar el Nombre o Código de la carrera primero. \n", "AVISO", javax.swing.JOptionPane.INFORMATION_MESSAGE);
@@ -365,16 +372,24 @@ public class CarrerasPanel extends javax.swing.JPanel {
 
     private void Eliminar_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Eliminar_ButtonActionPerformed
         
-        if(Carreras_Table.getSelectedRow() != -1){
+        if(Carreras_Table.getSelectedColumnCount() != 0){
             DefaultTableModel model = (DefaultTableModel)Carreras_Table.getModel();
             try{
-               for(int i : Carreras_Table.getSelectedRows()){
-                   ControllerCarrera.eliminarCarrera((Integer) Carreras_Table.getValueAt(i,0));
-                   model.removeRow(i);
-               }
+                // filas seleccionadas
+                int[] filasSeleccionadas = Carreras_Table.getSelectedRows();
+
+                // Recorre las filas seleccionadas en orden inverso
+                for (int i = filasSeleccionadas.length - 1; i >= 0; i--) {
+                    int fila = filasSeleccionadas[i];
+                    // Elimina el alumno usando el índice correspondiente
+                    ControllerCarrera.eliminarCarrera((Integer) Carreras_Table.getValueAt(fila, 0));
+                    // Elimina la fila del modelo
+                    model.removeRow(fila);
+}
             }
             catch(Exception e){
                 System.out.println(e.getMessage());
+                e.printStackTrace();
             }
         }
         else{
@@ -395,6 +410,7 @@ public class CarrerasPanel extends javax.swing.JPanel {
     private void Editar_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Editar_ButtonActionPerformed
         
         if(Carreras_Table.getSelectedRow() != -1){
+            ViewMain.ShowJPanel(new SubirCarreraPanel((Integer) Carreras_Table.getValueAt(Carreras_Table.getSelectedRow(),0)));
         }
         else{
             javax.swing.JOptionPane.showMessageDialog(this, "Debe seleccionar una Carrera primero. \n", "AVISO", javax.swing.JOptionPane.INFORMATION_MESSAGE);

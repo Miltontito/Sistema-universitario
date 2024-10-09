@@ -24,6 +24,11 @@ public class Cursada {
         this.materiaAprobada = Boolean.FALSE;
         this.cursando = Boolean.TRUE;
     }
+    
+    public Cursada(Materia materia, Boolean aprobada){
+        this(materia);
+        this.setMateriaAprobada(aprobada);
+    }
 
     
     
