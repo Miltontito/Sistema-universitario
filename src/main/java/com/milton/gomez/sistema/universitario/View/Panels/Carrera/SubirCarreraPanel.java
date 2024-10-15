@@ -37,15 +37,14 @@ public class SubirCarreraPanel extends javax.swing.JPanel {
     
     public SubirCarreraPanel(Integer carreraId) {
         initComponents();
+        listarPlanesDeEstudio();
         this.carreraId = carreraId;
         this.isEdicion = true;
     }
     
     private void listarPlanesDeEstudio(){
         DefaultListModel<PlanDeEstudio> listModel = (DefaultListModel<PlanDeEstudio>) PlanesDeEstudio_List.getModel();
-        
         listModel.clear();
-        
         ControllerPlanDeEstudio.listarTodosLosPlaneDeEstudio().forEach(p -> listModel.addElement(p));
     }
     
@@ -53,6 +52,13 @@ public class SubirCarreraPanel extends javax.swing.JPanel {
         DefaultListModel<Materia> listModel = (DefaultListModel<Materia>) Materias_List.getModel();
         listModel.clear();
         this.materiasDisponibles.forEach(m -> listModel.addElement(m));
+    }
+    
+    private void eliminarMateriasSeleccionadas(){
+        DefaultListModel<Materia> listModel = (DefaultListModel<Materia>) Materias_List.getModel();
+        for(int i : Materias_List.getSelectedIndices()){
+            listModel.removeElementAt(i);
+        }
     }
     
     // Método para configurar eventos, en este caso un Selection Listener de la tabla Cuatrimestres.
@@ -68,29 +74,46 @@ public class SubirCarreraPanel extends javax.swing.JPanel {
         });
     }
     private void asignarMateria(boolean esObligatoria) {
-        // Obtener la materia seleccionada en la lista
-        List<Materia> materiasObligatorias = new ArrayList<>();
-        Materia materiaSeleccionada = Materias_List.getSelectedValue();
+        
+        List<Materia> materiaSeleccionada = Materias_List.getSelectedValuesList();
+
         if (materiaSeleccionada == null) {
-            // Manejar el caso en que no se seleccionó ninguna materia
-            return;
+            javax.swing.JOptionPane.showMessageDialog(this, "Debe seleccionar una materia primero. \n", "AVISO", javax.swing.JOptionPane.WARNING_MESSAGE);
+            return; // Salir si no se selecciona una materia
         }
 
         // Obtener el cuatrimestre seleccionado en la tabla
         int filaSeleccionada = Cuatrimestres_Table.getSelectedRow();
         if (filaSeleccionada == -1) {
-            // Manejar el caso en que no se seleccionó ningún cuatrimestre
-            return;
+            javax.swing.JOptionPane.showMessageDialog(this, "Debe seleccionar un cuatrimestre primero. \n", "AVISO", javax.swing.JOptionPane.WARNING_MESSAGE);
+            return; // Salir si no se selecciona un cuatrimestre
         }
 
         // Asignar la materia al cuatrimestre
         DefaultTableModel tableModel = (DefaultTableModel) Cuatrimestres_Table.getModel();
+
         if (esObligatoria) {
-            materiasObligatorias.add(materiaSeleccionada);
-            tableModel.setValueAt(materiasObligatorias, filaSeleccionada, 2); // Columna de obligatoria
+            // Recuperar la lista de materias obligatorias existente
+            List<Materia> materiasObligatorias = (List<Materia>) tableModel.getValueAt(filaSeleccionada, 2);
             
+            if (materiasObligatorias == null) { // Si la lista no existe, crear una nueva
+                materiasObligatorias = new ArrayList<>();
+            }
+            
+            materiasObligatorias.addAll(materiaSeleccionada);
+            tableModel.setValueAt(materiasObligatorias, filaSeleccionada, 2); // Columna de obligatoria
+            eliminarMateriasSeleccionadas();
         } else {
-            tableModel.setValueAt(materiaSeleccionada.getNombre(), filaSeleccionada, 1); // Columna de opcional
+            // Recuperar la lista de materias optativas existente
+            List<Materia> materiasOptativas = (List<Materia>) tableModel.getValueAt(filaSeleccionada, 1);
+            
+            if (materiasOptativas == null) { // Si la lista no existe, crear una nueva
+                materiasOptativas = new ArrayList<>();
+            }
+            
+            materiasOptativas.addAll(materiaSeleccionada);
+            tableModel.setValueAt(materiasOptativas, filaSeleccionada, 1); // Columna de opcional
+            eliminarMateriasSeleccionadas();
         }
     }
 
@@ -196,6 +219,7 @@ public class SubirCarreraPanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        Cuatrimestres_Table.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         Cuatrimestres_Table.setColumnSelectionAllowed(true);
         Cuatrimestres_Table.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
@@ -204,9 +228,6 @@ public class SubirCarreraPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(Cuatrimestres_Table);
         Cuatrimestres_Table.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        if (Cuatrimestres_Table.getColumnModel().getColumnCount() > 0) {
-            Cuatrimestres_Table.getColumnModel().getColumn(0).setMaxWidth(50);
-        }
 
         removeCuatrimestre_Button.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         removeCuatrimestre_Button.setText("-");
@@ -243,6 +264,7 @@ public class SubirCarreraPanel extends javax.swing.JPanel {
 
         Opcional_Button.setBackground(new java.awt.Color(204, 0, 0));
         Opcional_Button.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        Opcional_Button.setForeground(new java.awt.Color(255, 255, 255));
         Opcional_Button.setText("Opcional");
         Opcional_Button.setBorderPainted(false);
         Opcional_Button.addActionListener(new java.awt.event.ActionListener() {
@@ -259,6 +281,7 @@ public class SubirCarreraPanel extends javax.swing.JPanel {
 
         Obligatoria_Button.setBackground(new java.awt.Color(204, 0, 0));
         Obligatoria_Button.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        Obligatoria_Button.setForeground(new java.awt.Color(255, 255, 255));
         Obligatoria_Button.setText("Obligatoria");
         Obligatoria_Button.setBorderPainted(false);
         Obligatoria_Button.addActionListener(new java.awt.event.ActionListener() {
@@ -271,6 +294,7 @@ public class SubirCarreraPanel extends javax.swing.JPanel {
 
         Subir_Button.setBackground(new java.awt.Color(204, 0, 0));
         Subir_Button.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        Subir_Button.setForeground(new java.awt.Color(255, 255, 255));
         Subir_Button.setText("Subir");
         Subir_Button.setBorderPainted(false);
 
@@ -299,18 +323,19 @@ public class SubirCarreraPanel extends javax.swing.JPanel {
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(Body_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(Body_PanelLayout.createSequentialGroup()
-                        .addGap(67, 67, 67)
-                        .addGroup(Body_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2)
-                            .addGroup(Body_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(Body_PanelLayout.createSequentialGroup()
-                                    .addComponent(Opcional_Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(Obligatoria_Button))
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(51, 51, 51))
+                        .addGap(61, 61, 61)
+                        .addGroup(Body_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(Body_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel3)
+                                .addComponent(jLabel2)
+                                .addGroup(Body_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(Body_PanelLayout.createSequentialGroup()
+                                        .addComponent(Opcional_Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(Obligatoria_Button))
+                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(57, 57, 57))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Body_PanelLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(Subir_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -351,10 +376,10 @@ public class SubirCarreraPanel extends javax.swing.JPanel {
                             .addGroup(Body_PanelLayout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(CodigoCarrera_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                                .addGap(44, 44, 44)
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(Body_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(addCuatrimestre_Button)
@@ -397,7 +422,7 @@ public class SubirCarreraPanel extends javax.swing.JPanel {
         DefaultTableModel listModel = (DefaultTableModel) Cuatrimestres_Table.getModel();
         
         Cuatrimestre c = ControllerCarrera.crearCuatrimestre(nroCuatrimestre);
-        listModel.addRow(new Object[]{c, c.getMateriasOptativas(), c.getMateriasOptativas()});
+        listModel.addRow(new Object[]{c, c.getMateriasOptativas(), c.getMateriasObligatorias()});
         
         nroCuatrimestre++;
     }//GEN-LAST:event_addCuatrimestre_ButtonActionPerformed
@@ -409,25 +434,31 @@ public class SubirCarreraPanel extends javax.swing.JPanel {
     private void removeCuatrimestre_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeCuatrimestre_ButtonActionPerformed
         DefaultTableModel listModel = (DefaultTableModel) Cuatrimestres_Table.getModel();
         if(listModel.getRowCount() != 0){
-            listModel.removeRow(listModel.getRowCount()-1);
+            int fila = listModel.getRowCount()-1;
+            
+            List<Materia> materiasOptativas = (List<Materia>) listModel.getValueAt(fila, 1);
+            List<Materia> materiasObligatorias = (List<Materia>) listModel.getValueAt(fila, 2);
+            
+            DefaultListModel listModelMaterias = (DefaultListModel) Materias_List.getModel();
+            listModelMaterias.addAll(materiasOptativas);
+            listModelMaterias.addAll(materiasObligatorias);
+            listModel.removeRow(fila);
             nroCuatrimestre--;
         }
     }//GEN-LAST:event_removeCuatrimestre_ButtonActionPerformed
 
     private void Opcional_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Opcional_ButtonActionPerformed
-        asignarMateria(false); // true para obligatoria
+        asignarMateria(false); // no es obligatoria
     }//GEN-LAST:event_Opcional_ButtonActionPerformed
 
     private void jScrollPane1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jScrollPane1PropertyChange
-        // TODO add your handling code here:
     }//GEN-LAST:event_jScrollPane1PropertyChange
 
     private void Cuatrimestres_TablePropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_Cuatrimestres_TablePropertyChange
-        listarPlanesDeEstudio();
     }//GEN-LAST:event_Cuatrimestres_TablePropertyChange
 
     private void Obligatoria_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Obligatoria_ButtonActionPerformed
-        asignarMateria(true); // true para obligatoria
+        asignarMateria(true); // es obligatoria
     }//GEN-LAST:event_Obligatoria_ButtonActionPerformed
 
 

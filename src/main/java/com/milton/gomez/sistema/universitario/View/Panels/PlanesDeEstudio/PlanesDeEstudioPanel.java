@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package com.milton.gomez.sistema.universitario.View.Panels;
+package com.milton.gomez.sistema.universitario.View.Panels.PlanesDeEstudio;
 
 import com.milton.gomez.sistema.universitario.Controller.ControllerPlanDeEstudio;
 import javax.swing.DefaultListModel;

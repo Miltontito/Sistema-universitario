@@ -40,7 +40,8 @@ public class PrincipalPanel extends javax.swing.JPanel {
         Info_Panel = new javax.swing.JPanel();
         Info_Label = new javax.swing.JLabel();
 
-        setPreferredSize(new java.awt.Dimension(638, 528));
+        setMinimumSize(new java.awt.Dimension(684, 528));
+        setPreferredSize(new java.awt.Dimension(780, 580));
 
         Titulo_Label.setFont(new java.awt.Font("Roboto Black", 0, 24)); // NOI18N
         Titulo_Label.setText("Bienvenido al Sistema de Gestión Universitaria");
@@ -113,7 +114,7 @@ public class PrincipalPanel extends javax.swing.JPanel {
                                 .addComponent(jLabel9)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Backgorund_PanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(102, Short.MAX_VALUE)
                 .addGroup(Backgorund_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Backgorund_PanelLayout.createSequentialGroup()
                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 578, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -145,7 +146,7 @@ public class PrincipalPanel extends javax.swing.JPanel {
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel9)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
                 .addComponent(Info_Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29))
         );

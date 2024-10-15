@@ -66,7 +66,7 @@ public class ControllerAlumno {
     }
     
     
-    public static DefaultTableModel obtenerAlumnoPorDNI(JTable Alumnos_Table, JTextField Alumno_TextField){
+    public static DefaultTableModel obtenerAlumnoPorDNI(JTable Alumnos_Table, JTextField Alumno_TextField) throws NumberFormatException, NullPointerException{
         
         DefaultTableModel model = (DefaultTableModel)Alumnos_Table.getModel();
         
@@ -85,9 +85,11 @@ public class ControllerAlumno {
         }
         catch(NumberFormatException e){
             System.out.println("El dato introducido no es un numero");
+            throw e;
         }
         catch(NullPointerException e){
             System.out.println("No se encuentra el Alumno");
+            throw e;
         }
         
         return model;
@@ -142,7 +144,7 @@ public class ControllerAlumno {
     }
     
     
-    public static DefaultTableModel obtenerAlumnoPorLegajo(JTable Alumnos_Table, JTextField Alumno_TextField){
+    public static DefaultTableModel obtenerAlumnoPorLegajo(JTable Alumnos_Table, JTextField Alumno_TextField) throws NumberFormatException, NullPointerException{
         DefaultTableModel model = (DefaultTableModel)Alumnos_Table.getModel();
         model.setRowCount(0);
         try{
@@ -158,9 +160,11 @@ public class ControllerAlumno {
         }
         catch(NumberFormatException e){
             System.out.println("El dato introducido no es un numero");
+            throw e;
         }
         catch(NullPointerException e){
             System.out.println("No se encuentra el Alumno");
+            throw e;
         }
         return model;
     }

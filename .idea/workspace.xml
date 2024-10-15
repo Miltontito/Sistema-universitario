@@ -1,9 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="43f794ac-412a-4586-8b5b-0d23349b2f31" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/milton/gomez/sistema/universitario/View/MainJFrame.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/milton/gomez/sistema/universitario/View/MainJFrame.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/milton/gomez/sistema/universitario/View/MainJFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/milton/gomez/sistema/universitario/View/MainJFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Sistema-universitario.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Sistema-universitario.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/milton/gomez/sistema/universitario/Controller/ControllerAlumno.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/milton/gomez/sistema/universitario/Controller/ControllerAlumno.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/milton/gomez/sistema/universitario/View/Panels/Alumno/AlumnosPanel.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/milton/gomez/sistema/universitario/View/Panels/Alumno/AlumnosPanel.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/milton/gomez/sistema/universitario/View/Panels/Alumno/AlumnosPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/milton/gomez/sistema/universitario/View/Panels/Alumno/AlumnosPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/milton/gomez/sistema/universitario/View/Panels/Alumno/DetallesAlumno.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/milton/gomez/sistema/universitario/View/Panels/Alumno/DetallesAlumno.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/milton/gomez/sistema/universitario/View/Panels/Alumno/DetallesAlumno.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/milton/gomez/sistema/universitario/View/Panels/Alumno/DetallesAlumno.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/milton/gomez/sistema/universitario/View/Panels/AyudaPanel.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/milton/gomez/sistema/universitario/View/Panels/Ayuda/AyudaPanel.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/milton/gomez/sistema/universitario/View/Panels/AyudaPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/milton/gomez/sistema/universitario/View/Panels/Ayuda/AyudaPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/milton/gomez/sistema/universitario/View/Panels/Carrera/CarrerasPanel.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/milton/gomez/sistema/universitario/View/Panels/Carrera/CarrerasPanel.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/milton/gomez/sistema/universitario/View/Panels/Carrera/CarrerasPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/milton/gomez/sistema/universitario/View/Panels/Carrera/CarrerasPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/milton/gomez/sistema/universitario/View/Panels/PlanesDeEstudioPanel.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/milton/gomez/sistema/universitario/View/Panels/PlanesDeEstudio/PlanesDeEstudioPanel.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/milton/gomez/sistema/universitario/View/Panels/PlanesDeEstudioPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/milton/gomez/sistema/universitario/View/Panels/PlanesDeEstudio/PlanesDeEstudioPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/milton/gomez/sistema/universitario/View/Panels/PrincipalPanel.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/milton/gomez/sistema/universitario/View/Panels/PrincipalPanel.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/milton/gomez/sistema/universitario/View/Panels/PrincipalPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/milton/gomez/sistema/universitario/View/Panels/PrincipalPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/milton/gomez/sistema/universitario/View/ViewMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/milton/gomez/sistema/universitario/View/ViewMain.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -13,22 +33,22 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "Miltontito"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Miltontito&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/Miltontito/Sistema-universitario.git",
-    "accountId": "1c042cc8-77b4-4572-8f06-02943fa1b83f"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Miltontito/Sistema-universitario.git&quot;,
+    &quot;accountId&quot;: &quot;1c042cc8-77b4-4572-8f06-02943fa1b83f&quot;
   }
-}]]></component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
-  "associatedIndex": 0
-}]]></component>
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 0
+}</component>
   <component name="ProjectId" id="2lKifpjFexxkJe24KRRr8HuRGaO" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -36,11 +56,33 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.Main.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true"
+    "kotlin-language-version-configured": "true",
+    "settings.editor.selected.configurable": "reference.settingsdialog.IDE.editor.colors.General"
   }
 }]]></component>
+  <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.milton.gomez.sistema.universitario.Main" />
+      <module name="Sistema-Universitario" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.milton.gomez.sistema.universitario.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">

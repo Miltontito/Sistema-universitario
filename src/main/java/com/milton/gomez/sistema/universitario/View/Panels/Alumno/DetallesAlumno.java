@@ -73,6 +73,8 @@ public class DetallesAlumno extends javax.swing.JPanel {
         Inscribirse_Button = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JSeparator();
 
+        setPreferredSize(new java.awt.Dimension(780, 580));
+
         Title_Label.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
         Title_Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/person_icon.png"))); // NOI18N
 
@@ -162,7 +164,7 @@ public class DetallesAlumno extends javax.swing.JPanel {
                 .addGroup(Datos_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(Carrera_Label))
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jLabel5.setFont(new java.awt.Font("Roboto", 0, 20)); // NOI18N
@@ -213,7 +215,7 @@ public class DetallesAlumno extends javax.swing.JPanel {
                     .addGroup(Body_PanelLayout.createSequentialGroup()
                         .addGap(28, 28, 28)
                         .addGroup(Body_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+                            .addComponent(jScrollPane3)
                             .addGroup(Body_PanelLayout.createSequentialGroup()
                                 .addGap(71, 71, 71)
                                 .addComponent(Inscribirse_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -224,7 +226,7 @@ public class DetallesAlumno extends javax.swing.JPanel {
                     .addGroup(Body_PanelLayout.createSequentialGroup()
                         .addGap(99, 99, 99)
                         .addComponent(jLabel7)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(54, 54, 54)
                 .addGroup(Body_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -282,7 +284,7 @@ public class DetallesAlumno extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(Title_Panel, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Title_Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Body_Panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );

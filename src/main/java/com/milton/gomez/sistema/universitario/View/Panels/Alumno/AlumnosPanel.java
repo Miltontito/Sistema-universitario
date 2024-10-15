@@ -35,16 +35,25 @@ public class AlumnosPanel extends javax.swing.JPanel {
         Alumnos_Table.setDefaultRenderer(Long.class, centerRenderer);
     }
     private void buscarAlumno(){
-        DefaultTableModel model = (DefaultTableModel)Alumnos_Table.getModel();
-        
-        if(Alumno_TextField.getText().length() == 8){
+        try{
+            if(Alumno_TextField.getText().length() == 8){
             Alumnos_Table.setModel(ControllerAlumno.obtenerAlumnoPorDNI(Alumnos_Table, Alumno_TextField));
+            }
+            else if (Alumno_TextField.getText().length() == 6){
+                Alumnos_Table.setModel(ControllerAlumno.obtenerAlumnoPorLegajo(Alumnos_Table, Alumno_TextField));
+            }
+            else if(Alumno_TextField.getText().equals("Inserte el DNI o Legajo del Alumno...")){
+                javax.swing.JOptionPane.showMessageDialog(this, "Debe escribir un Legajo o un DNI. \n", "AVISO", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            }
+            else{
+                javax.swing.JOptionPane.showMessageDialog(this, "Inserte un Legajo (6 digitos) o un DNI (8 digitos). \n", "AVISO", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            }
         }
-        else if (Alumno_TextField.getText().length() == 6){
-            Alumnos_Table.setModel(ControllerAlumno.obtenerAlumnoPorLegajo(Alumnos_Table, Alumno_TextField));
+        catch(NumberFormatException e){
+            javax.swing.JOptionPane.showMessageDialog(this, "Introduzca solo valores númericos. \n", "ERROR", javax.swing.JOptionPane.ERROR_MESSAGE);
         }
-        else if(Alumno_TextField.getText().equals("Inserte el DNI o Legajo del Alumno...")){
-            javax.swing.JOptionPane.showMessageDialog(this, "Debe escribir un Legajo o un DNI. \n", "AVISO", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        catch(NullPointerException e){
+            javax.swing.JOptionPane.showMessageDialog(this, "No se encontró el alumno. \n", "ERROR", javax.swing.JOptionPane.ERROR_MESSAGE);
         }
     }
     /**
@@ -77,6 +86,10 @@ public class AlumnosPanel extends javax.swing.JPanel {
 
         jMenu1.setText("jMenu1");
 
+        setPreferredSize(new java.awt.Dimension(780, 580));
+
+        Background_Panel.setPreferredSize(new java.awt.Dimension(780, 580));
+
         Titulo_Label.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
         Titulo_Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/people_icon.png"))); // NOI18N
         Titulo_Label.setText("Gestion de Alumnos");
@@ -100,7 +113,7 @@ public class AlumnosPanel extends javax.swing.JPanel {
             .addGroup(Header_PanelLayout.createSequentialGroup()
                 .addComponent(Titulo_Label)
                 .addGap(1, 1, 1)
-                .addComponent(Separador_Separator)
+                .addComponent(Separador_Separator, javax.swing.GroupLayout.DEFAULT_SIZE, 5, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -145,10 +158,10 @@ public class AlumnosPanel extends javax.swing.JPanel {
             AlumnoBusqueda_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(AlumnoBusqueda_PanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(AlumnoBusqueda_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(AlumnoBusqueda_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(Alumno_TextField, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
                     .addComponent(Buscar_Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         Alumnos_ScrollPane.setFont(new java.awt.Font("Roboto", 0, 15)); // NOI18N
@@ -253,7 +266,7 @@ public class AlumnosPanel extends javax.swing.JPanel {
             AlumnoEditDelete_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AlumnoEditDelete_PanelLayout.createSequentialGroup()
                 .addComponent(Refresh_Button)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
                 .addComponent(Nuevo_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(Detalles_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -272,7 +285,7 @@ public class AlumnosPanel extends javax.swing.JPanel {
                     .addComponent(Editar_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Nuevo_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Detalles_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(AlumnoEditDelete_PanelLayout.createSequentialGroup()
                 .addComponent(Refresh_Button)
                 .addGap(0, 0, Short.MAX_VALUE))
@@ -301,32 +314,31 @@ public class AlumnosPanel extends javax.swing.JPanel {
         Background_Panel.setLayout(Background_PanelLayout);
         Background_PanelLayout.setHorizontalGroup(
             Background_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Header_Panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(Background_PanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(Body_Panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(Background_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Header_Panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Body_Panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         Background_PanelLayout.setVerticalGroup(
             Background_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Background_PanelLayout.createSequentialGroup()
                 .addComponent(Header_Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(Body_Panel, javax.swing.GroupLayout.PREFERRED_SIZE, 501, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(146, 146, 146))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Body_Panel, javax.swing.GroupLayout.PREFERRED_SIZE, 492, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Background_Panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(Background_Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(Background_Panel, javax.swing.GroupLayout.PREFERRED_SIZE, 574, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(Background_Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -347,6 +359,7 @@ public class AlumnosPanel extends javax.swing.JPanel {
 
     private void Refresh_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Refresh_ButtonActionPerformed
         cargarAlumnos();
+        Alumno_TextField.setText("Inserte el DNI o Legajo del Alumno...");
     }//GEN-LAST:event_Refresh_ButtonActionPerformed
 
     private void Alumno_TextFieldMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Alumno_TextFieldMousePressed

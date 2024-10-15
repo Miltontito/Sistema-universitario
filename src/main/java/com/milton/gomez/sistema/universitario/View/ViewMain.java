@@ -1,4 +1,6 @@
 package com.milton.gomez.sistema.universitario.View;
+import com.milton.gomez.sistema.universitario.View.Panels.PlanesDeEstudio.PlanesDeEstudioPanel;
+import com.milton.gomez.sistema.universitario.View.Panels.Ayuda.AyudaPanel;
 import com.milton.gomez.sistema.universitario.View.Panels.Materias.MateriasPanel;
 import com.milton.gomez.sistema.universitario.View.Panels.Carrera.CarrerasPanel;
 import com.milton.gomez.sistema.universitario.View.Panels.Alumno.AlumnosPanel;
