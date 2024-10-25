@@ -24,20 +24,17 @@ public class Cuatrimestre {
         this();
         this.numeroCuatrimestre = numeroCuatrimestre;
     }
-    public Cuatrimestre(List<Materia> materiasObligatorias) {
-        this();
-        this.materiasObligatorias = materiasObligatorias;
-    }
-    
     public Cuatrimestre(List<Materia> materiasObligatorias, Integer numeroCuatrimestre) {
         this();
         this.materiasObligatorias = materiasObligatorias;
         this.numeroCuatrimestre = numeroCuatrimestre;
     }
     
-    public Cuatrimestre(List<Materia> materiasObligatorias, List<Materia> materiasOptativas) {
-        this(materiasObligatorias);
+    public Cuatrimestre(List<Materia> materiasObligatorias, List<Materia> materiasOptativas, Integer numeroCuatrimestre) {
+        this();
+        this.materiasObligatorias = materiasObligatorias;
         this.materiasOptativas = materiasOptativas;
+        this.numeroCuatrimestre = numeroCuatrimestre;
     }
 
     // -----------------------------------------------
@@ -46,7 +43,7 @@ public class Cuatrimestre {
     public List<Materia> listarMateriasObligatorias(){
         return materiasObligatorias;
     }
-    public List<Materia> litarMateriasOptativas(){
+    public List<Materia> listarMateriasOptativas(){
         return materiasOptativas;
     }
     public List<Materia> listarTodasLasMaterias(){

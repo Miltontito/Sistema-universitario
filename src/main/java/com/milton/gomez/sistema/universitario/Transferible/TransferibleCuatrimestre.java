@@ -4,6 +4,8 @@
  */
 package com.milton.gomez.sistema.universitario.Transferible;
 
+import com.milton.gomez.sistema.universitario.Model.Materia;
+
 import java.util.List;
 
 /**
@@ -11,33 +13,22 @@ import java.util.List;
  * @author milton
  */
 public class TransferibleCuatrimestre {
-    private Integer id;
-    private List<TransferibleMateria> materiasObligatorias;
-    private List<TransferibleMateria> materiasOptativas;
+    private List<Materia> materiasObligatorias;
+    private List<Materia> materiasOptativas;
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public List<TransferibleMateria> getMateriasObligatorias() {
+    public List<Materia> getMateriasObligatorias() {
         return materiasObligatorias;
     }
 
-    public void setMateriasObligatorias(List<TransferibleMateria> materiasObligatorias) {
+    public void setMateriasObligatorias(List<Materia> materiasObligatorias) {
         this.materiasObligatorias = materiasObligatorias;
     }
 
-    public List<TransferibleMateria> getMateriasOptativas() {
+    public List<Materia> getMateriasOptativas() {
         return materiasOptativas;
     }
 
-    public void setMateriasOptativas(List<TransferibleMateria> materiasOptativas) {
+    public void setMateriasOptativas(List<Materia> materiasOptativas) {
         this.materiasOptativas = materiasOptativas;
     }
-    
-    
 }

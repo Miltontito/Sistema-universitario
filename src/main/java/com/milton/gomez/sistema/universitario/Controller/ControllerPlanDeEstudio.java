@@ -17,6 +17,6 @@ public class ControllerPlanDeEstudio {
     private static ControladorUniversitario cu = ControladorUniversitario.getInstance();
     
     public static List<PlanDeEstudio> listarTodosLosPlaneDeEstudio(){
-        return cu.getPlanesDeEstudios();
+        return cu.obtenerPlanesDeEstudios();
     }
 }

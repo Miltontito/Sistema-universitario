@@ -3,29 +3,15 @@ package com.milton.gomez.sistema.universitario.Transferible;
 import com.milton.gomez.sistema.universitario.Model.Alumno;
 import com.milton.gomez.sistema.universitario.Model.Cuatrimestre;
 import com.milton.gomez.sistema.universitario.Model.PlanDeEstudio;
-import java.util.HashMap;
+
 import java.util.List;
 
-/**
- *
- * @author milton
- */
-public class TransferibleCarrera {
-    private Integer id;
+public class TransferibleCarreraCrear {
     private String nombre;
     private String codigoCarrera;
     private Integer cantMateriasOptativasParaAprobar;
-    private HashMap<Integer,Cuatrimestre> cuatrimestres;
+    private List<TransferibleCuatrimestre> cuatrimestres;
     private PlanDeEstudio planDeEstudio;
-    private List<Alumno> alumnos;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public String getNombre() {
         return nombre;
@@ -59,23 +45,11 @@ public class TransferibleCarrera {
         this.planDeEstudio = planDeEstudio;
     }
 
-    public List<Alumno> getAlumnos() {
-        return alumnos;
-    }
-
-    public void setAlumnos(List<Alumno> alumnos) {
-        this.alumnos = alumnos;
-    }
-
-    public HashMap<Integer, Cuatrimestre> getCuatrimestres() {
+    public List<TransferibleCuatrimestre> getCuatrimestres() {
         return cuatrimestres;
     }
 
-    public void setCuatrimestres(HashMap<Integer, Cuatrimestre> cuatrimestres) {
+    public void setCuatrimestres(List<TransferibleCuatrimestre> cuatrimestres) {
         this.cuatrimestres = cuatrimestres;
     }
-
-    
-    
-    
 }

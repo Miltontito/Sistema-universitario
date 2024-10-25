@@ -100,7 +100,7 @@ public class SubirAlumnoPanel extends javax.swing.JPanel {
     }
     
     private void listarMaterias(){
-        // Obtenemos el modelo de la JList materias
+        // Obtenemos el modelo de la JTable materias
         DefaultTableModel tableModel = (DefaultTableModel) Materias_Table.getModel();
         
         tableModel.setRowCount(0);

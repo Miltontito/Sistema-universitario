@@ -2,6 +2,8 @@ package com.milton.gomez.sistema.universitario.Model;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 
 public class Carrera {
@@ -14,9 +16,9 @@ public class Carrera {
     private String nombre;
     private String codigoCarrera;
     private Integer cantMateriasOptativasParaAprobar;
-    private List<Cuatrimestre> cuatrimestres;
+    private HashMap<Integer,Cuatrimestre> cuatrimestres;
     private PlanDeEstudio planDeEstudio;
-    private List<Alumno> alumnos;
+    private HashMap<Integer,Alumno> alumnos;
     private Integer nroCuatrimestre = 0;
     
     // -----------------------------------------------
@@ -24,7 +26,8 @@ public class Carrera {
     // -----------------------------------------------
     public Carrera() {
         this.carreraID = asignarID();
-        this.cuatrimestres = new ArrayList<>();
+        this.cuatrimestres = new HashMap<>();
+        this.alumnos = new HashMap<>();
     }
     
     public Carrera(String nombre) {
@@ -56,23 +59,31 @@ public class Carrera {
     private Integer asignarID(){
         return identificador_carrera++;
     }
-    public boolean crearCuatrimestre(){
-        this.cuatrimestres.add(new Cuatrimestre(nroCuatrimestre));
+
+    public Cuatrimestre crearCuatrimestre(){
+        Cuatrimestre cuatrimestreCreado = new Cuatrimestre(nroCuatrimestre);
+        this.cuatrimestres.put(nroCuatrimestre,cuatrimestreCreado);
         nroCuatrimestre++;
-        return true;
+        return cuatrimestreCreado;
     }
-    
-    public boolean crearCuatrimestre(List<Materia> materias){
-        this.cuatrimestres.add(new Cuatrimestre(materias, nroCuatrimestre));
+    public Cuatrimestre crearCuatrimestre(List<Materia> materiasObligatorias){
+        Cuatrimestre cuatrimestreCreado = new Cuatrimestre(materiasObligatorias,nroCuatrimestre);
+        this.cuatrimestres.put(nroCuatrimestre,cuatrimestreCreado);
         nroCuatrimestre++;
-        return true;
+        return cuatrimestreCreado;
+    }
+    public Cuatrimestre crearCuatrimestre(List<Materia> materiasObligatorias, List<Materia> materiasOptativas){
+        Cuatrimestre cuatrimestreCreado = new Cuatrimestre(materiasObligatorias, materiasOptativas, nroCuatrimestre);
+        this.cuatrimestres.put(nroCuatrimestre,cuatrimestreCreado);
+        nroCuatrimestre++;
+        return cuatrimestreCreado;
     }
     
     public void borrarCuatrimestre(Integer nroCuatrimestre){
-        this.cuatrimestres.remove(this.cuatrimestres.get(nroCuatrimestre));
+        this.cuatrimestres.remove(nroCuatrimestre);
     }
     public Carrera asignarCuatrimestre(Cuatrimestre cuatrimestre){
-        this.cuatrimestres.add(cuatrimestre);
+        this.cuatrimestres.put(cuatrimestre.getNumeroCuatrimestre(),cuatrimestre);
         return this;
     }
     public Carrera setPlanDeEstudio(PlanDeEstudio planDeEstudio){
@@ -89,11 +100,9 @@ public class Carrera {
         List<Materia> aprobadas = alumno.getMaterias();
 
         //Por cada cuatrimestre retira las materias obligatorias.
-        for(Cuatrimestre cuatrimestre : this.cuatrimestres){
-            obligatorias.addAll(cuatrimestre.listarMateriasObligatorias());
-        }
-        //No es eficiente.
-        cumpleLosRequisitos = aprobadas.containsAll(obligatorias);
+        this.cuatrimestres.forEach((k,v) -> obligatorias.addAll(v.listarMateriasObligatorias()));
+
+        cumpleLosRequisitos = new HashSet<>(aprobadas).containsAll(obligatorias);
 
         /* Si eliminamos todas las obligatorias nos quedan las optativas */
         aprobadas.removeAll(obligatorias);
@@ -106,11 +115,14 @@ public class Carrera {
     }
     public List<Materia> obtenerMateriasDeLaCarrera(){
         List<Materia> materias = new ArrayList<>();
-        for(Cuatrimestre cuatrimestre : this.cuatrimestres){
-            materias.addAll(cuatrimestre.listarTodasLasMaterias());
-        }
+        this.cuatrimestres.forEach((k,v) -> materias.addAll(v.listarTodasLasMaterias()));
         return materias;
     }
+
+    public void inscribirAlumno(Alumno alumno){
+        this.alumnos.put(alumno.getAlumnoID(),alumno);
+    }
+
     @Override
     public String toString(){
         return this.getNombre();
@@ -130,11 +142,10 @@ public class Carrera {
     public String getCodigoCarrera() {
         return codigoCarrera;
     }
-    public List<Cuatrimestre> getCuatrimestres(){
-        return this.cuatrimestres;
-    }
-    public List<Alumno> getAlumnos(){
-        return this.alumnos;
+    public List<Alumno> getAlumnosList(){
+        List<Alumno> alumnosList = new ArrayList<>();
+        this.alumnos.forEach((k,v) -> alumnosList.add(v));
+        return alumnosList;
     }
     public PlanDeEstudio getPlanDeEstudio() {
         return planDeEstudio;
@@ -152,10 +163,17 @@ public class Carrera {
     public void setCodigoCarrera(String codigoCarrera) {
         this.codigoCarrera = codigoCarrera;
     }
-    public void setCuatrimestres(List<Cuatrimestre> cuatrimestres){
+    public void setAlumnos(List<Alumno> alumnos){
+        HashMap<Integer, Alumno> alumnoHashMap = new HashMap<>();
+        alumnos.forEach((a) -> this.alumnos.put(a.getAlumnoID(), a));
+    }
+
+    public HashMap<Integer, Cuatrimestre> getCuatrimestres() {
+        return cuatrimestres;
+    }
+
+    public void setCuatrimestres(HashMap<Integer, Cuatrimestre> cuatrimestres) {
         this.cuatrimestres = cuatrimestres;
     }
-    public void setAlumnos(List<Alumno> alumnos){
-        this.alumnos = alumnos;
-    }
+
 }

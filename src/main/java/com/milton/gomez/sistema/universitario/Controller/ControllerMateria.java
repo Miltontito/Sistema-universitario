@@ -18,11 +18,11 @@ public class ControllerMateria {
     
     
     public static List<Materia> listarTodasLasMaterias(){
-        return cu.getMaterias();
+        return cu.obtenerMaterias();
     }
     
-    public static List<Materia> listarCorrelativas(Integer carreraID){
-        return cu.getMaterias().get(carreraID).getCorrelativas();
+    public static List<Materia> listarCorrelativas(Integer materiaId){
+        return cu.obtenerMateria(materiaId).getCorrelativas();
     }
     
     public static void eliminarCarrera(Integer materiaID){

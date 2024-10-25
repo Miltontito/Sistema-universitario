@@ -27,7 +27,7 @@ public class CarrerasPanel extends javax.swing.JPanel {
     private void cargarCarreras(){
         
         // "ID", "Codigo", "Nombre", "Materias Optativas", "Cuatrimestres", "Plan de Estudio"
-        DefaultTableModel model = (DefaultTableModel)Carreras_Table.getModel();
+        DefaultTableModel model = (DefaultTableModel)carrerasTable.getModel();
         
         model.setRowCount(0);
         
@@ -44,9 +44,9 @@ public class CarrerasPanel extends javax.swing.JPanel {
     private void alinearTablaCarreras(){
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment( JLabel.CENTER );
-        Carreras_Table.setDefaultRenderer(Integer.class, centerRenderer);
-        Carreras_Table.setDefaultRenderer(Long.class, centerRenderer);
-        Carreras_Table.setDefaultRenderer(Object.class, centerRenderer);
+        carrerasTable.setDefaultRenderer(Integer.class, centerRenderer);
+        carrerasTable.setDefaultRenderer(Long.class, centerRenderer);
+        carrerasTable.setDefaultRenderer(Object.class, centerRenderer);
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -68,7 +68,7 @@ public class CarrerasPanel extends javax.swing.JPanel {
         Buscar_Button = new javax.swing.JButton();
         ListCarreras_Panel = new javax.swing.JPanel();
         Carrera_ScrollPane = new javax.swing.JScrollPane();
-        Carreras_Table = new javax.swing.JTable();
+        carrerasTable = new javax.swing.JTable();
         CarreraBottonButtons_Panel = new javax.swing.JPanel();
         Eliminar_Button = new javax.swing.JButton();
         Editar_Button = new javax.swing.JButton();
@@ -153,8 +153,8 @@ public class CarrerasPanel extends javax.swing.JPanel {
 
         Carrera_ScrollPane.setFont(new java.awt.Font("Roboto", 0, 15)); // NOI18N
 
-        Carreras_Table.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
-        Carreras_Table.setModel(new javax.swing.table.DefaultTableModel(
+        carrerasTable.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        carrerasTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -177,12 +177,12 @@ public class CarrerasPanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        Carreras_Table.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        Carreras_Table.setShowGrid(false);
-        Carrera_ScrollPane.setViewportView(Carreras_Table);
-        if (Carreras_Table.getColumnModel().getColumnCount() > 0) {
-            Carreras_Table.getColumnModel().getColumn(0).setMaxWidth(100);
-            Carreras_Table.getColumnModel().getColumn(1).setMaxWidth(200);
+        carrerasTable.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        carrerasTable.setShowGrid(false);
+        Carrera_ScrollPane.setViewportView(carrerasTable);
+        if (carrerasTable.getColumnModel().getColumnCount() > 0) {
+            carrerasTable.getColumnModel().getColumn(0).setMaxWidth(100);
+            carrerasTable.getColumnModel().getColumn(1).setMaxWidth(200);
         }
 
         javax.swing.GroupLayout ListCarreras_PanelLayout = new javax.swing.GroupLayout(ListCarreras_Panel);
@@ -359,7 +359,7 @@ public class CarrerasPanel extends javax.swing.JPanel {
         if(!Carrera_TextField.getText().equals("Inserte el Nombre o Codigo de la Carrera...")){
             try{
                 String busqueda = Carrera_TextField.getText();
-                Carreras_Table.setModel(ControllerCarrera.obtenerCarrera(Carreras_Table, busqueda));
+                carrerasTable.setModel(ControllerCarrera.obtenerCarrera(carrerasTable, busqueda));
             }
             catch(Exception e){
                 e.printStackTrace();
@@ -372,17 +372,17 @@ public class CarrerasPanel extends javax.swing.JPanel {
 
     private void Eliminar_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Eliminar_ButtonActionPerformed
         
-        if(Carreras_Table.getSelectedColumnCount() != 0){
-            DefaultTableModel model = (DefaultTableModel)Carreras_Table.getModel();
+        if(carrerasTable.getSelectedColumnCount() != 0){
+            DefaultTableModel model = (DefaultTableModel)carrerasTable.getModel();
             try{
                 // filas seleccionadas
-                int[] filasSeleccionadas = Carreras_Table.getSelectedRows();
+                int[] filasSeleccionadas = carrerasTable.getSelectedRows();
 
                 // Recorre las filas seleccionadas en orden inverso
                 for (int i = filasSeleccionadas.length - 1; i >= 0; i--) {
                     int fila = filasSeleccionadas[i];
                     // Elimina el alumno usando el índice correspondiente
-                    ControllerCarrera.eliminarCarrera((Integer) Carreras_Table.getValueAt(fila, 0));
+                    ControllerCarrera.eliminarCarrera((Integer) carrerasTable.getValueAt(fila, 0));
                     // Elimina la fila del modelo
                     model.removeRow(fila);
 }
@@ -399,8 +399,9 @@ public class CarrerasPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_Eliminar_ButtonActionPerformed
 
     private void Detalles_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Detalles_ButtonActionPerformed
-        if(Carreras_Table.getSelectedRow() != -1){
-            ViewMain.ShowJPanel(new DetallesCarrera());
+        if(carrerasTable.getSelectedRow() != -1){
+            Integer carreraId = (Integer) carrerasTable.getValueAt(carrerasTable.getSelectedRow(), 0);
+            ViewMain.ShowJPanel(new DetallesCarrera(carreraId));
         }
         else{
             javax.swing.JOptionPane.showMessageDialog(this, "Debe seleccionar una Carrera primero. \n", "AVISO", javax.swing.JOptionPane.INFORMATION_MESSAGE);
@@ -409,8 +410,8 @@ public class CarrerasPanel extends javax.swing.JPanel {
 
     private void Editar_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Editar_ButtonActionPerformed
         
-        if(Carreras_Table.getSelectedRow() != -1){
-            ViewMain.ShowJPanel(new SubirCarreraPanel((Integer) Carreras_Table.getValueAt(Carreras_Table.getSelectedRow(),0)));
+        if(carrerasTable.getSelectedRow() != -1){
+            ViewMain.ShowJPanel(new SubirCarreraPanel((Integer) carrerasTable.getValueAt(carrerasTable.getSelectedRow(),0)));
         }
         else{
             javax.swing.JOptionPane.showMessageDialog(this, "Debe seleccionar una Carrera primero. \n", "AVISO", javax.swing.JOptionPane.INFORMATION_MESSAGE);
@@ -426,7 +427,6 @@ public class CarrerasPanel extends javax.swing.JPanel {
     private javax.swing.JPanel CarreraBusqueda_Panel;
     private javax.swing.JScrollPane Carrera_ScrollPane;
     private javax.swing.JTextField Carrera_TextField;
-    private javax.swing.JTable Carreras_Table;
     private javax.swing.JButton Detalles_Button;
     private javax.swing.JButton Editar_Button;
     private javax.swing.JButton Eliminar_Button;
@@ -436,6 +436,7 @@ public class CarrerasPanel extends javax.swing.JPanel {
     private javax.swing.JButton Refresh_Button;
     private javax.swing.JSeparator Separador_Separator;
     private javax.swing.JLabel Titulo_Label;
+    private javax.swing.JTable carrerasTable;
     private javax.swing.JMenu jMenu1;
     // End of variables declaration//GEN-END:variables
 }

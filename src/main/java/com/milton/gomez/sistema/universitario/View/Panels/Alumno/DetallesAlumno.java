@@ -184,6 +184,9 @@ public class DetallesAlumno extends javax.swing.JPanel {
         jLabel7.setFont(new java.awt.Font("Roboto", 0, 20)); // NOI18N
         jLabel7.setText("Datos del Alumno");
 
+        jScrollPane3.setMaximumSize(new java.awt.Dimension(277, 133));
+        jScrollPane3.setPreferredSize(new java.awt.Dimension(277, 133));
+
         MateriasQuePuedeCursar_List.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         MateriasQuePuedeCursar_List.setModel(new DefaultListModel<>());
         MateriasQuePuedeCursar_List.setToolTipText("");
@@ -214,8 +217,8 @@ public class DetallesAlumno extends javax.swing.JPanel {
                 .addGroup(Body_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(Body_PanelLayout.createSequentialGroup()
                         .addGap(28, 28, 28)
-                        .addGroup(Body_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane3)
+                        .addGroup(Body_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(Body_PanelLayout.createSequentialGroup()
                                 .addGap(71, 71, 71)
                                 .addComponent(Inscribirse_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -226,7 +229,7 @@ public class DetallesAlumno extends javax.swing.JPanel {
                     .addGroup(Body_PanelLayout.createSequentialGroup()
                         .addGap(99, 99, 99)
                         .addComponent(jLabel7)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(67, 67, 67)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(54, 54, 54)
                 .addGroup(Body_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -267,7 +270,7 @@ public class DetallesAlumno extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel8)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(Inscribirse_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 448, javax.swing.GroupLayout.PREFERRED_SIZE))

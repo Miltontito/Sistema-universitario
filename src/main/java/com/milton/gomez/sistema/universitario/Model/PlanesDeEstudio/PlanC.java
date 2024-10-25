@@ -27,7 +27,9 @@ public class PlanC implements PlanDeEstudio {
         }
 
 
-        List<Cuatrimestre> cuatrimestres = carrera.getCuatrimestres();
+        List<Cuatrimestre> cuatrimestres = new ArrayList<>();
+        carrera.getCuatrimestres().forEach((k,v) -> cuatrimestres.add(v));
+
         // Adicionalmente, verificar los últimos 5 cuatrimestres
         if (!aproboLosFinalesDeLosCuatrimestres(alumno, cuatrimestres)) {
             return new ArrayList<>(); // Retorna vacío si no se cumplen los requisitos

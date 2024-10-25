@@ -4,10 +4,15 @@
  */
 package com.milton.gomez.sistema.universitario.Controller;
 
-import com.milton.gomez.sistema.universitario.Model.Carrera;
-import com.milton.gomez.sistema.universitario.Model.ControladorUniversitario;
-import com.milton.gomez.sistema.universitario.Model.Cuatrimestre;
-import com.milton.gomez.sistema.universitario.Model.Materia;
+import com.milton.gomez.sistema.universitario.Model.*;
+import com.milton.gomez.sistema.universitario.Transferible.TransferibleCarrera;
+import com.milton.gomez.sistema.universitario.Transferible.TransferibleCarreraCrear;
+import com.milton.gomez.sistema.universitario.Transferible.TransferibleCuatrimestre;
+import com.milton.gomez.sistema.universitario.Transferible.TransferibleCursada;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -22,24 +27,38 @@ public class ControllerCarrera {
     private static ControladorUniversitario cu = ControladorUniversitario.getInstance();
     
     public static List<Carrera> listarTodasLasCarreras(){
-        return cu.getCarreras();
+        return cu.obtenerCarreras();
     }
     
+    public static void crearCarrera(TransferibleCarreraCrear t){
+        Carrera carreraCreada = cu.crearCarrera(t.getNombre(), t.getCodigoCarrera(), t.getCantMateriasOptativasParaAprobar(), t.getPlanDeEstudio(), new HashMap<>(), null);
+        agregarCuatrimestre(carreraCreada, t.getCuatrimestres());
+    }
+
+    public static void agregarCuatrimestre (Carrera carrera,List<TransferibleCuatrimestre> transferible){
+        for (TransferibleCuatrimestre t : transferible){
+            carrera.crearCuatrimestre(t.getMateriasObligatorias(), t.getMateriasOptativas());
+        }
+    }
+
     public static Carrera obtenerCarreraPorId(Integer id){
-        return cu.getCarreras().get(id);
+        return cu.obtenerCarrera(id);
     }
     
-    public static List<Cuatrimestre> listarTodosLosCuatrimestres(Integer carreraID){
-        return cu.getCarreras().get(carreraID).getCuatrimestres();
+    public static List<Cuatrimestre> listarTodosLosCuatrimestres(Integer carreraId){
+        HashMap<Integer, Cuatrimestre> cuatrimestres = cu.obtenerCarrera(carreraId).getCuatrimestres();
+        ArrayList<Cuatrimestre> listaCuatrimestre = new ArrayList<>();
+        cuatrimestres.forEach((k,v) -> listaCuatrimestre.add(v));
+
+        return listaCuatrimestre;
     }
     
-    public static Cuatrimestre listarCuatrimestre(Integer carreraID, Integer cuatrimestreID){
-        return cu.getCarreras().get(carreraID).getCuatrimestres().get(cuatrimestreID);
+    public static Cuatrimestre listarCuatrimestre(Integer carreraId, Integer cuatrimestreId){
+        return cu.obtenerCarrera(carreraId).getCuatrimestres().get(cuatrimestreId);
     }
     
-    public static List<Materia> listarMateriasDeLaCarrera(Integer carreraID){
-        cu.getCarreras().get(carreraID).getCuatrimestres().forEach((c) -> System.out.print(c.getNumeroCuatrimestre()));
-        return cu.getCarreras().get(carreraID).obtenerMateriasDeLaCarrera();
+    public static List<Materia> listarMateriasDeLaCarrera(Integer carreraId){
+        return cu.obtenerCarrera(carreraId).obtenerMateriasDeLaCarrera();
     }
     
     public static void eliminarCarrera(Integer carreraID){
@@ -75,6 +94,28 @@ public class ControllerCarrera {
             }
         }
         return null;
+    }
+    
+    public static TransferibleCarrera obtenerDatosCarrera(Integer id){
+        TransferibleCarrera transferible = new TransferibleCarrera();
+        Carrera carrera = cu.obtenerCarrera(id);
+        
+        transferible.setNombre(carrera.getNombre());
+        transferible.setCodigoCarrera(carrera.getCodigoCarrera());
+        transferible.setAlumnos(carrera.getAlumnosList());
+        transferible.setCantMateriasOptativasParaAprobar(carrera.getCantMateriasOptativasParaAprobar());
+        transferible.setCuatrimestres(carrera.getCuatrimestres());
+        transferible.setPlanDeEstudio(carrera.getPlanDeEstudio());
+        transferible.setId(carrera.getCarreraID());
+        
+        return transferible;
+    }
+
+    public static boolean sePuedeEgresar(Integer carreraId, Integer alumnoId){
+        Carrera carrera = cu.obtenerCarrera(carreraId);
+        Alumno alumno = cu.obtenerAlumno(alumnoId);
+
+        return carrera.sePuedeGraduar(alumno);
     }
     
     public static Cuatrimestre crearCuatrimestre(Integer nroCuatrimestre){

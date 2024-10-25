@@ -61,8 +61,8 @@ public class ControllerAlumno {
         }
         return transferible;
     }
-    private static Alumno getAlumnoPorID(Integer alumnoID){
-        return cu.getAlumnos().get(alumnoID);
+    private static Alumno getAlumnoPorID(Integer alumnoId){
+        return cu.obtenerAlumno(alumnoId);
     }
     
     
@@ -135,12 +135,12 @@ public class ControllerAlumno {
         return model;
     }
     
-    public static List<Materia> listarMateriasQuePuedeCursar(Integer alumnoID){
-        return cu.getAlumnos().get(alumnoID).obtenerMateriasQuePuedeCursar();
+    public static List<Materia> listarMateriasQuePuedeCursar(Integer alumnoId){
+        return cu.obtenerAlumno(alumnoId).obtenerMateriasQuePuedeCursar();
     }
     
-    public static List<Materia> listarMateriasQueCursa(Integer alumnoID){
-        return cu.getAlumnos().get(alumnoID).obtenerMateriasQueCursa();
+    public static List<Materia> listarMateriasQueCursa(Integer alumnoId){
+        return cu.obtenerAlumno(alumnoId).obtenerMateriasQueCursa();
     }
     
     
@@ -205,16 +205,16 @@ public class ControllerAlumno {
     }
     
     public static void actualizarAlumno(TransferibleAlumno alumno){
-        Alumno alumnoFinal = cu.getAlumnos().get(alumno.getId());
+        Alumno alumnoFinal = cu.obtenerAlumno(alumno.getId());
         alumnoFinal.setLegajo(alumno.getLegajo());
         alumnoFinal.setDni(alumno.getDni());
         alumnoFinal.setNombre(alumno.getNombre());
         alumnoFinal.setApellido(alumno.getApellido());
-        alumnoFinal.setCarrera(alumno.getCarrera());
+        alumnoFinal.inscribirACarrera(alumno.getCarrera());
         
         //Nos aseguramos de guardar las materias aprobadas del alumno.
         List<Cursada> cursadas = new ArrayList<>();
-        for(Materia materia : cu.getAlumnos().get(alumno.getId()).obtenerMateriasAprobadas()){
+        for(Materia materia : cu.obtenerAlumno(alumno.getId()).obtenerMateriasAprobadas()){
             cursadas.add(new Cursada(materia, true));
         }
         cursadas.addAll(alumno.getCursadas());
@@ -223,7 +223,7 @@ public class ControllerAlumno {
     
     public static void inscribirAlumno(Integer id, List<Materia> materias){
         for(Materia m : materias){
-            cu.getAlumnos().get(id).inscribirseAMateria(m);
+            cu.obtenerAlumno(id).inscribirseAMateria(m);
         }
     }
 }

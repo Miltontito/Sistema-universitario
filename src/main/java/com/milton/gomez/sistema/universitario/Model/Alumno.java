@@ -66,13 +66,11 @@ public class Alumno {
         materiasQuePuedeCursar = carrera.materiasQuePuedeCursar(this);
         return materiasQuePuedeCursar;
     }
-    public Boolean inscribirseAMateria(Materia materia){
+    public void inscribirseAMateria(Materia materia){
         /* si la materia se encuentra en la lista de materias que puede cursar entonces... */
         if(materiasQuePuedeCursar.contains(materia)){
             cursadas.add(new Cursada(materia));
-            return true;
         }
-        return false;
     }
     public List<Materia> obtenerMateriasQueCursa(){
         List<Materia> materias = new ArrayList<>();
@@ -112,6 +110,11 @@ public class Alumno {
     public void setMateriaAprobada(Materia materia) {
         Cursada cursada = new Cursada(materia);
         cursada.setMateriaAprobada(Boolean.TRUE);
+    }
+
+    @Override
+    public String toString(){
+        return this.dni+ " | " +this.nombre + " " + this.apellido;
     }
 
     // -----------------------------------------
@@ -176,8 +179,9 @@ public class Alumno {
         materias.forEach((m) -> nuevaCursada.add(new Cursada(m)));
         this.cursadas = nuevaCursada;
     }
-    public void setCarrera(Carrera carrera){
+    public void inscribirACarrera(Carrera carrera){
         this.carrera = carrera;
+        this.carrera.inscribirAlumno(this);
     }
 
     public void setCursadas(List<Cursada> cursadas) {

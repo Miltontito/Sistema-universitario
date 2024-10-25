@@ -8,6 +8,7 @@ import com.milton.gomez.sistema.universitario.Model.PlanesDeEstudio.PlanC;
 import com.milton.gomez.sistema.universitario.Model.PlanesDeEstudio.PlanD;
 import com.milton.gomez.sistema.universitario.Model.PlanesDeEstudio.PlanE;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class ControladorUniversitario {
@@ -16,18 +17,18 @@ public class ControladorUniversitario {
     // ---------------| Atributos |---------------
     // -------------------------------------------
     private static ControladorUniversitario instance;
-    private List<Carrera> carreras;
-    private List<Materia> materias;
-    private List<Alumno> alumnos;
+    private HashMap<Integer, Carrera> carreras;
+    private HashMap<Integer, Materia> materias;
+    private HashMap<Integer, Alumno> alumnos;
     private List<PlanDeEstudio> planesDeEstudios;
 
     // -----------------------------------------------
     // ---------------| Constructores |---------------
     // -----------------------------------------------
     private ControladorUniversitario() {
-        this.carreras = new ArrayList<>();
-        this.materias = new ArrayList<>();
-        this.alumnos = new ArrayList<>();
+        this.carreras = new HashMap<>();
+        this.materias = new HashMap<>();
+        this.alumnos = new HashMap<>();
         this.planesDeEstudios = new ArrayList<>();
     }
     
@@ -48,21 +49,21 @@ public class ControladorUniversitario {
     // -----------------------------------------
     
     // Crear métodos
-    public Carrera crearCarrera(String nombre, String codCarrera, Integer cantMateriasOptativas, PlanDeEstudio planDeEstudio, List<Cuatrimestre> cuatrimestres, List<Alumno> alumnos) {
+    public Carrera crearCarrera(String nombre, String codCarrera, Integer cantMateriasOptativas, PlanDeEstudio planDeEstudio, HashMap<Integer,Cuatrimestre> cuatrimestres, List<Alumno> alumnos) {
         Carrera nuevaCarrera = new Carrera();
         nuevaCarrera.setNombre(nombre);
         nuevaCarrera.setCodigoCarrera(codCarrera);
         nuevaCarrera.setCantMateriasOptativasParaAprobar(cantMateriasOptativas);
         nuevaCarrera.setPlanDeEstudio(planDeEstudio);
-        nuevaCarrera.setCuatrimestres(cuatrimestres != null ? cuatrimestres : new ArrayList<>());
+        nuevaCarrera.setCuatrimestres(cuatrimestres != null ? cuatrimestres : new HashMap<>());
         nuevaCarrera.setAlumnos(alumnos != null ? alumnos : new ArrayList<>());
-        this.carreras.add(nuevaCarrera);
+        this.carreras.put(nuevaCarrera.getCarreraID(), nuevaCarrera);
         return nuevaCarrera;
     }
 
     public Materia crearMateria(String codigoDeMateria, String nombre, Boolean promocionable, List<Materia> correlativas) {
         Materia nuevaMateria = new Materia(codigoDeMateria, nombre, promocionable, correlativas != null ? correlativas : new ArrayList<>());
-        this.materias.add(nuevaMateria);
+        this.materias.put(nuevaMateria.getMateriaID(), nuevaMateria);
         return nuevaMateria;
     }
 
@@ -72,9 +73,9 @@ public class ControladorUniversitario {
         nuevoAlumno.setApellido(apellido);
         nuevoAlumno.setLegajo(legajo);
         nuevoAlumno.setDni(dni);
-        nuevoAlumno.setCarrera(carrera);
+        nuevoAlumno.inscribirACarrera(carrera);
         nuevoAlumno.setMaterias(materias);
-        this.alumnos.add(nuevoAlumno);
+        this.alumnos.put(nuevoAlumno.getAlumnoID(), nuevoAlumno);
         return nuevoAlumno;
     }
     
@@ -86,63 +87,54 @@ public class ControladorUniversitario {
         this.planesDeEstudios.add(new PlanE());
     }
 
-    // Obtener métodos
+    /* Métodos para Obtener TODOS */
     public List<Carrera> obtenerCarreras() {
-        return this.carreras;
+        List<Carrera> listaCarreras = new ArrayList<>();
+        this.carreras.forEach((k,v) -> listaCarreras.add(v));
+        return listaCarreras;
     }
 
     public List<Materia> obtenerMaterias() {
-        return this.materias;
+        List<Materia> listaMaterias = new ArrayList<>();
+        this.materias.forEach((k,v) -> listaMaterias.add(v));
+        return listaMaterias;
     }
 
     public List<Alumno> obtenerAlumnos() {
-        return this.alumnos;
+        List<Alumno> listaAlumos = new ArrayList<>();
+        this.alumnos.forEach((k,v) -> listaAlumos.add(v));
+        return listaAlumos;
     }
 
     public List<PlanDeEstudio> obtenerPlanesDeEstudios() {
         return this.planesDeEstudios;
     }
 
+    /* Métodos para Obtener uno */
+    public Carrera obtenerCarrera(Integer carreraId){
+        return this.carreras.get(carreraId);
+    }
+
+    public Materia obtenerMateria(Integer materiaId){
+        return this.materias.get(materiaId);
+    }
+
+    public Alumno obtenerAlumno(Integer alumnoId){
+        return this.alumnos.get(alumnoId);
+    }
 
     // Eliminar métodos
     public void eliminarCarrera(Integer carreraID) {
-        carreras.removeIf(carrera -> carrera.getCarreraID().equals(carreraID));
+        this.carreras.remove(carreraID);
     }
     public void eliminarMateria(Integer materiaID) {
-        materias.removeIf(materia -> materia.getMateriaID().equals(materiaID));
+        this.materias.remove(materiaID);
     }
     public void eliminarAlumno(Integer alumnoID) {
-        alumnos.removeIf(alumno -> alumno.getAlumnoID().equals(alumnoID));
-    }
-    
-    // Getters
-    public List<Carrera> getCarreras() {
-        return this.carreras;
-    }
-    public List<Materia> getMaterias() {
-        return this.materias;
-    }
-    public List<Alumno> getAlumnos() {
-        return this.alumnos;
-    }
-    public List<PlanDeEstudio> getPlanesDeEstudios() {
-        return this.planesDeEstudios;
+        this.materias.remove(alumnoID);
     }
 
-    // Setters
-    public void setCarreras(List<Carrera> carreras) {
-        this.carreras = carreras;
-    }
-    public void setMaterias(List<Materia> materias) {
-        this.materias = materias;
-    }
-    public void setAlumnos(List<Alumno> alumnos) {
-        this.alumnos = alumnos;
-    }
-    public void setPlanesDeEstudios(List<PlanDeEstudio> planesDeEstudios) {
-        this.planesDeEstudios = planesDeEstudios;
-    }
     public void agregarCarrera(Carrera carrera){
-        this.carreras.add(carrera);
+        this.carreras.put(carrera.getCarreraID(), carrera);
     }
 }
