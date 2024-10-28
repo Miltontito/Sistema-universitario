@@ -6,12 +6,8 @@ package com.milton.gomez.sistema.universitario.Controller;
 
 import com.milton.gomez.sistema.universitario.Model.*;
 import com.milton.gomez.sistema.universitario.Transferible.TransferibleCarrera;
-import com.milton.gomez.sistema.universitario.Transferible.TransferibleCarreraCrear;
-import com.milton.gomez.sistema.universitario.Transferible.TransferibleCuatrimestre;
-import com.milton.gomez.sistema.universitario.Transferible.TransferibleCursada;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import javax.swing.JTable;
@@ -30,15 +26,13 @@ public class ControllerCarrera {
         return cu.obtenerCarreras();
     }
     
-    public static void crearCarrera(TransferibleCarreraCrear t){
-        Carrera carreraCreada = cu.crearCarrera(t.getNombre(), t.getCodigoCarrera(), t.getCantMateriasOptativasParaAprobar(), t.getPlanDeEstudio(), new HashMap<>(), null);
-        agregarCuatrimestre(carreraCreada, t.getCuatrimestres());
-    }
-
-    public static void agregarCuatrimestre (Carrera carrera,List<TransferibleCuatrimestre> transferible){
-        for (TransferibleCuatrimestre t : transferible){
-            carrera.crearCuatrimestre(t.getMateriasObligatorias(), t.getMateriasOptativas());
-        }
+    public static void crearCarrera(TransferibleCarrera t){
+        cu.crearCarrera(t.getNombre(), 
+                t.getCodigoCarrera(), 
+                t.getCantMateriasOptativasParaAprobar(), 
+                t.getPlanDeEstudio(), 
+                t.getCuatrimestres(), 
+                null);
     }
 
     public static Carrera obtenerCarreraPorId(Integer id){
@@ -120,5 +114,14 @@ public class ControllerCarrera {
     
     public static Cuatrimestre crearCuatrimestre(Integer nroCuatrimestre){
         return new Cuatrimestre(nroCuatrimestre);
+    }
+    
+    public static void actualizarCarrera(TransferibleCarrera carrera){
+        Carrera carreraActualizada = cu.obtenerCarrera(carrera.getId());
+        
+    }
+    
+    public static HashMap<> obtenerCuatrimestresCreados(){
+        
     }
 }

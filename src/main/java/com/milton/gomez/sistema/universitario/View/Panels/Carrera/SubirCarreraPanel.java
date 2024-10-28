@@ -12,7 +12,6 @@ import com.milton.gomez.sistema.universitario.Model.Cuatrimestre;
 import com.milton.gomez.sistema.universitario.Model.Materia;
 import com.milton.gomez.sistema.universitario.Model.PlanDeEstudio;
 import com.milton.gomez.sistema.universitario.Transferible.TransferibleCarrera;
-import com.milton.gomez.sistema.universitario.Transferible.TransferibleCarreraCrear;
 import com.milton.gomez.sistema.universitario.Transferible.TransferibleCuatrimestre;
 import com.milton.gomez.sistema.universitario.View.Panels.Alumno.AlumnosPanel;
 import com.milton.gomez.sistema.universitario.View.ViewMain;
@@ -539,19 +538,18 @@ public class SubirCarreraPanel extends javax.swing.JPanel {
     private void Subir_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Subir_ButtonActionPerformed
         try{
             if(!nombreTextField.getText().isEmpty() || !codigoTextField.getText().isEmpty() || !(planesDeEstudioList.getSelectedIndex() == -1)){
+                // Construyo el transferible
+                TransferibleCarrera transferibleCarrera = new TransferibleCarrera();
+
+                transferibleCarrera.setNombre(nombreTextField.getText());
+                transferibleCarrera.setCodigoCarrera(codigoTextField.getText());
+                transferibleCarrera.setCantMateriasOptativasParaAprobar(Integer.parseInt(optativasTextField.getText()));
+                transferibleCarrera.setCuatrimestres(ControllerCarrera.obtenerCuatrimestres(obtenerCuatrimestresCreados()));
+                transferibleCarrera.setPlanDeEstudio(planesDeEstudioList.getSelectedValue());
                 if(isEdicion){
-                    
+                    ControllerCarrera.actualizarCarrera(transferibleCarrera);
                 }
                 else{
-                    // Construyo el transferible
-                    TransferibleCarreraCrear transferibleCarrera = new TransferibleCarreraCrear();
-
-                    transferibleCarrera.setNombre(nombreTextField.getText());
-                    transferibleCarrera.setCodigoCarrera(codigoTextField.getText());
-                    transferibleCarrera.setCantMateriasOptativasParaAprobar(Integer.parseInt(optativasTextField.getText()));
-                    transferibleCarrera.setCuatrimestres(obtenerCuatrimestresCreados());
-                    transferibleCarrera.setPlanDeEstudio(planesDeEstudioList.getSelectedValue());
-
                     ControllerCarrera.crearCarrera(transferibleCarrera);
                     javax.swing.JOptionPane.showMessageDialog(this, "La carrera fue creada con éxito. \n", "AVISO", JOptionPane.INFORMATION_MESSAGE);
                 }

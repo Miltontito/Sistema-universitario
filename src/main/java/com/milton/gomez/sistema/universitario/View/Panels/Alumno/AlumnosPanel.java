@@ -32,7 +32,8 @@ public class AlumnosPanel extends javax.swing.JPanel {
         centerRenderer.setHorizontalAlignment( JLabel.CENTER );
         Alumnos_Table.setDefaultRenderer(Object.class, centerRenderer);
         Alumnos_Table.setDefaultRenderer(Integer.class, centerRenderer);
-        Alumnos_Table.setDefaultRenderer(Long.class, centerRenderer);
+        Alumnos_Table.setDefaultRenderer(String.class, centerRenderer);
+        Alumnos_Table.setDefaultRenderer(Boolean.class, centerRenderer);
     }
     private void buscarAlumno(){
         try{

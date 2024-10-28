@@ -1,5 +1,4 @@
 package com.milton.gomez.sistema.universitario.View;
-import com.milton.gomez.sistema.universitario.View.Panels.PlanesDeEstudio.PlanesDeEstudioPanel;
 import com.milton.gomez.sistema.universitario.View.Panels.Ayuda.AyudaPanel;
 import com.milton.gomez.sistema.universitario.View.Panels.Materias.MateriasPanel;
 import com.milton.gomez.sistema.universitario.View.Panels.Carrera.CarrerasPanel;
@@ -58,7 +57,6 @@ public class ViewMain extends JFrame {
         Alumnos_Button = new javax.swing.JButton();
         Carreras_Button = new javax.swing.JButton();
         Materias_Button = new javax.swing.JButton();
-        PlanesDeEstudio_Button = new javax.swing.JButton();
         Ayuda_Button = new javax.swing.JButton();
         HeaderPanel = new javax.swing.JPanel();
         ExitPanel = new javax.swing.JPanel();
@@ -163,21 +161,6 @@ public class ViewMain extends JFrame {
             }
         });
 
-        PlanesDeEstudio_Button.setBackground(new java.awt.Color(204, 0, 0));
-        PlanesDeEstudio_Button.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
-        PlanesDeEstudio_Button.setForeground(new java.awt.Color(255, 255, 255));
-        PlanesDeEstudio_Button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/rule_settings_icon.png"))); // NOI18N
-        PlanesDeEstudio_Button.setText("Planes de Estudio");
-        PlanesDeEstudio_Button.setBorder(null);
-        PlanesDeEstudio_Button.setBorderPainted(false);
-        PlanesDeEstudio_Button.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        PlanesDeEstudio_Button.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        PlanesDeEstudio_Button.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                PlanesDeEstudio_ButtonActionPerformed(evt);
-            }
-        });
-
         Ayuda_Button.setBackground(new java.awt.Color(204, 0, 0));
         Ayuda_Button.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         Ayuda_Button.setForeground(new java.awt.Color(255, 255, 255));
@@ -201,7 +184,6 @@ public class ViewMain extends JFrame {
             .addComponent(Materias_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addComponent(Carreras_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addComponent(Ayuda_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(PlanesDeEstudio_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         Menu_ButtonsPanelLayout.setVerticalGroup(
             Menu_ButtonsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -213,10 +195,8 @@ public class ViewMain extends JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Materias_Button)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(PlanesDeEstudio_Button)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
                 .addComponent(Ayuda_Button)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout MenuPanelLayout = new javax.swing.GroupLayout(MenuPanel);
@@ -234,7 +214,7 @@ public class ViewMain extends JFrame {
                 .addComponent(Menu_HeaderPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33)
                 .addComponent(Menu_ButtonsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(139, Short.MAX_VALUE))
+                .addContainerGap(211, Short.MAX_VALUE))
         );
 
         BackgroundPanel.add(MenuPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, 650));
@@ -366,10 +346,6 @@ public class ViewMain extends JFrame {
         this.setLocation(x- xMouse, y - yMouse);
     }//GEN-LAST:event_HeaderPanelMouseDragged
 
-    private void PlanesDeEstudio_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PlanesDeEstudio_ButtonActionPerformed
-        ShowJPanel(new PlanesDeEstudioPanel());
-    }//GEN-LAST:event_PlanesDeEstudio_ButtonActionPerformed
-
     private void Ayuda_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Ayuda_ButtonActionPerformed
         ShowJPanel(new AyudaPanel());
     }//GEN-LAST:event_Ayuda_ButtonActionPerformed
@@ -442,7 +418,6 @@ public class ViewMain extends JFrame {
     private javax.swing.JPanel Menu_HeaderPanel;
     private javax.swing.JPanel MinimizePanel;
     private javax.swing.JLabel Minimize_Label;
-    private javax.swing.JButton PlanesDeEstudio_Button;
     private javax.swing.JLabel Title_Label;
     private javax.swing.JLabel UNTDF_iconLabel;
     // End of variables declaration//GEN-END:variables

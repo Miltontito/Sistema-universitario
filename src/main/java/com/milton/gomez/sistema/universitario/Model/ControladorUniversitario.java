@@ -131,7 +131,7 @@ public class ControladorUniversitario {
         this.materias.remove(materiaID);
     }
     public void eliminarAlumno(Integer alumnoID) {
-        this.materias.remove(alumnoID);
+        this.alumnos.remove(alumnoID);
     }
 
     public void agregarCarrera(Carrera carrera){

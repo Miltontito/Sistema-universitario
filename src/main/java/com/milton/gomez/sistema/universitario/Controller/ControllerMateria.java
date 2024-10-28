@@ -25,7 +25,7 @@ public class ControllerMateria {
         return cu.obtenerMateria(materiaId).getCorrelativas();
     }
     
-    public static void eliminarCarrera(Integer materiaID){
+    public static void eliminarMateria(Integer materiaID){
         cu.eliminarMateria(materiaID);
     }
 }

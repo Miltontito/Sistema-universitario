@@ -74,7 +74,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <EmptySpace min="-2" pref="229" max="-2" attributes="0"/>
-                              <Component id="Titulo_Label" min="-2" max="-2" attributes="0"/>
+                              <Component id="tituloLabel" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="179" max="-2" attributes="0"/>
@@ -88,7 +88,7 @@
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="Titulo_Label" min="-2" max="-2" attributes="0"/>
+                      <Component id="tituloLabel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="Separador_Separator" min="-2" pref="10" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -97,7 +97,7 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JLabel" name="Titulo_Label">
+            <Component class="javax.swing.JLabel" name="tituloLabel">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Roboto" size="24" style="0"/>
@@ -117,34 +117,34 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="AlumnoBusqueda_Panel" max="32767" attributes="0"/>
-                  <Component id="ListAlumnos_Panel" alignment="0" max="32767" attributes="0"/>
-                  <Component id="AlumnoEditDelete_Panel" alignment="0" max="32767" attributes="0"/>
+                  <Component id="materiasBusquedaPanel" max="32767" attributes="0"/>
+                  <Component id="listaMateriasPanel" alignment="0" max="32767" attributes="0"/>
+                  <Component id="materiaEditDeletePanel" alignment="0" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="AlumnoBusqueda_Panel" min="-2" max="-2" attributes="0"/>
+                      <Component id="materiasBusquedaPanel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="ListAlumnos_Panel" min="-2" max="-2" attributes="0"/>
+                      <Component id="listaMateriasPanel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="AlumnoEditDelete_Panel" min="-2" max="-2" attributes="0"/>
+                      <Component id="materiaEditDeletePanel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="86" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Container class="javax.swing.JPanel" name="AlumnoBusqueda_Panel">
+            <Container class="javax.swing.JPanel" name="materiasBusquedaPanel">
 
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="Alumno_TextField" max="32767" attributes="0"/>
+                          <Component id="materiaTextField" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="Buscar_Button" min="-2" pref="149" max="-2" attributes="0"/>
+                          <Component id="buscarButton" min="-2" pref="149" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -153,8 +153,8 @@
                       <Group type="102" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="Alumno_TextField" pref="50" max="32767" attributes="0"/>
-                              <Component id="Buscar_Button" max="32767" attributes="0"/>
+                              <Component id="materiaTextField" pref="50" max="32767" attributes="0"/>
+                              <Component id="buscarButton" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
@@ -162,17 +162,17 @@
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JTextField" name="Alumno_TextField">
+                <Component class="javax.swing.JTextField" name="materiaTextField">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Inserte el DNI o Legajo del Alumno..."/>
+                    <Property name="text" type="java.lang.String" value="Ingrese el Codigo o Nombre de la materia"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="Alumno_TextFieldFocusLost"/>
-                    <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="Alumno_TextFieldMousePressed"/>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Alumno_TextFieldActionPerformed"/>
+                    <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="materiaTextFieldFocusLost"/>
+                    <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="materiaTextFieldMousePressed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="materiaTextFieldActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JButton" name="Buscar_Button">
+                <Component class="javax.swing.JButton" name="buscarButton">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="0" green="0" red="cc" type="rgb"/>
@@ -189,27 +189,27 @@
                     </Property>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Buscar_ButtonActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buscarButtonActionPerformed"/>
                   </Events>
                 </Component>
               </SubComponents>
             </Container>
-            <Container class="javax.swing.JPanel" name="ListAlumnos_Panel">
+            <Container class="javax.swing.JPanel" name="listaMateriasPanel">
 
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="Alumnos_ScrollPane" alignment="0" max="32767" attributes="0"/>
+                      <Component id="materiasScrollPane" alignment="0" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="Alumnos_ScrollPane" min="-2" pref="340" max="-2" attributes="0"/>
+                      <Component id="materiasScrollPane" min="-2" pref="340" max="-2" attributes="0"/>
                   </Group>
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Container class="javax.swing.JScrollPane" name="Alumnos_ScrollPane">
+                <Container class="javax.swing.JScrollPane" name="materiasScrollPane">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Roboto" size="15" style="0"/>
@@ -218,7 +218,7 @@
 
                   <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                   <SubComponents>
-                    <Component class="javax.swing.JTable" name="Alumnos_Table">
+                    <Component class="javax.swing.JTable" name="materiasTable">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Roboto" size="18" style="0"/>
@@ -274,21 +274,21 @@
                 </Container>
               </SubComponents>
             </Container>
-            <Container class="javax.swing.JPanel" name="AlumnoEditDelete_Panel">
+            <Container class="javax.swing.JPanel" name="materiaEditDeletePanel">
 
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
-                          <Component id="Refresh_Button" min="-2" max="-2" attributes="0"/>
+                          <Component id="refreshButton" min="-2" max="-2" attributes="0"/>
                           <EmptySpace pref="58" max="32767" attributes="0"/>
-                          <Component id="Nuevo_Button" min="-2" pref="149" max="-2" attributes="0"/>
+                          <Component id="nuevoButton" min="-2" pref="149" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="Detalles_Button" min="-2" pref="149" max="-2" attributes="0"/>
+                          <Component id="detallesButton" min="-2" pref="149" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="Editar_Button" min="-2" pref="149" max="-2" attributes="0"/>
+                          <Component id="editarButon" min="-2" pref="149" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="Eliminar_Button" min="-2" pref="149" max="-2" attributes="0"/>
+                          <Component id="eliminarButton" min="-2" pref="149" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -298,22 +298,22 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="Eliminar_Button" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
-                              <Component id="Editar_Button" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
-                              <Component id="Nuevo_Button" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
-                              <Component id="Detalles_Button" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
+                              <Component id="eliminarButton" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
+                              <Component id="editarButon" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
+                              <Component id="nuevoButton" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
+                              <Component id="detallesButton" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace pref="14" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="Refresh_Button" min="-2" max="-2" attributes="0"/>
+                          <Component id="refreshButton" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JButton" name="Eliminar_Button">
+                <Component class="javax.swing.JButton" name="eliminarButton">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="0" green="0" red="cc" type="rgb"/>
@@ -329,8 +329,11 @@
                       <Border info="null"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="eliminarButtonActionPerformed"/>
+                  </Events>
                 </Component>
-                <Component class="javax.swing.JButton" name="Editar_Button">
+                <Component class="javax.swing.JButton" name="editarButon">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="0" green="0" red="cc" type="rgb"/>
@@ -347,7 +350,7 @@
                     </Property>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JButton" name="Nuevo_Button">
+                <Component class="javax.swing.JButton" name="nuevoButton">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="0" green="0" red="cc" type="rgb"/>
@@ -364,10 +367,10 @@
                     </Property>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Nuevo_ButtonActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nuevoButtonActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JButton" name="Detalles_Button">
+                <Component class="javax.swing.JButton" name="detallesButton">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="0" green="0" red="cc" type="rgb"/>
@@ -384,10 +387,10 @@
                     </Property>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Detalles_ButtonActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="detallesButtonActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JButton" name="Refresh_Button">
+                <Component class="javax.swing.JButton" name="refreshButton">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/refresh_icon.png"/>
@@ -395,7 +398,7 @@
                     <Property name="borderPainted" type="boolean" value="false"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Refresh_ButtonActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="refreshButtonActionPerformed"/>
                   </Events>
                 </Component>
               </SubComponents>
