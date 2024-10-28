@@ -119,9 +119,11 @@ public class ControllerCarrera {
     public static void actualizarCarrera(TransferibleCarrera carrera){
         Carrera carreraActualizada = cu.obtenerCarrera(carrera.getId());
         
-    }
-    
-    public static HashMap<> obtenerCuatrimestresCreados(){
+        carreraActualizada.setNombre(carrera.getNombre());
+        carreraActualizada.setCodigoCarrera(carrera.getCodigoCarrera());
+        carreraActualizada.setCantMateriasOptativasParaAprobar(carrera.getCantMateriasOptativasParaAprobar());
+        carreraActualizada.setPlanDeEstudio(carrera.getPlanDeEstudio());
+        carreraActualizada.setCuatrimestres(carrera.getCuatrimestres());
         
     }
 }

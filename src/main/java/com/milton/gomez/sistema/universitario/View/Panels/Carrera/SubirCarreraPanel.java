@@ -17,6 +17,7 @@ import com.milton.gomez.sistema.universitario.View.Panels.Alumno.AlumnosPanel;
 import com.milton.gomez.sistema.universitario.View.ViewMain;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -84,18 +85,17 @@ public class SubirCarreraPanel extends javax.swing.JPanel {
         }
     }
 
-    private List<TransferibleCuatrimestre> obtenerCuatrimestresCreados(){
+    private HashMap<Integer, Cuatrimestre> obtenerCuatrimestresCreados(){
         DefaultTableModel table = (DefaultTableModel) cuatrimestresTable.getModel();
-        List<TransferibleCuatrimestre> transferible = new ArrayList<>();
-
+        HashMap<Integer, Cuatrimestre> cuatrimestreHash = new HashMap<>();
         for(int i = 0; i < table.getRowCount(); i++){
-            TransferibleCuatrimestre transferibleCuatrimestre = new TransferibleCuatrimestre();
-            transferibleCuatrimestre.setMateriasObligatorias((List<Materia>) table.getValueAt(i,2));
-            transferibleCuatrimestre.setMateriasObligatorias((List<Materia>) table.getValueAt(i,1));
-            transferible.add(transferibleCuatrimestre);
+            Cuatrimestre cuatrimestre = new Cuatrimestre();
+            cuatrimestre.setMateriasObligatorias((List<Materia>) table.getValueAt(i,2));
+            cuatrimestre.setMateriasObligatorias((List<Materia>) table.getValueAt(i,1));
+            cuatrimestreHash.put(cuatrimestre.getNumeroCuatrimestre(), cuatrimestre);
         }
 
-        return transferible;
+        return cuatrimestreHash;
     }
 
     private void asignarMateria(boolean esObligatoria) {
@@ -544,9 +544,10 @@ public class SubirCarreraPanel extends javax.swing.JPanel {
                 transferibleCarrera.setNombre(nombreTextField.getText());
                 transferibleCarrera.setCodigoCarrera(codigoTextField.getText());
                 transferibleCarrera.setCantMateriasOptativasParaAprobar(Integer.parseInt(optativasTextField.getText()));
-                transferibleCarrera.setCuatrimestres(ControllerCarrera.obtenerCuatrimestres(obtenerCuatrimestresCreados()));
+                transferibleCarrera.setCuatrimestres(obtenerCuatrimestresCreados());
                 transferibleCarrera.setPlanDeEstudio(planesDeEstudioList.getSelectedValue());
                 if(isEdicion){
+                    transferibleCarrera.setId(carreraId);
                     ControllerCarrera.actualizarCarrera(transferibleCarrera);
                 }
                 else{
