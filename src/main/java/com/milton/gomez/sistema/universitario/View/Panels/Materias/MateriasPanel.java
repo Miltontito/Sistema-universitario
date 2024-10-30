@@ -4,6 +4,7 @@ import com.milton.gomez.sistema.universitario.View.Panels.Alumno.SubirAlumnoPane
 import com.milton.gomez.sistema.universitario.Controller.ControllerAlumno;
 import com.milton.gomez.sistema.universitario.Controller.ControllerMateria;
 import com.milton.gomez.sistema.universitario.Model.Alumno;
+import com.milton.gomez.sistema.universitario.Model.Materia;
 import com.milton.gomez.sistema.universitario.View.ViewMain;
 import java.awt.Color;
 import javax.swing.JLabel;
@@ -49,9 +50,6 @@ public class MateriasPanel extends javax.swing.JPanel {
         materiasTable.setDefaultRenderer(Object.class, centerRenderer);
         materiasTable.setDefaultRenderer(Integer.class, centerRenderer);
         materiasTable.setDefaultRenderer(Long.class, centerRenderer);
-    }
-    private void buscarAlumno(){
-       
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -110,7 +108,8 @@ public class MateriasPanel extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        materiaTextField.setText("Ingrese el Codigo o Nombre de la materia");
+        materiaTextField.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
+        materiaTextField.setText("Inserte el Codigo o Nombre de la materia");
         materiaTextField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 materiaTextFieldFocusLost(evt);
@@ -342,7 +341,7 @@ public class MateriasPanel extends javax.swing.JPanel {
     private void materiaTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_materiaTextFieldFocusLost
         if(materiaTextField.getText().isEmpty()){
             materiaTextField.setForeground(Color.gray);
-            materiaTextField.setText("Inserte el DNI o Legajo del Alumno...");
+            materiaTextField.setText("Inserte el Codigo o Nombre de la materia...");
         }
     }//GEN-LAST:event_materiaTextFieldFocusLost
 
@@ -351,14 +350,27 @@ public class MateriasPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_refreshButtonActionPerformed
 
     private void materiaTextFieldMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_materiaTextFieldMousePressed
-        if(materiaTextField.getText().equals("Inserte el DNI o Legajo del Alumno...")){
+        if(materiaTextField.getText().equals("Inserte el Codigo o Nombre de la materia...")){
             materiaTextField.setText("");
             materiaTextField.setForeground(Color.black);
         }
     }//GEN-LAST:event_materiaTextFieldMousePressed
 
     private void buscarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarButtonActionPerformed
-        buscarAlumno();
+        if(!materiaTextField.getText().equals("Inserte el Codigo o Nombre de la materia...")){
+            try{
+                Integer idMateria = Integer.parseInt(materiaTextField.getText());
+                DefaultTableModel model = (DefaultTableModel) materiasTable.getModel();
+                model.setRowCount(0);
+                Materia m = ControllerMateria.obtenerMateria(idMateria);
+            }
+            catch(Exception e){
+                e.printStackTrace();
+            }
+        }
+        else{
+            javax.swing.JOptionPane.showMessageDialog(this, "Debe ingresar el Nombre o Código de la carrera primero. \n", "AVISO", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_buscarButtonActionPerformed
 
     private void detallesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_detallesButtonActionPerformed

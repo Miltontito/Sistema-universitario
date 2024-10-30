@@ -16,6 +16,9 @@ public class ControllerMateria {
     //Inicialización del controlador.
     private static ControladorUniversitario cu = ControladorUniversitario.getInstance();
     
+    public static Materia obtenerMateria(Integer id){
+        return cu.obtenerMateria(id);
+    }
     
     public static List<Materia> listarTodasLasMaterias(){
         return cu.obtenerMaterias();

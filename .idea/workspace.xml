@@ -4,22 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="43f794ac-412a-4586-8b5b-0d23349b2f31" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/milton/gomez/sistema/universitario/Controller/ControllerCarrera.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/milton/gomez/sistema/universitario/Controller/ControllerCarrera.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/milton/gomez/sistema/universitario/Controller/ControllerMateria.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/milton/gomez/sistema/universitario/Controller/ControllerMateria.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/milton/gomez/sistema/universitario/Model/ControladorUniversitario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/milton/gomez/sistema/universitario/Model/ControladorUniversitario.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/milton/gomez/sistema/universitario/Transferible/TransferibleCarreraCrear.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/milton/gomez/sistema/universitario/View/Panels/Alumno/AlumnosPanel.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/milton/gomez/sistema/universitario/View/Panels/Alumno/AlumnosPanel.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/milton/gomez/sistema/universitario/View/Panels/Alumno/AlumnosPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/milton/gomez/sistema/universitario/View/Panels/Alumno/AlumnosPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/milton/gomez/sistema/universitario/View/Panels/Carrera/SubirCarreraPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/milton/gomez/sistema/universitario/View/Panels/Carrera/SubirCarreraPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/milton/gomez/sistema/universitario/View/Panels/Materias/MateriasPanel.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/milton/gomez/sistema/universitario/View/Panels/Materias/MateriasPanel.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/milton/gomez/sistema/universitario/View/Panels/Materias/MateriasPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/milton/gomez/sistema/universitario/View/Panels/Materias/MateriasPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/milton/gomez/sistema/universitario/View/Panels/PlanesDeEstudio/PlanesDeEstudioPanel.form" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/milton/gomez/sistema/universitario/View/Panels/PlanesDeEstudio/PlanesDeEstudioPanel.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/milton/gomez/sistema/universitario/View/ViewMain.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/milton/gomez/sistema/universitario/View/ViewMain.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/milton/gomez/sistema/universitario/View/ViewMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/milton/gomez/sistema/universitario/View/ViewMain.java" afterDir="false" />
-    </list>
+    <list default="true" id="43f794ac-412a-4586-8b5b-0d23349b2f31" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

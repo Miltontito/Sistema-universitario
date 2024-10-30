@@ -91,8 +91,8 @@ public class SubirCarreraPanel extends javax.swing.JPanel {
         for(int i = 0; i < table.getRowCount(); i++){
             Cuatrimestre cuatrimestre = new Cuatrimestre();
             cuatrimestre.setMateriasObligatorias((List<Materia>) table.getValueAt(i,2));
-            cuatrimestre.setMateriasObligatorias((List<Materia>) table.getValueAt(i,1));
-            cuatrimestreHash.put(cuatrimestre.getNumeroCuatrimestre(), cuatrimestre);
+            cuatrimestre.setMateriasOptativas((List<Materia>) table.getValueAt(i,1));
+            cuatrimestreHash.put(i+1, cuatrimestre);
         }
 
         return cuatrimestreHash;
