@@ -90,9 +90,10 @@ public class SubirCarreraPanel extends javax.swing.JPanel {
         HashMap<Integer, Cuatrimestre> cuatrimestreHash = new HashMap<>();
         for(int i = 0; i < table.getRowCount(); i++){
             Cuatrimestre cuatrimestre = new Cuatrimestre();
+            cuatrimestre.setNumeroCuatrimestre(i+1);
             cuatrimestre.setMateriasObligatorias((List<Materia>) table.getValueAt(i,2));
             cuatrimestre.setMateriasOptativas((List<Materia>) table.getValueAt(i,1));
-            cuatrimestreHash.put(i+1, cuatrimestre);
+            cuatrimestreHash.put(cuatrimestre.getNumeroCuatrimestre(), cuatrimestre);
         }
 
         return cuatrimestreHash;
