@@ -560,6 +560,7 @@ public class SubirCarreraPanel extends javax.swing.JPanel {
         }
         catch(Exception e){
             e.printStackTrace();
+            javax.swing.JOptionPane.showMessageDialog(this, "Error fatal al intentar crear la carrera. \n" + e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_Subir_ButtonActionPerformed
 

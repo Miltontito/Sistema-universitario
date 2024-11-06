@@ -4,6 +4,8 @@
  */
 package com.milton.gomez.sistema.universitario.Transferible;
 
+import com.milton.gomez.sistema.universitario.Model.Materia;
+
 import java.util.List;
 
 /**
@@ -15,7 +17,7 @@ public class TransferibleMateria {
     private String codigoDeMateria;
     private String nombre;
     private Boolean promocionable;
-    private List<TransferibleMateria> correlativas;
+    private List<Materia> correlativas;
 
     // Getters y setters
     public Integer getMateriaID() {
@@ -50,11 +52,11 @@ public class TransferibleMateria {
         this.promocionable = promocionable;
     }
 
-    public List<TransferibleMateria> getCorrelativas() {
+    public List<Materia> getCorrelativas() {
         return correlativas;
     }
 
-    public void setCorrelativas(List<TransferibleMateria> correlativas) {
+    public void setCorrelativas(List<Materia> correlativas) {
         this.correlativas = correlativas;
     }
 }

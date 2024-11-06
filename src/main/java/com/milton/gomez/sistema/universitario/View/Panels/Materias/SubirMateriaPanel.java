@@ -4,19 +4,49 @@
  */
 package com.milton.gomez.sistema.universitario.View.Panels.Materias;
 
+import com.milton.gomez.sistema.universitario.Controller.ControllerCarrera;
+import com.milton.gomez.sistema.universitario.Controller.ControllerMateria;
+import com.milton.gomez.sistema.universitario.Model.Materia;
+import com.milton.gomez.sistema.universitario.Transferible.TransferibleMateria;
+import com.milton.gomez.sistema.universitario.View.ViewMain;
+
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author milton
  */
 public class SubirMateriaPanel extends javax.swing.JPanel {
 
-    /**
-     * Creates new form SubirMateriaPanel
-     */
+    
+    private Integer materiaId;
+    private Boolean isEdicion = false;
+    
+    
     public SubirMateriaPanel() {
         initComponents();
+        listarMaterias();
+    }
+    
+    public SubirMateriaPanel(Integer id) {
+        initComponents();
+        listarMaterias();
+        this.materiaId = id;
+        this.isEdicion = true;
+        editableView();
     }
 
+    private void editableView(){
+        
+    }
+    
+    private void listarMaterias(){
+        DefaultListModel<Materia> listModel = (DefaultListModel<Materia>) materiasList.getModel();
+        listModel.clear();
+        ControllerMateria.listarTodasLasMaterias().forEach(m -> listModel.addElement(m));
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -31,18 +61,28 @@ public class SubirMateriaPanel extends javax.swing.JPanel {
         Separador_Separator = new javax.swing.JSeparator();
         tituloLabel = new javax.swing.JLabel();
         BodyPanel = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        materiasList = new javax.swing.JList<>();
+        nombreTextField = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        codigoTextField = new javax.swing.JTextField();
+        promocionableCheckBox = new javax.swing.JCheckBox();
+        jLabel6 = new javax.swing.JLabel();
+        Subir_Button = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(782, 580));
 
         tituloLabel.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
         tituloLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/materia_icon.png"))); // NOI18N
+        tituloLabel.setText("Crear nueva Materia");
 
         javax.swing.GroupLayout headerPanelLayout = new javax.swing.GroupLayout(headerPanel);
         headerPanel.setLayout(headerPanelLayout);
         headerPanelLayout.setHorizontalGroup(
             headerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, headerPanelLayout.createSequentialGroup()
-                .addContainerGap(203, Short.MAX_VALUE)
+                .addContainerGap(201, Short.MAX_VALUE)
                 .addGroup(headerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(headerPanelLayout.createSequentialGroup()
                         .addGap(50, 50, 50)
@@ -59,15 +99,99 @@ public class SubirMateriaPanel extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
+        jLabel4.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        jLabel4.setText("Nombre *");
+
+        materiasList.setModel(new DefaultListModel<>());
+        jScrollPane1.setViewportView(materiasList);
+
+        nombreTextField.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        nombreTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nombreTextFieldActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        jLabel5.setText("Codigo *");
+
+        codigoTextField.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        codigoTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                codigoTextFieldActionPerformed(evt);
+            }
+        });
+
+        promocionableCheckBox.setText("Promocionable");
+        promocionableCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                promocionableCheckBoxActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        jLabel6.setText("Seleccione las correlativas");
+
+        Subir_Button.setBackground(new java.awt.Color(204, 0, 0));
+        Subir_Button.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        Subir_Button.setForeground(new java.awt.Color(255, 255, 255));
+        Subir_Button.setText("Subir");
+        Subir_Button.setBorderPainted(false);
+        Subir_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Subir_ButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout BodyPanelLayout = new javax.swing.GroupLayout(BodyPanel);
         BodyPanel.setLayout(BodyPanelLayout);
         BodyPanelLayout.setHorizontalGroup(
             BodyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(BodyPanelLayout.createSequentialGroup()
+                .addGap(41, 41, 41)
+                .addGroup(BodyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(BodyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel4)
+                        .addComponent(jLabel5)
+                        .addComponent(nombreTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
+                        .addComponent(codigoTextField))
+                    .addComponent(promocionableCheckBox))
+                .addGroup(BodyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(BodyPanelLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Subir_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(111, 111, 111))
+                    .addGroup(BodyPanelLayout.createSequentialGroup()
+                        .addGap(185, 185, 185)
+                        .addGroup(BodyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BodyPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addGap(87, 87, 87))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BodyPanelLayout.createSequentialGroup()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(39, 39, 39))))))
         );
         BodyPanelLayout.setVerticalGroup(
             BodyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 488, Short.MAX_VALUE)
+            .addGroup(BodyPanelLayout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addGroup(BodyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel6))
+                .addGap(6, 6, 6)
+                .addGroup(BodyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(BodyPanelLayout.createSequentialGroup()
+                        .addComponent(nombreTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel5)
+                        .addGap(6, 6, 6)
+                        .addComponent(codigoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(promocionableCheckBox))
+                    .addComponent(jScrollPane1))
+                .addGap(157, 157, 157)
+                .addComponent(Subir_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(74, 74, 74))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -99,12 +223,63 @@ public class SubirMateriaPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void nombreTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nombreTextFieldActionPerformed
+
+    private void codigoTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_codigoTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_codigoTextFieldActionPerformed
+
+    private void promocionableCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_promocionableCheckBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_promocionableCheckBoxActionPerformed
+
+    private void Subir_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Subir_ButtonActionPerformed
+        try{
+            if(!nombreTextField.getText().isBlank() && !codigoTextField.getText().isBlank()){
+                TransferibleMateria transferible = new TransferibleMateria();
+                transferible.setNombre(nombreTextField.getText());
+                transferible.setCodigoDeMateria(codigoTextField.getText());
+                transferible.setPromocionable(promocionableCheckBox.isSelected());
+                transferible.setCorrelativas(materiasList.getSelectedValuesList());
+                
+                if(this.isEdicion){
+                    
+                }
+                else{
+                    ControllerMateria.crearMateria(transferible);
+                    javax.swing.JOptionPane.showMessageDialog(this, "La Materia fue creada con éxito. \n", "AVISO", JOptionPane.INFORMATION_MESSAGE);
+                }
+                
+
+                ViewMain.ShowJPanel(new MateriasPanel());
+            }
+            else{
+                javax.swing.JOptionPane.showMessageDialog(this, "Complete todos los campos obligatorios. \n", "ERROR", JOptionPane.INFORMATION_MESSAGE);
+            }
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            javax.swing.JOptionPane.showMessageDialog(this, "Error fatal al intentar crear la Materia. \n", "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_Subir_ButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel BodyPanel;
     private javax.swing.JSeparator Separador_Separator;
+    private javax.swing.JButton Subir_Button;
+    private javax.swing.JTextField codigoTextField;
     private javax.swing.JPanel headerPanel;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JList<Materia> materiasList;
+    private javax.swing.JTextField nombreTextField;
+    private javax.swing.JCheckBox promocionableCheckBox;
     private javax.swing.JLabel tituloLabel;
     // End of variables declaration//GEN-END:variables
 }

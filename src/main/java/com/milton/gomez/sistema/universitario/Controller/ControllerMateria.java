@@ -6,6 +6,8 @@ package com.milton.gomez.sistema.universitario.Controller;
 
 import com.milton.gomez.sistema.universitario.Model.ControladorUniversitario;
 import com.milton.gomez.sistema.universitario.Model.Materia;
+import com.milton.gomez.sistema.universitario.Transferible.TransferibleMateria;
+
 import java.util.List;
 
 /**
@@ -26,6 +28,15 @@ public class ControllerMateria {
     
     public static List<Materia> listarCorrelativas(Integer materiaId){
         return cu.obtenerMateria(materiaId).getCorrelativas();
+    }
+
+    public static void crearMateria(TransferibleMateria transferible){
+        cu.crearMateria(
+                transferible.getCodigoDeMateria(),
+                transferible.getNombre(),
+                transferible.getPromocionable(),
+                transferible.getCorrelativas()
+        );
     }
     
     public static void eliminarMateria(Integer materiaID){

@@ -27,6 +27,9 @@ public class ControllerCarrera {
     }
     
     public static void crearCarrera(TransferibleCarrera t){
+        if(getCarrera(t.getCodigoCarrera()) != null){
+            throw new IllegalArgumentException("El codigo de carrera ya existe.");
+        }
         cu.crearCarrera(t.getNombre(), 
                 t.getCodigoCarrera(), 
                 t.getCantMateriasOptativasParaAprobar(), 

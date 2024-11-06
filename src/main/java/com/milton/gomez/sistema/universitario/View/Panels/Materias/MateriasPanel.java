@@ -109,7 +109,7 @@ public class MateriasPanel extends javax.swing.JPanel {
         );
 
         materiaTextField.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
-        materiaTextField.setText("Inserte el Codigo o Nombre de la materia");
+        materiaTextField.setText("Inserte el Codigo de la materia...");
         materiaTextField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 materiaTextFieldFocusLost(evt);
@@ -164,7 +164,7 @@ public class MateriasPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "ID", "Codigo", "Nombre", "esPromocionable?", "Correlativas"
+                "ID", "Codigo", "Nombre", "Promocionable", "Correlativas"
             }
         ) {
             Class[] types = new Class [] {
@@ -253,7 +253,7 @@ public class MateriasPanel extends javax.swing.JPanel {
             materiaEditDeletePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, materiaEditDeletePanelLayout.createSequentialGroup()
                 .addComponent(refreshButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
                 .addComponent(nuevoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(detallesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -341,7 +341,7 @@ public class MateriasPanel extends javax.swing.JPanel {
     private void materiaTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_materiaTextFieldFocusLost
         if(materiaTextField.getText().isEmpty()){
             materiaTextField.setForeground(Color.gray);
-            materiaTextField.setText("Inserte el Codigo o Nombre de la materia...");
+            materiaTextField.setText("Inserte el Codigo de la materia...");
         }
     }//GEN-LAST:event_materiaTextFieldFocusLost
 
@@ -350,31 +350,43 @@ public class MateriasPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_refreshButtonActionPerformed
 
     private void materiaTextFieldMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_materiaTextFieldMousePressed
-        if(materiaTextField.getText().equals("Inserte el Codigo o Nombre de la materia...")){
+        if(materiaTextField.getText().equals("Inserte el Codigo de la materia...")){
             materiaTextField.setText("");
             materiaTextField.setForeground(Color.black);
         }
     }//GEN-LAST:event_materiaTextFieldMousePressed
 
     private void buscarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarButtonActionPerformed
-        if(!materiaTextField.getText().equals("Inserte el Codigo o Nombre de la materia...")){
+        if(!materiaTextField.getText().equals("Inserte el Codigo de la materia...")){
             try{
                 Integer idMateria = Integer.parseInt(materiaTextField.getText());
                 DefaultTableModel model = (DefaultTableModel) materiasTable.getModel();
                 model.setRowCount(0);
                 Materia m = ControllerMateria.obtenerMateria(idMateria);
+                model.addRow(new Object[]{
+                    m.getMateriaID(),
+                    m.getCodigoDeMateria(),
+                    m.getNombre(),
+                    m.isPromocionable(),
+                    m.getCorrelativas()
+                });
             }
             catch(Exception e){
                 e.printStackTrace();
             }
         }
         else{
-            javax.swing.JOptionPane.showMessageDialog(this, "Debe ingresar el Nombre o Código de la carrera primero. \n", "AVISO", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            javax.swing.JOptionPane.showMessageDialog(this, "Debe ingresar el Código de la Materia primero. \n", "AVISO", javax.swing.JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_buscarButtonActionPerformed
 
     private void detallesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_detallesButtonActionPerformed
-        ViewMain.ShowJPanel(new DetallesMateriaPanel());
+        if(materiasTable.getSelectedRow() != -1){
+            ViewMain.ShowJPanel(new DetallesMateriaPanel((Integer) materiasTable.getValueAt(materiasTable.getSelectedRow(),0)));
+        }
+        else{
+            javax.swing.JOptionPane.showMessageDialog(this, "Debe seleccionar una Materia primero. \n", "AVISO", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_detallesButtonActionPerformed
 
     private void eliminarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarButtonActionPerformed

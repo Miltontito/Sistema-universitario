@@ -93,26 +93,29 @@ public class Carrera {
     public List<Materia> materiasQuePuedeCursar(Alumno alumno){
         return planDeEstudio.materiasQuePuedeCursar(alumno, this);
     }
-    public Boolean sePuedeGraduar(Alumno alumno){
-
-        boolean cumpleLosRequisitos = true;
+    
+    public Boolean sePuedeGraduar(Alumno alumno) {
+        // Lista de materias obligatorias del plan de estudios
         List<Materia> obligatorias = new ArrayList<>();
         List<Materia> aprobadas = alumno.getMaterias();
 
-        //Por cada cuatrimestre retira las materias obligatorias.
-        this.cuatrimestres.forEach((k,v) -> obligatorias.addAll(v.listarMateriasObligatorias()));
+        // Agregar todas las materias obligatorias desde los cuatrimestres
+        this.cuatrimestres.forEach((k, v) -> obligatorias.addAll(v.listarMateriasObligatorias()));
 
-        cumpleLosRequisitos = new HashSet<>(aprobadas).containsAll(obligatorias);
-
-        /* Si eliminamos todas las obligatorias nos quedan las optativas */
-        aprobadas.removeAll(obligatorias);
-        if(cumpleLosRequisitos){
-            return aprobadas.size() >= this.getCantMateriasOptativasParaAprobar();
+        // Comprobar si el alumno aprobó todas las materias obligatorias
+        if (!new HashSet<>(aprobadas).containsAll(obligatorias)) {
+            return false;
         }
 
-        //Retorna false
-        return cumpleLosRequisitos;
+        // Filtrar las materias aprobadas para obtener solo las optativas
+        List<Materia> optativasAprobadas = new ArrayList<>(aprobadas);
+        optativasAprobadas.removeAll(obligatorias);
+
+        // Verificar si el número de optativas aprobadas cumple con el requisito
+        return optativasAprobadas.size() >= this.getCantMateriasOptativasParaAprobar();
     }
+
+    
     public List<Materia> obtenerMateriasDeLaCarrera(){
         List<Materia> materias = new ArrayList<>();
         this.cuatrimestres.forEach((k,v) -> materias.addAll(v.listarTodasLasMaterias()));
