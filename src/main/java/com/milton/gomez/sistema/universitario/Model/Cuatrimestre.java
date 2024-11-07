@@ -67,9 +67,7 @@ public class Cuatrimestre {
     
     @Override
     public String toString(){
-        Integer numero = numeroCuatrimestre;
-        numero++;
-        return numero.toString();
+        return ""+numeroCuatrimestre;
     }
 
     public List<Materia> getMateriasObligatorias() {

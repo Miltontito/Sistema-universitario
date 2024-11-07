@@ -97,22 +97,26 @@ public class Carrera {
     public Boolean sePuedeGraduar(Alumno alumno) {
         // Lista de materias obligatorias del plan de estudios
         List<Materia> obligatorias = new ArrayList<>();
-        List<Materia> aprobadas = alumno.getMaterias();
+        List<Materia> optativas = new ArrayList<>();
+        List<Materia> aprobadas = alumno.obtenerMateriasAprobadas();
 
         // Agregar todas las materias obligatorias desde los cuatrimestres
-        this.cuatrimestres.forEach((k, v) -> obligatorias.addAll(v.listarMateriasObligatorias()));
-
+        this.cuatrimestres.forEach((k, v) -> {
+            obligatorias.addAll(v.listarMateriasObligatorias());
+            optativas.addAll(v.listarMateriasOptativas());
+        });
+        
         // Comprobar si el alumno aprobó todas las materias obligatorias
         if (!new HashSet<>(aprobadas).containsAll(obligatorias)) {
             return false;
         }
 
-        // Filtrar las materias aprobadas para obtener solo las optativas
-        List<Materia> optativasAprobadas = new ArrayList<>(aprobadas);
-        optativasAprobadas.removeAll(obligatorias);
-
-        // Verificar si el número de optativas aprobadas cumple con el requisito
-        return optativasAprobadas.size() >= this.getCantMateriasOptativasParaAprobar();
+        // Contar las materias optativas aprobadas
+        long optativasAprobadas = optativas.stream()
+                .filter(aprobadas::contains)
+                .count();
+        
+        return optativasAprobadas >= this.getCantMateriasOptativasParaAprobar();
     }
 
     

@@ -87,7 +87,7 @@ public class Alumno {
         List<Materia> aprobadas = new ArrayList<>();
         if(!this.cursadas.isEmpty()){
             for(Cursada cursada : this.cursadas){
-                if(cursada.getCursadaAprobada()){
+                if(cursada.getVaAFinal()){
                     aprobadas.add(cursada.getMateria());
                 }
             }
@@ -109,7 +109,7 @@ public class Alumno {
     }
     public void setMateriaAprobada(Materia materia) {
         Cursada cursada = new Cursada(materia);
-        cursada.setMateriaAprobada(Boolean.TRUE);
+        cursada.aprobarMateria(Boolean.TRUE);
     }
 
     @Override

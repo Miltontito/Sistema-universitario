@@ -197,7 +197,7 @@ public class ControllerAlumno {
         int[] filasSeleccionadas = materias_Table.getSelectedRows();
         for (int i = 0; i < filasSeleccionadas.length; i++) {
             int fila = filasSeleccionadas[i];
-            materias.add((Materia) materias_Table.getValueAt(fila, 1));
+            materias.add((Materia) materias_Table.getValueAt(fila, 0));
         }
 
         cu.crearAlumno(nombre, apellido, legajo, dni, carrera, materias);

@@ -4,9 +4,11 @@
  */
 package com.milton.gomez.sistema.universitario.Controller;
 
+import com.milton.gomez.sistema.universitario.Model.Alumno;
 import com.milton.gomez.sistema.universitario.Model.ControladorUniversitario;
 import com.milton.gomez.sistema.universitario.Model.Materia;
 import com.milton.gomez.sistema.universitario.Transferible.TransferibleMateria;
+import java.util.ArrayList;
 
 import java.util.List;
 
@@ -41,5 +43,53 @@ public class ControllerMateria {
     
     public static void eliminarMateria(Integer materiaID){
         cu.eliminarMateria(materiaID);
+    }
+    
+    public static List<Alumno> obtenerAlumnosAprobados(Integer materiaId){
+        List<Alumno> alumnos = new ArrayList<>();
+        Materia materia = cu.obtenerMateria(materiaId);
+        
+        cu.obtenerAlumnos().forEach(a -> {
+            if(a.obtenerMateriasAprobadas().contains(materia)){
+                alumnos.add(a);
+            }
+        });
+        
+        return alumnos;
+    }
+
+    public static List<Alumno> obtenerAlumnosCursando(Integer materiaId){
+        List<Alumno> alumnos = new ArrayList<>();
+        Materia materia = cu.obtenerMateria(materiaId);
+
+        cu.obtenerAlumnos().forEach(a -> {
+            if(a.obtenerMateriasQueCursa().contains(materia)){
+                alumnos.add(a);
+            }
+        });
+
+        return alumnos;
+    }
+
+    public static List<Alumno> obtenerAlumnosQueVanAFinal(Integer materiaId){
+        List<Alumno> alumnos = new ArrayList<>();
+        Materia materia = cu.obtenerMateria(materiaId);
+
+        cu.obtenerAlumnos().forEach(a -> {
+            if(a.obtenerCursadasAprobadas().contains(materia)){
+                alumnos.add(a);
+            }
+        });
+
+        return alumnos;
+    }
+
+    public static void aprobarAlumno(Alumno alumno, Integer materiaId) {
+        Materia materia = cu.obtenerMateria(materiaId);
+        alumno.getCursadas().forEach(c ->{
+            if(c.getMateria().equals(materia)){
+                c.aprobarMateria(Boolean.TRUE);
+            }
+        });
     }
 }

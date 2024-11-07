@@ -49,8 +49,15 @@ public class PlanA implements PlanDeEstudio {
 
         // Verifica que las correlativas tengan la cursada aprobada
         for (Materia correlativa : materia.getCorrelativas()) {
-            if (!alumno.obtenerCursadasAprobadas().contains(correlativa)) {
-                return false;
+            if(correlativa.isPromocionable()){
+                if (!alumno.obtenerMateriasAprobadas().contains(correlativa)) {
+                    return false;
+                }
+            }
+            else{
+                if (!alumno.obtenerCursadasAprobadas().contains(correlativa)) {
+                    return false;
+                }
             }
         }
 

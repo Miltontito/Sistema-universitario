@@ -90,7 +90,7 @@ public class IniciadorCompleto {
         alumno.setMaterias(cuatrimestre0_Sistemas.listarTodasLasMaterias());
         
         //Apruebo al alumno en la primera materia
-        alumno.getCursadas().get(0).setMateriaAprobada(Boolean.TRUE);
+        alumno.getCursadas().get(0).aprobarMateria(Boolean.TRUE);
         
         return controlador;
     }

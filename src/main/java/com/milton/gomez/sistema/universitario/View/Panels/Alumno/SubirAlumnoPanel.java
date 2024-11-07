@@ -73,7 +73,7 @@ public class SubirAlumnoPanel extends javax.swing.JPanel {
         // Recorre las filas de la tabla
         for (int row = 0; row < tableModel.getRowCount(); row++) {
             // Obtenemos la materia
-            Materia materiaTabla = (Materia) tableModel.getValueAt(row, 1);
+            Materia materiaTabla = (Materia) tableModel.getValueAt(row, 0);
 
             // Verifica si alguna cursada contiene la materia mostrada en la fila de la tabla
             for (Cursada cursada : cursadasSeleccionadas) {
@@ -110,7 +110,7 @@ public class SubirAlumnoPanel extends javax.swing.JPanel {
                 cuatrimestre.listarTodasLasMaterias().forEach(materia -> {
                     // Solo agregamos la materia si la lista de correlativas está vacía
                     if (materia.getCorrelativas().isEmpty()) {
-                        tableModel.addRow(new Object[]{cuatrimestre.toString(), materia});
+                        tableModel.addRow(new Object[]{materia});
                     }
                 });
             });
@@ -127,7 +127,7 @@ public class SubirAlumnoPanel extends javax.swing.JPanel {
         ControllerCarrera.listarTodosLosCuatrimestres(Carreras_List.getSelectedValue().getCarreraID())
                 .forEach(c -> c.listarTodasLasMaterias().forEach(m -> {
                     if(ControllerAlumno.listarMateriasQuePuedeCursar(alumnoID).contains(m) || ControllerAlumno.listarMateriasQueCursa(alumnoID).contains(m)){
-                        tableModel.addRow(new Object[]{c.toString(), m});
+                        tableModel.addRow(new Object[]{m});
             }
         }));
     }
@@ -144,7 +144,7 @@ public class SubirAlumnoPanel extends javax.swing.JPanel {
         int[] filasSeleccionadas = Materias_Table.getSelectedRows();
         for (int i = 0; i < filasSeleccionadas.length; i++) {
             int fila = filasSeleccionadas[i];
-            cursadas.add(new Cursada((Materia) Materias_Table.getValueAt(fila, 1)));
+            cursadas.add(new Cursada((Materia) Materias_Table.getValueAt(fila, 0)));
         }
         return cursadas;
     }
@@ -273,19 +273,12 @@ public class SubirAlumnoPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Cuatrimestre", "Materia"
+                "Materias"
             }
         ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.Object.class
-            };
             boolean[] canEdit = new boolean [] {
-                false, false
+                false
             };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
@@ -297,9 +290,6 @@ public class SubirAlumnoPanel extends javax.swing.JPanel {
             }
         });
         Materia_ScrollPane.setViewportView(Materias_Table);
-        if (Materias_Table.getColumnModel().getColumnCount() > 0) {
-            Materias_Table.getColumnModel().getColumn(0).setMaxWidth(100);
-        }
 
         Aceptar_Button.setBackground(new java.awt.Color(204, 0, 0));
         Aceptar_Button.setForeground(new java.awt.Color(255, 255, 255));

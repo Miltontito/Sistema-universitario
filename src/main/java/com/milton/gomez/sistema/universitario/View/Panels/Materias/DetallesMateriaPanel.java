@@ -7,6 +7,7 @@ package com.milton.gomez.sistema.universitario.View.Panels.Materias;
 import com.milton.gomez.sistema.universitario.Controller.ControllerMateria;
 import com.milton.gomez.sistema.universitario.Model.Alumno;
 import com.milton.gomez.sistema.universitario.Model.Materia;
+import com.milton.gomez.sistema.universitario.View.ViewMain;
 import javax.swing.DefaultListModel;
 
 /**
@@ -21,6 +22,9 @@ public class DetallesMateriaPanel extends javax.swing.JPanel {
         this.materiaId = id;
         initComponents();
         inicializarComponentes(materiaId);
+        listarAlumnosAprobados();
+        listarAlumnosCursando();
+        listarAlumnosSinFinal();
     }
 
     private void inicializarComponentes(Integer materiaId){
@@ -34,6 +38,24 @@ public class DetallesMateriaPanel extends javax.swing.JPanel {
         correlativasList.setModel(model);
     }
     
+    private void listarAlumnosAprobados(){
+        DefaultListModel<Alumno> model = (DefaultListModel<Alumno>) alumnosAprobadosList.getModel();
+        model.addAll(ControllerMateria.obtenerAlumnosAprobados(this.materiaId));
+        alumnosAprobadosList.setModel(model);
+    }
+
+    private void listarAlumnosCursando(){
+        DefaultListModel<Alumno> model = (DefaultListModel<Alumno>) alumnosCursandoList.getModel();
+        model.addAll(ControllerMateria.obtenerAlumnosCursando(this.materiaId));
+        alumnosCursandoList.setModel(model);
+    }
+
+    private void listarAlumnosSinFinal(){
+        DefaultListModel<Alumno> model = (DefaultListModel<Alumno>) alumnosSinFinalList.getModel();
+        model.addAll(ControllerMateria.obtenerAlumnosQueVanAFinal(this.materiaId));
+        alumnosSinFinalList.setModel(model);
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -66,7 +88,7 @@ public class DetallesMateriaPanel extends javax.swing.JPanel {
         aprobarFinalButton = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
-        javax.swing.JList<Alumno> alumnosAprobadosList = new javax.swing.JList<>();
+        alumnosAprobadosList = new javax.swing.JList<>();
 
         tituloLabel.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
         tituloLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -257,16 +279,28 @@ public class DetallesMateriaPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void aprobarCursadaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aprobarCursadaButtonActionPerformed
-
+        if(alumnosCursandoList.getSelectedIndex() != -1){
+            ControllerMateria.aprobarAlumno(alumnosCursandoList.getSelectedValue(), materiaId);
+            ViewMain.ShowJPanel(new DetallesMateriaPanel(this.materiaId));
+        }
+        else{
+            javax.swing.JOptionPane.showMessageDialog(this, "Debe seleccionar un alumno de la lista de alumnos cursando. \n", "AVISO", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_aprobarCursadaButtonActionPerformed
 
     private void aprobarFinalButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aprobarFinalButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_aprobarFinalButtonActionPerformed
+        if(alumnosCursandoList.getSelectedIndex() != -1){
+            ControllerMateria.aprobarAlumno(alumnosCursandoList.getSelectedValue(), materiaId);
+            ViewMain.ShowJPanel(new DetallesMateriaPanel(this.materiaId));
+        }
+        else{
+            javax.swing.JOptionPane.showMessageDialog(this, "Debe seleccionar un alumno de la lista de alumnos sin final. \n", "AVISO", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        }    }//GEN-LAST:event_aprobarFinalButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JSeparator Separador_Separator;
+    private javax.swing.JList<Alumno> alumnosAprobadosList;
     private javax.swing.JList<Alumno> alumnosCursandoList;
     private javax.swing.JList<Alumno> alumnosSinFinalList;
     private javax.swing.JButton aprobarCursadaButton;

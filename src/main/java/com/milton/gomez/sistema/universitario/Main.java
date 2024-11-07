@@ -15,7 +15,7 @@ import com.milton.gomez.sistema.universitario.View.ViewMain;
  */
 public class Main {
 
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         /* Set the Nimbus look and feel */
         FlatMaterialLighterIJTheme.setup();
         /* Create and display the form */
