@@ -255,19 +255,25 @@ public class DetallesCarrera extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void Inscribirse_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Inscribirse_ButtonActionPerformed
-        Integer alumnoId = alumnosList.getSelectedValue().getAlumnoID();
-        String nombreAlumno = alumnosList.getSelectedValue().getNombre() + " " + alumnosList.getSelectedValue().getApellido();
-        try{
-            if(ControllerCarrera.sePuedeEgresar(this.carreraId, alumnoId)){
-                javax.swing.JOptionPane.showMessageDialog(this, "El alumno "+ nombreAlumno + " ¡puede egresarse!\n", "Puede egresarse", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        if(alumnosList.getSelectedIndex() != -1){
+            Integer alumnoId = alumnosList.getSelectedValue().getAlumnoID();
+            String nombreAlumno = alumnosList.getSelectedValue().getNombre() + " " + alumnosList.getSelectedValue().getApellido();
+            try{
+                if(ControllerCarrera.sePuedeEgresar(this.carreraId, alumnoId)){
+                    javax.swing.JOptionPane.showMessageDialog(this, "El alumno "+ nombreAlumno + " ¡puede egresarse!\n", "Puede egresarse", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+                }
+                else{
+                    javax.swing.JOptionPane.showMessageDialog(this, "El alumno "+ nombreAlumno + " no puede egresarse.\n", "No puede egresarse", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+                }
             }
-            else{
-                javax.swing.JOptionPane.showMessageDialog(this, "El alumno "+ nombreAlumno + " no puede egresarse.\n", "No puede egresarse", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            catch(Exception e){
+                e.printStackTrace();
             }
         }
-        catch(Exception e){
-            e.printStackTrace();
+        else{
+            javax.swing.JOptionPane.showMessageDialog(this, "Seleccione un alumno de la lista.\n", "AVISO", javax.swing.JOptionPane.INFORMATION_MESSAGE);
         }
+        
     }//GEN-LAST:event_Inscribirse_ButtonActionPerformed
 
 

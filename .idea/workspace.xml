@@ -6,20 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="43f794ac-412a-4586-8b5b-0d23349b2f31" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/milton/gomez/sistema/universitario/Controller/ControllerAlumno.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/milton/gomez/sistema/universitario/Controller/ControllerAlumno.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/milton/gomez/sistema/universitario/Controller/ControllerMateria.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/milton/gomez/sistema/universitario/Controller/ControllerMateria.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/milton/gomez/sistema/universitario/Iniciador/IniciadorCompleto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/milton/gomez/sistema/universitario/Iniciador/IniciadorCompleto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/milton/gomez/sistema/universitario/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/milton/gomez/sistema/universitario/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/milton/gomez/sistema/universitario/Model/Alumno.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/milton/gomez/sistema/universitario/Model/Alumno.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/milton/gomez/sistema/universitario/Model/Carrera.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/milton/gomez/sistema/universitario/Model/Carrera.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/milton/gomez/sistema/universitario/Model/Cuatrimestre.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/milton/gomez/sistema/universitario/Model/Cuatrimestre.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/milton/gomez/sistema/universitario/Model/Cursada.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/milton/gomez/sistema/universitario/Model/Cursada.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/milton/gomez/sistema/universitario/Model/PlanesDeEstudio/PlanA.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/milton/gomez/sistema/universitario/Model/PlanesDeEstudio/PlanA.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/milton/gomez/sistema/universitario/View/Panels/Alumno/SubirAlumnoPanel.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/milton/gomez/sistema/universitario/View/Panels/Alumno/SubirAlumnoPanel.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/milton/gomez/sistema/universitario/View/Panels/Alumno/SubirAlumnoPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/milton/gomez/sistema/universitario/View/Panels/Alumno/SubirAlumnoPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/milton/gomez/sistema/universitario/View/Panels/Materias/DetallesMateriaPanel.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/milton/gomez/sistema/universitario/View/Panels/Materias/DetallesMateriaPanel.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/milton/gomez/sistema/universitario/View/Panels/Materias/DetallesMateriaPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/milton/gomez/sistema/universitario/View/Panels/Materias/DetallesMateriaPanel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

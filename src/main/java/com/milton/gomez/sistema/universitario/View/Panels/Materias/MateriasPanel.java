@@ -216,6 +216,11 @@ public class MateriasPanel extends javax.swing.JPanel {
         editarButon.setForeground(new java.awt.Color(255, 255, 255));
         editarButon.setText("Editar");
         editarButon.setBorder(null);
+        editarButon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editarButonActionPerformed(evt);
+            }
+        });
 
         nuevoButton.setBackground(new java.awt.Color(204, 0, 0));
         nuevoButton.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
@@ -415,6 +420,10 @@ public class MateriasPanel extends javax.swing.JPanel {
             javax.swing.JOptionPane.showMessageDialog(this, "Debe seleccionar una Materia primero. \n", "AVISO", javax.swing.JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_eliminarButtonActionPerformed
+
+    private void editarButonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarButonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_editarButonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
