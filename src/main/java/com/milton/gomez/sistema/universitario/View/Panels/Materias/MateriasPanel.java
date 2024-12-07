@@ -109,7 +109,7 @@ public class MateriasPanel extends javax.swing.JPanel {
         );
 
         materiaTextField.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
-        materiaTextField.setText("Inserte el Codigo de la materia...");
+        materiaTextField.setText("Inserte el Id de la materia...");
         materiaTextField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 materiaTextFieldFocusLost(evt);
@@ -341,23 +341,24 @@ public class MateriasPanel extends javax.swing.JPanel {
     private void materiaTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_materiaTextFieldFocusLost
         if(materiaTextField.getText().isEmpty()){
             materiaTextField.setForeground(Color.gray);
-            materiaTextField.setText("Inserte el Codigo de la materia...");
+            materiaTextField.setText("Inserte el Id de la materia...");
         }
     }//GEN-LAST:event_materiaTextFieldFocusLost
 
     private void refreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshButtonActionPerformed
         cargarMaterias();
+        materiaTextField.setText("Inserte el Id de la materia...");
     }//GEN-LAST:event_refreshButtonActionPerformed
 
     private void materiaTextFieldMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_materiaTextFieldMousePressed
-        if(materiaTextField.getText().equals("Inserte el Codigo de la materia...")){
+        if(materiaTextField.getText().equals("Inserte el Id de la materia...")){
             materiaTextField.setText("");
             materiaTextField.setForeground(Color.black);
         }
     }//GEN-LAST:event_materiaTextFieldMousePressed
 
     private void buscarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarButtonActionPerformed
-        if(!materiaTextField.getText().equals("Inserte el Codigo de la materia...")){
+        if(!materiaTextField.getText().equals("Inserte el Id de la materia...")){
             try{
                 Integer idMateria = Integer.parseInt(materiaTextField.getText());
                 DefaultTableModel model = (DefaultTableModel) materiasTable.getModel();
@@ -376,7 +377,7 @@ public class MateriasPanel extends javax.swing.JPanel {
             }
         }
         else{
-            javax.swing.JOptionPane.showMessageDialog(this, "Debe ingresar el Código de la Materia primero. \n", "AVISO", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            javax.swing.JOptionPane.showMessageDialog(this, "Debe ingresar el Id de la Materia primero. \n", "AVISO", javax.swing.JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_buscarButtonActionPerformed
 

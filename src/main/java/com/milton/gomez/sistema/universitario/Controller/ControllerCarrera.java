@@ -62,7 +62,7 @@ public class ControllerCarrera {
         cu.eliminarCarrera(carreraID);
     }
     
-    public static DefaultTableModel obtenerCarrera(JTable table, String busqueda){
+    public static DefaultTableModel obtenerCarrera(JTable table, String busqueda) throws NullPointerException{
         DefaultTableModel model = (DefaultTableModel)table.getModel();
         model.setRowCount(0);
         try{
@@ -77,7 +77,7 @@ public class ControllerCarrera {
         });
         }
         catch(NullPointerException e){
-            System.out.println("No se encuentra la carrera");
+            throw new NullPointerException("No se encuentra la carrera.");
         }
         return model;
     }

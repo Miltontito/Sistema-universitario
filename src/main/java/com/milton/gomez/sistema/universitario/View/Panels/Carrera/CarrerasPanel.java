@@ -346,6 +346,7 @@ public class CarrerasPanel extends javax.swing.JPanel {
 
     private void Refresh_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Refresh_ButtonActionPerformed
         cargarCarreras();
+        Carrera_TextField.setText("Inserte el Nombre o Codigo de la Carrera...");
     }//GEN-LAST:event_Refresh_ButtonActionPerformed
 
     private void Carrera_TextFieldMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Carrera_TextFieldMousePressed
@@ -360,6 +361,10 @@ public class CarrerasPanel extends javax.swing.JPanel {
             try{
                 String busqueda = Carrera_TextField.getText();
                 carrerasTable.setModel(ControllerCarrera.obtenerCarrera(carrerasTable, busqueda));
+            }
+            catch(NullPointerException e){
+                e.printStackTrace();
+                javax.swing.JOptionPane.showMessageDialog(this, "No se encontró la carrera. \n", "ERROR", javax.swing.JOptionPane.ERROR_MESSAGE);
             }
             catch(Exception e){
                 e.printStackTrace();

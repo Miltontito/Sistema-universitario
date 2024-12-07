@@ -24,7 +24,6 @@ public class AlumnosPanel extends javax.swing.JPanel {
     }
     
     private void cargarAlumnos(){
-        TransferibleAlumno alumno = new TransferibleAlumno();
         Alumnos_Table.setModel(ControllerAlumno.listarTodosLosAlumnos(this.Alumnos_Table));
     }
     private void alinearTablaAlumnos(){
