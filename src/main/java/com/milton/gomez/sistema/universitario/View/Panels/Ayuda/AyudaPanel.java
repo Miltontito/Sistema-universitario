@@ -31,6 +31,8 @@ public class AyudaPanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         Body_Panel = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextPane1 = new javax.swing.JTextPane();
 
         setPreferredSize(new java.awt.Dimension(780, 580));
 
@@ -46,31 +48,40 @@ public class AyudaPanel extends javax.swing.JPanel {
             .addGroup(Titulo_PanelLayout.createSequentialGroup()
                 .addGroup(Titulo_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(Titulo_PanelLayout.createSequentialGroup()
-                        .addGap(51, 51, 51)
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 586, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(252, 252, 252)
+                        .addComponent(jLabel1))
                     .addGroup(Titulo_PanelLayout.createSequentialGroup()
-                        .addGap(208, 208, 208)
-                        .addComponent(jLabel1)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(95, 95, 95)
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 586, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(99, Short.MAX_VALUE))
         );
         Titulo_PanelLayout.setVerticalGroup(
             Titulo_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Titulo_PanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(12, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
+
+        jTextPane1.setEditable(false);
+        jTextPane1.setText("Alumnos:\n - Se puede crear un alumno seleccionando la Carrera y las Materias que cursará.\n - Se pueden ver los Detalles de un Alumno lo cual mostrará las materias que esta cursando, aprobó o que puede cursar. En caso de que pueda cursar una materia se podrá inscribir a esta según el plan de estudio.\n\nCarreras:\n - Se pueden crear nuevas Carreras asignando la cantidad de Cuatrimestres, las Materias (optativas u obligatorias) y su Plan de estudio.\n - En los Detalles de la Carrera se pueden ver la lista de Alumnos cursando una Carrera, en esta sección se puede evaluar si el Alumno estó en condiciones de aprobar.\n\nMaterias:\n - Se pueden crear nuevas Carreras seleccionando si será promocionable (o no) y sus correlativas.\n - En los Detalles de las Materias se pueden aprobar los Alumnos y se comportará de forma distinta si es promocionable o no.");
+        jScrollPane1.setViewportView(jTextPane1);
 
         javax.swing.GroupLayout Body_PanelLayout = new javax.swing.GroupLayout(Body_Panel);
         Body_Panel.setLayout(Body_PanelLayout);
         Body_PanelLayout.setHorizontalGroup(
             Body_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Body_PanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addContainerGap())
         );
         Body_PanelLayout.setVerticalGroup(
             Body_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(Body_PanelLayout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 464, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 18, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout Background_PanelLayout = new javax.swing.GroupLayout(Background_Panel);
@@ -106,6 +117,8 @@ public class AyudaPanel extends javax.swing.JPanel {
     private javax.swing.JPanel Body_Panel;
     private javax.swing.JPanel Titulo_Panel;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JTextPane jTextPane1;
     // End of variables declaration//GEN-END:variables
 }

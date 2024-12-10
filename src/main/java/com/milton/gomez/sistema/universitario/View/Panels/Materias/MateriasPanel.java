@@ -422,7 +422,12 @@ public class MateriasPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_eliminarButtonActionPerformed
 
     private void editarButonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarButonActionPerformed
-        // TODO add your handling code here:
+        if(materiasTable.getSelectedRow() != -1){
+            ViewMain.ShowJPanel(new SubirMateriaPanel((Integer) materiasTable.getValueAt(materiasTable.getSelectedRow(),0)));
+        }
+        else{
+            javax.swing.JOptionPane.showMessageDialog(this, "Debe seleccionar una Materia primero. \n", "AVISO", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_editarButonActionPerformed
 
 

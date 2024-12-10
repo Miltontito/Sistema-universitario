@@ -9,6 +9,8 @@ import com.milton.gomez.sistema.universitario.Controller.ControllerMateria;
 import com.milton.gomez.sistema.universitario.Model.Materia;
 import com.milton.gomez.sistema.universitario.Transferible.TransferibleMateria;
 import com.milton.gomez.sistema.universitario.View.ViewMain;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
@@ -38,6 +40,29 @@ public class SubirMateriaPanel extends javax.swing.JPanel {
     }
 
     private void editableView(){
+        Materia materia = ControllerMateria.obtenerMateria(materiaId);
+        
+        
+        
+        tituloLabel.setText("Editar Materia");
+        nombreTextField.setText(materia.getNombre());
+        codigoTextField.setText(materia.getCodigoDeMateria());
+        promocionableCheckBox.setSelected(materia.isPromocionable());
+        
+        //Seleccionar elementos de la lista de materias
+        DefaultListModel<Materia> listModel = (DefaultListModel<Materia>) materiasList.getModel();
+        
+        List<Integer> indicesSeleccionados = new ArrayList<>();
+        for (int i = 0; i < listModel.size(); i++) {
+            if (materia.getCorrelativas().contains(listModel.get(i))) {
+                indicesSeleccionados.add(i);
+            }
+        }
+        
+        // conversion
+        int[] indices = indicesSeleccionados.stream().mapToInt(Integer::intValue).toArray();
+
+        materiasList.setSelectedIndices(indices);
         
     }
     
@@ -245,7 +270,8 @@ public class SubirMateriaPanel extends javax.swing.JPanel {
                 transferible.setCorrelativas(materiasList.getSelectedValuesList());
                 
                 if(this.isEdicion){
-                    
+                    transferible.setMateriaID(materiaId);
+                    ControllerMateria.actualizarMateria(transferible);
                 }
                 else{
                     ControllerMateria.crearMateria(transferible);

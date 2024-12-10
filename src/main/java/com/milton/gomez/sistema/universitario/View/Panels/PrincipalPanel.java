@@ -35,10 +35,10 @@ public class PrincipalPanel extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         Info_Panel = new javax.swing.JPanel();
         Info_Label = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
 
         setMinimumSize(new java.awt.Dimension(684, 528));
         setPreferredSize(new java.awt.Dimension(780, 580));
@@ -51,7 +51,7 @@ public class PrincipalPanel extends javax.swing.JPanel {
         jLabel2.setText("una universidad.");
 
         jLabel4.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
-        jLabel4.setText("- Carreras: Añadir nuevas carreras, asignar materias y estudiantes.");
+        jLabel4.setText("- Carreras: Añadir nuevas carreras, asignarle materias, estudiantes y");
 
         jLabel5.setText("Con una interfaz intuitiva podrás:");
 
@@ -61,11 +61,8 @@ public class PrincipalPanel extends javax.swing.JPanel {
         jLabel7.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel7.setText("- Materias: Administrar la información de cada materia y sus correlativas.");
 
-        jLabel8.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
-        jLabel8.setText("- Planes de estudio: Organizar y ajustar los diferentes planes según");
-
         jLabel9.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
-        jLabel9.setText("las necesidades acadmicas.");
+        jLabel9.setText("planes de estudio.");
 
         Info_Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/info_icon_24.png"))); // NOI18N
 
@@ -85,6 +82,8 @@ public class PrincipalPanel extends javax.swing.JPanel {
                 .addComponent(Info_Label))
         );
 
+        jLabel10.setText("¿Se requiere información adicional? selecciona la sección de \"Ayuda\".");
+
         javax.swing.GroupLayout Backgorund_PanelLayout = new javax.swing.GroupLayout(Backgorund_Panel);
         Backgorund_Panel.setLayout(Backgorund_PanelLayout);
         Backgorund_PanelLayout.setHorizontalGroup(
@@ -101,11 +100,11 @@ public class PrincipalPanel extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 4, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel5))
                             .addComponent(jLabel2)
-                            .addComponent(jLabel3)))
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel10)))
                     .addGroup(Backgorund_PanelLayout.createSequentialGroup()
                         .addGap(69, 69, 69)
                         .addGroup(Backgorund_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel8)
                             .addComponent(jLabel7)
                             .addComponent(jLabel6)
                             .addComponent(jLabel4)
@@ -139,14 +138,14 @@ public class PrincipalPanel extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel9)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                 .addComponent(Info_Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29))
         );
@@ -169,13 +168,13 @@ public class PrincipalPanel extends javax.swing.JPanel {
     private javax.swing.JLabel Info_Label;
     private javax.swing.JPanel Info_Panel;
     private javax.swing.JLabel Titulo_Label;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JSeparator jSeparator1;
     // End of variables declaration//GEN-END:variables

@@ -54,6 +54,8 @@ public class SubirCarreraPanel extends javax.swing.JPanel {
 
         carrera.getCuatrimestres().forEach((k,v) -> this.materiasDisponibles.removeAll(v.listarTodasLasMaterias()));
         listarMaterias();
+        
+        tituloLabel.setText("Editar Carrera");
 
         nombreTextField.setText(carrera.getNombre());
         codigoTextField.setText(carrera.getCodigoCarrera());
@@ -158,7 +160,7 @@ public class SubirCarreraPanel extends javax.swing.JPanel {
         Background_Panel = new javax.swing.JPanel();
         Title_Panel = new javax.swing.JPanel();
         Separador_Separator = new javax.swing.JSeparator();
-        Titulo_Label = new javax.swing.JLabel();
+        tituloLabel = new javax.swing.JLabel();
         Body_Panel = new javax.swing.JPanel();
         nombreTextField = new javax.swing.JTextField();
         codigoTextField = new javax.swing.JTextField();
@@ -198,9 +200,9 @@ public class SubirCarreraPanel extends javax.swing.JPanel {
         setMaximumSize(new java.awt.Dimension(780, 580));
         setPreferredSize(new java.awt.Dimension(780, 580));
 
-        Titulo_Label.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
-        Titulo_Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carrera_icon.png"))); // NOI18N
-        Titulo_Label.setText("Crear nueva Carrera");
+        tituloLabel.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
+        tituloLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carrera_icon.png"))); // NOI18N
+        tituloLabel.setText("Crear nueva Carrera");
 
         javax.swing.GroupLayout Title_PanelLayout = new javax.swing.GroupLayout(Title_Panel);
         Title_Panel.setLayout(Title_PanelLayout);
@@ -211,14 +213,14 @@ public class SubirCarreraPanel extends javax.swing.JPanel {
                 .addGroup(Title_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(Title_PanelLayout.createSequentialGroup()
                         .addGap(51, 51, 51)
-                        .addComponent(Titulo_Label))
+                        .addComponent(tituloLabel))
                     .addComponent(Separador_Separator, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(176, 176, 176))
         );
         Title_PanelLayout.setVerticalGroup(
             Title_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Title_PanelLayout.createSequentialGroup()
-                .addComponent(Titulo_Label)
+                .addComponent(tituloLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Separador_Separator, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -577,7 +579,6 @@ public class SubirCarreraPanel extends javax.swing.JPanel {
     private javax.swing.JSeparator Separador_Separator;
     private javax.swing.JButton Subir_Button;
     private javax.swing.JPanel Title_Panel;
-    private javax.swing.JLabel Titulo_Label;
     private javax.swing.JButton addCuatrimestre_Button;
     private javax.swing.JTextField codigoTextField;
     private javax.swing.JTable cuatrimestresTable;
@@ -598,6 +599,7 @@ public class SubirCarreraPanel extends javax.swing.JPanel {
     private javax.swing.JTextField optativasTextField;
     private javax.swing.JList<com.milton.gomez.sistema.universitario.Model.PlanDeEstudio> planesDeEstudioList;
     private javax.swing.JButton removeCuatrimestre_Button;
+    private javax.swing.JLabel tituloLabel;
     // End of variables declaration//GEN-END:variables
 
 }

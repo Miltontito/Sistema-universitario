@@ -41,6 +41,15 @@ public class ControllerMateria {
         );
     }
     
+    public static void actualizarMateria(TransferibleMateria transferible){
+        Materia materia = cu.obtenerMateria(transferible.getMateriaID());
+        
+        materia.setCodigoDeMateria(transferible.getCodigoDeMateria());
+        materia.setNombre(transferible.getNombre());
+        materia.setCorrelativas(transferible.getCorrelativas());
+        materia.esPromocionable(transferible.getPromocionable());
+    }
+    
     public static void eliminarMateria(Integer materiaID){
         cu.eliminarMateria(materiaID);
     }

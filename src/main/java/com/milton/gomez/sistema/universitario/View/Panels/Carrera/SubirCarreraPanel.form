@@ -87,7 +87,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
-                              <Component id="Titulo_Label" min="-2" max="-2" attributes="0"/>
+                              <Component id="tituloLabel" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Component id="Separador_Separator" alignment="0" min="-2" pref="400" max="-2" attributes="0"/>
                       </Group>
@@ -98,7 +98,7 @@
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-                      <Component id="Titulo_Label" min="-2" max="-2" attributes="0"/>
+                      <Component id="tituloLabel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="Separador_Separator" min="-2" pref="10" max="-2" attributes="0"/>
                   </Group>
@@ -108,7 +108,7 @@
           <SubComponents>
             <Component class="javax.swing.JSeparator" name="Separador_Separator">
             </Component>
-            <Component class="javax.swing.JLabel" name="Titulo_Label">
+            <Component class="javax.swing.JLabel" name="tituloLabel">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Roboto" size="24" style="0"/>
